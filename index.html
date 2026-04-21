@@ -6,14 +6,34 @@
 </head>
 <body>
 
-<h1>🎤 Phonora: Speak to Succeed</h1>
+<!-- 🏠 MENU -->
+<div id="menu">
+    <h1>🎤 Phonora</h1>
+    <button onclick="goToRoles()">Start Game</button>
+</div>
 
-<p id="script">The plane is ready to fly</p>
+<!-- 🎭 ROLE SELECTION -->
+<div id="roles" style="display:none;">
+    <h2>Select Your Role</h2>
 
-<button onclick="startListening()">🎙️ Start Speaking</button>
+    <button onclick="selectRole('pilot')">✈️ Pilot</button>
+    <button onclick="selectRole('news')">📺 News Announcer</button>
+    <button onclick="selectRole('service')">🎧 Customer Service</button>
+    <button onclick="selectRole('host')">🎤 TV Host</button>
+    <button onclick="selectRole('minister')">🏛️ Minister</button>
+</div>
 
-<p id="result"></p>
-<p id="lives">Lives: 6</p>
+<!-- 🎮 GAME SCREEN -->
+<div id="game" style="display:none;">
+    <h2 id="roleTitle"></h2>
+
+    <p id="script"></p>
+
+    <button onclick="startListening()">🎙️ Speak</button>
+
+    <p id="result"></p>
+    <p id="lives">Lives: 6</p>
+</div>
 
 <script src="script.js"></script>
 
