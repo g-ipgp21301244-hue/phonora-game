@@ -17,7 +17,6 @@
     <!-- ROLE SELECTION -->
     <div id="roles" class="screen hidden">
         <h2>Select Your Role</h2>
-
         <div class="grid">
             <button class="btn" onclick="selectRole('pilot')">✈️ Pilot</button>
             <button class="btn" onclick="selectRole('news')">📺 News</button>
@@ -27,12 +26,21 @@
         </div>
     </div>
 
-    <!-- GAME -->
+    <!-- 🎯 LEVEL SELECTION -->
+    <div id="levels" class="screen hidden">
+        <h2>Select Difficulty</h2>
+
+        <button class="btn" onclick="startGame('easy')">🟢 Easy</button>
+        <button class="btn" onclick="startGame('medium')">🟡 Intermediate</button>
+        <button class="btn" onclick="startGame('hard')">🔴 Hard</button>
+    </div>
+
+    <!-- 🎮 GAME -->
     <div id="game" class="screen hidden">
 
         <div class="top-bar">
             <div id="roleTitle"></div>
-            <div id="hearts">❤️❤️❤️❤️❤️❤️</div>
+            <div id="hearts"></div>
         </div>
 
         <div class="card">
