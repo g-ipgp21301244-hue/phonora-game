@@ -1,3 +1,6 @@
+speechSynthesis.onvoiceschanged = () => {
+    speechSynthesis.getVoices();
+};
 let lives = 6;
 let currentScript = "";
 let selectedRole = "";
@@ -115,5 +118,16 @@ function updateHearts() {
 function speakWord(word) {
     const utterance = new SpeechSynthesisUtterance(word);
     utterance.lang = 'en-GB';
-    speechSynthesis.speak(utterance);
+
+    // ensure voices are loaded
+    let voices = speechSynthesis.getVoices();
+
+    if (voices.length > 0) {
+        utterance.voice = voices.find(v => v.lang === 'en-GB') || voices[0];
+    }
+
+    // slight delay helps playback
+    setTimeout(() => {
+        speechSynthesis.speak(utterance);
+    }, 200);
 }
