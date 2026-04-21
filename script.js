@@ -1,7 +1,6 @@
 let lives = 6;
 let currentScript = "";
 
-// 🎭 Scripts for each role
 const scripts = {
     pilot: "Prepare for takeoff. The plane is ready.",
     news: "Good evening. This is the latest news update.",
@@ -10,40 +9,39 @@ const scripts = {
     minister: "We must work together for a better future."
 };
 
-// 🎤 Speech Recognition
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 recognition.lang = 'en-GB';
 
 // NAVIGATION
 function goToRoles() {
-    document.getElementById("menu").style.display = "none";
-    document.getElementById("roles").style.display = "block";
+    document.getElementById("menu").classList.add("hidden");
+    document.getElementById("roles").classList.remove("hidden");
 }
 
 function selectRole(role) {
-    document.getElementById("roles").style.display = "none";
-    document.getElementById("game").style.display = "block";
+    document.getElementById("roles").classList.add("hidden");
+    document.getElementById("game").classList.remove("hidden");
 
     currentScript = scripts[role];
     lives = 6;
 
-    document.getElementById("roleTitle").innerText = "Role: " + role.toUpperCase();
+    document.getElementById("roleTitle").innerText = role.toUpperCase();
     document.getElementById("script").innerText = currentScript;
-    document.getElementById("lives").innerText = "Lives: " + lives;
+    updateHearts();
+    document.getElementById("feedback").innerText = "";
 }
 
-// START SPEAKING
+// SPEECH
 function startListening() {
     recognition.start();
 }
 
 recognition.onresult = function(event) {
     const speechResult = event.results[0][0].transcript.toLowerCase();
-    document.getElementById("result").innerText = "You said: " + speechResult;
     checkPronunciation(speechResult);
 };
 
-// CHECK PRONUNCIATION
+// CHECK
 function checkPronunciation(spoken) {
     let spokenWords = spoken.split(" ");
     let targetWords = currentScript.toLowerCase().split(" ");
@@ -58,21 +56,29 @@ function checkPronunciation(spoken) {
 
     if (mistakes.length > 0) {
         lives -= mistakes.length;
-        document.getElementById("lives").innerText = "Lives: " + lives;
+        updateHearts();
 
-        alert("Wrong words: " + mistakes.join(", "));
+        document.getElementById("feedback").innerText =
+            "❌ Try again: " + mistakes.join(", ");
 
         mistakes.forEach(word => speakWord(word));
 
         if (lives <= 0) {
-            alert("💀 Game Over!");
+            document.getElementById("feedback").innerText = "💀 Game Over!";
         }
+
     } else {
-        alert("🎉 Excellent pronunciation!");
+        document.getElementById("feedback").innerText =
+            "🎉 Perfect pronunciation!";
     }
 }
 
-// 🔊 CORRECT PRONUNCIATION
+// HEARTS UI
+function updateHearts() {
+    document.getElementById("hearts").innerText = "❤️".repeat(lives);
+}
+
+// SPEAK CORRECT WORD
 function speakWord(word) {
     const utterance = new SpeechSynthesisUtterance(word);
     utterance.lang = 'en-GB';
