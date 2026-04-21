@@ -1,12 +1,34 @@
 let lives = 6;
 let currentScript = "";
+let selectedRole = "";
 
+// 🎭 Scripts with levels
 const scripts = {
-    pilot: "Prepare for takeoff. The plane is ready.",
-    news: "Good evening. This is the latest news update.",
-    service: "Hello, how may I assist you today?",
-    host: "Welcome to the show. We are live tonight.",
-    minister: "We must work together for a better future."
+    pilot: {
+        easy: "The plane is ready",
+        medium: "Prepare for takeoff now",
+        hard: "Passengers must fasten their seatbelts immediately"
+    },
+    news: {
+        easy: "This is the news",
+        medium: "Here is the latest update",
+        hard: "We are reporting live from the scene tonight"
+    },
+    service: {
+        easy: "How can I help you",
+        medium: "Please hold while I check",
+        hard: "We apologise for the inconvenience caused"
+    },
+    host: {
+        easy: "Welcome to the show",
+        medium: "We are live tonight",
+        hard: "Stay tuned for an exciting performance"
+    },
+    minister: {
+        easy: "We must work together",
+        medium: "This is important for our country",
+        hard: "We will implement policies for national development"
+    }
 };
 
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
@@ -18,15 +40,26 @@ function goToRoles() {
     document.getElementById("roles").classList.remove("hidden");
 }
 
+// SELECT ROLE → GO TO LEVEL
 function selectRole(role) {
+    selectedRole = role;
     document.getElementById("roles").classList.add("hidden");
+    document.getElementById("levels").classList.remove("hidden");
+}
+
+// START GAME AFTER LEVEL
+function startGame(level) {
+    document.getElementById("levels").classList.add("hidden");
     document.getElementById("game").classList.remove("hidden");
 
-    currentScript = scripts[role];
+    currentScript = scripts[selectedRole][level];
     lives = 6;
 
-    document.getElementById("roleTitle").innerText = role.toUpperCase();
+    document.getElementById("roleTitle").innerText =
+        selectedRole.toUpperCase() + " - " + level.toUpperCase();
+
     document.getElementById("script").innerText = currentScript;
+
     updateHearts();
     document.getElementById("feedback").innerText = "";
 }
@@ -73,12 +106,12 @@ function checkPronunciation(spoken) {
     }
 }
 
-// HEARTS UI
+// HEARTS
 function updateHearts() {
     document.getElementById("hearts").innerText = "❤️".repeat(lives);
 }
 
-// SPEAK CORRECT WORD
+// AUDIO
 function speakWord(word) {
     const utterance = new SpeechSynthesisUtterance(word);
     utterance.lang = 'en-GB';
