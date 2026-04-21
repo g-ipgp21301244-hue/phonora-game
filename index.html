@@ -6,36 +6,47 @@
 </head>
 <body>
 
-<!-- 🏠 MENU -->
-<div id="menu">
-    <h1>🎤 Phonora</h1>
-    <button onclick="goToRoles()">Start Game</button>
-</div>
+<div class="container">
 
-<!-- 🎭 ROLE SELECTION -->
-<div id="roles" style="display:none;">
-    <h2>Select Your Role</h2>
+    <!-- MENU -->
+    <div id="menu" class="screen">
+        <h1>🎤 Phonora</h1>
+        <button class="btn" onclick="goToRoles()">Start Game</button>
+    </div>
 
-    <button onclick="selectRole('pilot')">✈️ Pilot</button>
-    <button onclick="selectRole('news')">📺 News Announcer</button>
-    <button onclick="selectRole('service')">🎧 Customer Service</button>
-    <button onclick="selectRole('host')">🎤 TV Host</button>
-    <button onclick="selectRole('minister')">🏛️ Minister</button>
-</div>
+    <!-- ROLE SELECTION -->
+    <div id="roles" class="screen hidden">
+        <h2>Select Your Role</h2>
 
-<!-- 🎮 GAME SCREEN -->
-<div id="game" style="display:none;">
-    <h2 id="roleTitle"></h2>
+        <div class="grid">
+            <button class="btn" onclick="selectRole('pilot')">✈️ Pilot</button>
+            <button class="btn" onclick="selectRole('news')">📺 News</button>
+            <button class="btn" onclick="selectRole('service')">🎧 Service</button>
+            <button class="btn" onclick="selectRole('host')">🎤 Host</button>
+            <button class="btn" onclick="selectRole('minister')">🏛️ Minister</button>
+        </div>
+    </div>
 
-    <p id="script"></p>
+    <!-- GAME -->
+    <div id="game" class="screen hidden">
 
-    <button onclick="startListening()">🎙️ Speak</button>
+        <div class="top-bar">
+            <div id="roleTitle"></div>
+            <div id="hearts">❤️❤️❤️❤️❤️❤️</div>
+        </div>
 
-    <p id="result"></p>
-    <p id="lives">Lives: 6</p>
+        <div class="card">
+            <p id="script"></p>
+        </div>
+
+        <button class="btn speak" onclick="startListening()">🎙️ Speak</button>
+
+        <div id="feedback"></div>
+
+    </div>
+
 </div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
