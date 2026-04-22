@@ -165,28 +165,14 @@ function startGame(level) {
 
     document.getElementById("roleTitle").innerText =
         selectedRole.toUpperCase() + " - " + level.toUpperCase();
+    document.getElementById("missionTitle").innerText =
+    missions[selectedRole].title;
 
     document.getElementById("script").innerText = currentScript;
 
     updateHearts();
     updateScore();
     document.getElementById("feedback").innerHTML = "";
-}
-.game-area {
-    transition: 0.3s;
-}
-
-/* Pilot shake */
-.shake {
-    animation: shake 0.4s;
-}
-
-@keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    50% { transform: translateX(5px); }
-    75% { transform: translateX(-5px); }
-    100% { transform: translateX(0); }
 }
 
 /* Glitch effect */
@@ -226,12 +212,15 @@ function startListening() {
 recognition.onresult = function(event) {
     let spokenText = event.results[0][0].transcript;
     console.log(spokenText);
-}
-if (spokenText.toLowerCase().trim() === currentScript.toLowerCase().trim()) {
-    handleResult(true);
-} else {
-    handleResult(false);
-}
+
+    checkPronunciation(spokenText);
+
+    if (spokenText.toLowerCase().trim() === currentScript.toLowerCase().trim()) {
+        handleResult(true);
+    } else {
+        handleResult(false);
+    }
+};
 
 // ================= PRONUNCIATION CHECK =================
 
@@ -325,4 +314,18 @@ function nextRound() {
     currentScript = levelScripts[currentIndex];
     document.getElementById("script").innerText = currentScript;
     document.getElementById("feedback").innerHTML = "";
+}
+
+function handleResult(isCorrect) {
+    const feedback = document.getElementById("feedback");
+    const gameArea = document.getElementById("gameArea");
+
+    gameArea.className = "card"; // reset
+
+    if (isCorrect) {
+        feedback.innerHTML += "<br>" + missions[selectedRole].success;
+    } else {
+        feedback.innerHTML += "<br>" + missions[selectedRole].fail;
+        gameArea.classList.add(missions[selectedRole].effect);
+    }
 }
