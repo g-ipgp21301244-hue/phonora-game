@@ -172,6 +172,42 @@ function startGame(level) {
     updateScore();
     document.getElementById("feedback").innerHTML = "";
 }
+.game-area {
+    transition: 0.3s;
+}
+
+/* Pilot shake */
+.shake {
+    animation: shake 0.4s;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+/* Glitch effect */
+.glitch {
+    background-color: #ffcccc;
+}
+
+/* Angry */
+.angry {
+    background-color: #ff9999;
+}
+
+/* Awkward */
+.awkward {
+    background-color: #f0f0f0;
+}
+
+/* Crowd */
+.crowd {
+    background-color: #ffe6cc;
+}
 
 function goToMenu() {
     document.getElementById("game").classList.add("hidden");
@@ -188,9 +224,14 @@ function startListening() {
 }
 
 recognition.onresult = function(event) {
-    const speechResult = event.results[0][0].transcript.toLowerCase();
-    checkPronunciation(speechResult);
-};
+    let spokenText = event.results[0][0].transcript;
+    console.log(spokenText);
+}
+if (spokenText.toLowerCase().trim() === currentScript.toLowerCase().trim()) {
+    handleResult(true);
+} else {
+    handleResult(false);
+}
 
 // ================= PRONUNCIATION CHECK =================
 
