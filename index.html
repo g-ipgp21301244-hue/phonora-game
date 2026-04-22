@@ -39,18 +39,21 @@
     <div id="game" class="screen hidden">
 
 <div class="top-bar">
-    <div id="roleTitle"></div>
+    <div>
+        <div id="roleTitle"></div>
+        <div id="missionTitle"></div>
+    </div>
     <div>
         <span id="score">⭐ 0</span>
         <span id="hearts"></span>
     </div>
 </div>
 
-        <div class="card">
-            <p id="script"></p>
-        </div>
+<div class="card" id="gameArea">
+    <p id="script"></p>
+</div>
 
-        <button class="btn speak" onclick="startListening()">🎙️ Speak</button>
+<button class="btn speak" onclick="startListening()">🎙️ Speak</button>
 
 <div id="feedback"></div>
 
@@ -59,17 +62,4 @@
     <button class="btn" onclick="goToMenu()">🏠 Menu</button>
 </div>
 
-    </div>
-
-</div>
-
-<script src="script.js"></script>
-</body>
-</html>
-<button onclick="alert('working')">Test</button>
-<h2 id="missionTitle"></h2>
-<p id="missionFeedback"></p>
-
-<div id="gameArea" class="game-area">
-    <p id="scriptDisplay"></p>
 </div>
