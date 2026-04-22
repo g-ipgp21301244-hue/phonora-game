@@ -69,12 +69,19 @@ function startGame(level) {
     document.getElementById("game").classList.remove("hidden");
 
     currentLevel = level;
-currentIndex = 0;
+    currentIndex = 0;
 
-currentScript = scripts[selectedRole][level][0];
+    let levelScripts = scripts[selectedRole][level];
+
+    if (!levelScripts || levelScripts.length === 0) {
+        alert("No scripts found!");
+        return;
+    }
+
+    currentScript = levelScripts[currentIndex];
+
     lives = 6;
     score = 0;
-document.getElementById("score").innerText = "⭐ " + score;
 
     document.getElementById("roleTitle").innerText =
         selectedRole.toUpperCase() + " - " + level.toUpperCase();
@@ -82,6 +89,7 @@ document.getElementById("score").innerText = "⭐ " + score;
     document.getElementById("script").innerText = currentScript;
 
     updateHearts();
+    document.getElementById("score").innerText = "⭐ " + score;
     document.getElementById("feedback").innerText = "";
 }
 
