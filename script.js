@@ -2,6 +2,7 @@ speechSynthesis.onvoiceschanged = () => {
     speechSynthesis.getVoices();
 };
 let lives = 6;
+let score = 0;
 let currentScript = "";
 let selectedRole = "";
 
@@ -57,6 +58,8 @@ function startGame(level) {
 
     currentScript = scripts[selectedRole][level];
     lives = 6;
+    score = 0;
+document.getElementById("score").innerText = "⭐ " + score;
 
     document.getElementById("roleTitle").innerText =
         selectedRole.toUpperCase() + " - " + level.toUpperCase();
@@ -102,15 +105,17 @@ function checkPronunciation(spoken) {
 
     if (mistakes > 0) {
         lives -= mistakes;
+        score -= mistakes * 2; // penalty
         updateHearts();
 
         if (lives <= 0) {
             document.getElementById("feedback").innerHTML += "<br>💀 Game Over!";
         }
     } else {
+        score += 10; // reward
         document.getElementById("feedback").innerHTML += "<br>🎉 Perfect!";
     }
-}
+    document.getElementById("score").innerText = "⭐ " + score;
 
 // HEARTS
 function updateHearts() {
