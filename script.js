@@ -71,7 +71,7 @@ function startGame(level) {
     currentLevel = level;
 currentIndex = 0;
 
-currentScript = scripts[selectedRole][level][currentIndex];
+currentScript = scripts[selectedRole][level][0];
     lives = 6;
     score = 0;
 document.getElementById("score").innerText = "⭐ " + score;
