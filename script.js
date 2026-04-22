@@ -1,138 +1,34 @@
-// 🎤 Load voices
-speechSynthesis.onvoiceschanged = () => {
-    speechSynthesis.getVoices();
-};
-
-// 🎮 GAME STATE
+// GAME STATE
 let lives = 6;
 let score = 0;
 let currentScript = "";
 let selectedRole = "";
 let currentIndex = 0;
 let currentLevel = "";
+
+// MISSIONS
 const missions = {
-    pilot: {
-        title: "✈️ Flight Mission",
-        success: "Smooth flight! Good pronunciation!",
-        fail: "⚠️ Turbulence! Fix your pronunciation!",
-        effect: "shake"
-    },
-    news: {
-        title: "📡 Live News",
-        success: "Clear broadcast!",
-        fail: "📡 Signal glitch detected!",
-        effect: "glitch"
-    },
-    customer: {
-        title: "☎️ Customer Service",
-        success: "Customer satisfied 😊",
-        fail: "😡 Customer is angry!",
-        effect: "angry"
-    },
-    host: {
-        title: "🎬 TV Show",
-        success: "Audience loves you!",
-        fail: "😬 Awkward silence...",
-        effect: "awkward"
-    },
-    minister: {
-        title: "🏛️ Public Speech",
-        success: "👏 Crowd is impressed!",
-        fail: "😠 Crowd dissatisfied!",
-        effect: "crowd"
-    }
+    pilot: { title: "✈️ Flight Mission", success: "Smooth flight!", fail: "⚠️ Turbulence!", effect: "shake" },
+    news: { title: "📡 Live News", success: "Clear broadcast!", fail: "📡 Signal glitch!", effect: "glitch" },
+    service: { title: "☎️ Customer Service", success: "Customer happy!", fail: "😡 Customer angry!", effect: "angry" },
+    host: { title: "🎬 TV Show", success: "Audience loves it!", fail: "😬 Awkward moment!", effect: "awkward" },
+    minister: { title: "🏛️ Speech", success: "👏 Crowd impressed!", fail: "😠 Crowd unhappy!", effect: "crowd" }
 };
 
-// 🎭 SCRIPTS (ALL ROLES COMPLETE)
+// SCRIPTS
 const scripts = {
-    pilot: {
-        easy: [
-            "The plane is ready",
-            "The sky is clear",
-            "We are flying high"
-        ],
-        medium: [
-            "Prepare for takeoff now",
-            "The passengers are seated",
-            "We will land soon"
-        ],
-        hard: [
-            "Passengers must fasten their seatbelts immediately",
-            "We are experiencing slight turbulence",
-            "Please remain seated during landing"
-        ]
-    },
-
-    news: {
-        easy: [
-            "This is the news",
-            "Good morning everyone",
-            "Here is the update"
-        ],
-        medium: [
-            "Here is the latest update",
-            "We are live today",
-            "This just in"
-        ],
-        hard: [
-            "We are reporting live from the scene tonight",
-            "Authorities have issued a warning",
-            "More updates will follow shortly"
-        ]
-    },
-
-    service: {
-        easy: [
-            "How can I help you",
-            "Please wait a moment"
-        ],
-        medium: [
-            "Please hold while I check",
-            "I will assist you shortly"
-        ],
-        hard: [
-            "We apologise for the inconvenience caused",
-            "Your request is being processed now"
-        ]
-    },
-
-    host: {
-        easy: [
-            "Welcome to the show",
-            "We are live now"
-        ],
-        medium: [
-            "We have an exciting guest today",
-            "Stay tuned for more"
-        ],
-        hard: [
-            "Stay tuned for an exciting performance",
-            "We will be back after this short break"
-        ]
-    },
-
-    minister: {
-        easy: [
-            "We must work together",
-            "This is important"
-        ],
-        medium: [
-            "This is important for our country",
-            "We must act now"
-        ],
-        hard: [
-            "We will implement policies for national development",
-            "This decision will benefit future generations"
-        ]
-    }
+    pilot: { easy: ["The plane is ready"], medium: ["Prepare for takeoff now"], hard: ["Passengers must fasten seatbelts"] },
+    news: { easy: ["This is the news"], medium: ["Here is the latest update"], hard: ["We are reporting live"] },
+    service: { easy: ["How can I help you"], medium: ["Please hold while I check"], hard: ["We apologise for inconvenience"] },
+    host: { easy: ["Welcome to the show"], medium: ["We have a guest today"], hard: ["Stay tuned for performance"] },
+    minister: { easy: ["We must work together"], medium: ["We must act now"], hard: ["This will benefit future generations"] }
 };
 
-// 🎤 SPEECH RECOGNITION
+// SPEECH
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 recognition.lang = 'en-GB';
 
-// ================= NAVIGATION =================
-
+// NAVIGATION
 function goToRoles() {
     document.getElementById("menu").classList.add("hidden");
     document.getElementById("roles").classList.remove("hidden");
@@ -150,24 +46,13 @@ function startGame(level) {
 
     currentLevel = level;
     currentIndex = 0;
-
-    let levelScripts = scripts[selectedRole][level];
-
-    if (!levelScripts || levelScripts.length === 0) {
-        alert("No scripts found!");
-        return;
-    }
-
-    currentScript = levelScripts[currentIndex];
-
     lives = 6;
     score = 0;
 
-    document.getElementById("roleTitle").innerText =
-        selectedRole.toUpperCase() + " - " + level.toUpperCase();
-    document.getElementById("missionTitle").innerText =
-    missions[selectedRole].title;
+    currentScript = scripts[selectedRole][level][0];
 
+    document.getElementById("roleTitle").innerText = selectedRole.toUpperCase();
+    document.getElementById("missionTitle").innerText = missions[selectedRole].title;
     document.getElementById("script").innerText = currentScript;
 
     updateHearts();
@@ -175,104 +60,44 @@ function startGame(level) {
     document.getElementById("feedback").innerHTML = "";
 }
 
-/* Glitch effect */
-.glitch {
-    background-color: #ffcccc;
-}
-
-/* Angry */
-.angry {
-    background-color: #ff9999;
-}
-
-/* Awkward */
-.awkward {
-    background-color: #f0f0f0;
-}
-
-/* Crowd */
-.crowd {
-    background-color: #ffe6cc;
-}
-
-function goToMenu() {
-    document.getElementById("game").classList.add("hidden");
-    document.getElementById("levels").classList.add("hidden");
-    document.getElementById("roles").classList.add("hidden");
-
-    document.getElementById("menu").classList.remove("hidden");
-}
-
-// ================= SPEECH =================
-
+// SPEECH START
 function startListening() {
     recognition.start();
 }
 
+// SPEECH RESULT
 recognition.onresult = function(event) {
-    let spokenText = event.results[0][0].transcript;
-    console.log(spokenText);
+    let spokenText = event.results[0][0].transcript.toLowerCase().trim();
+    let correct = currentScript.toLowerCase().trim();
 
-    checkPronunciation(spokenText);
-
-    if (spokenText.toLowerCase().trim() === currentScript.toLowerCase().trim()) {
+    if (spokenText === correct) {
         handleResult(true);
     } else {
         handleResult(false);
     }
 };
 
-// ================= PRONUNCIATION CHECK =================
+// RESULT SYSTEM
+function handleResult(isCorrect) {
+    const feedback = document.getElementById("feedback");
+    const gameArea = document.getElementById("gameArea");
 
-function checkPronunciation(spoken) {
-    spoken = spoken.replace(/[.,!?]/g, "").toLowerCase();
+    gameArea.className = "card";
 
-    let spokenWords = spoken.split(" ");
-    let targetWords = currentScript
-        .toLowerCase()
-        .replace(/[.,!?]/g, "")
-        .split(" ");
-
-    let resultHTML = "";
-    let mistakes = 0;
-
-    targetWords.forEach((word, index) => {
-        let spokenWord = spokenWords[index];
-
-        if (!spokenWord) {
-            resultHTML += `<span class="missing">${word}</span> `;
-            mistakes++;
-        } else if (spokenWord !== word) {
-            resultHTML += `<span class="wrong">${word}</span> `;
-            mistakes++;
-            speakWord(word);
-        } else {
-            resultHTML += `<span class="correct">${word}</span> `;
-        }
-    });
-
-    document.getElementById("feedback").innerHTML = resultHTML;
-
-    if (mistakes > 0) {
-        lives -= mistakes;
-        score -= mistakes * 2;
-        if (score < 0) score = 0;
-
-        updateHearts();
-
-        if (lives <= 0) {
-            document.getElementById("feedback").innerHTML += "<br>💀 Game Over!";
-        }
-    } else {
+    if (isCorrect) {
+        feedback.innerHTML = "✅ " + missions[selectedRole].success;
         score += 10;
-        document.getElementById("feedback").innerHTML += "<br>🎉 Perfect!";
+    } else {
+        feedback.innerHTML = "❌ " + missions[selectedRole].fail;
+        lives--;
+        gameArea.classList.add(missions[selectedRole].effect);
     }
 
+    updateHearts();
     updateScore();
 }
 
-// ================= UI =================
-
+// UI
 function updateHearts() {
     document.getElementById("hearts").innerText = "❤️".repeat(lives);
 }
@@ -281,51 +106,21 @@ function updateScore() {
     document.getElementById("score").innerText = "⭐ " + score;
 }
 
-// ================= AUDIO =================
-
-function speakWord(word) {
-    const utterance = new SpeechSynthesisUtterance(word);
-    utterance.lang = 'en-GB';
-
-    let voices = speechSynthesis.getVoices();
-
-    if (voices.length > 0) {
-        utterance.voice = voices.find(v => v.lang === 'en-GB') || voices[0];
-    }
-
-    setTimeout(() => {
-        speechSynthesis.speak(utterance);
-    }, 200);
-}
-
-// ================= NEXT ROUND =================
-
 function nextRound() {
-    let levelScripts = scripts[selectedRole][currentLevel];
-
+    let arr = scripts[selectedRole][currentLevel];
     currentIndex++;
 
-    if (currentIndex >= levelScripts.length) {
-        document.getElementById("feedback").innerHTML =
-            "🎉 You completed this level!";
+    if (currentIndex >= arr.length) {
+        document.getElementById("feedback").innerHTML = "🎉 Level complete!";
         return;
     }
 
-    currentScript = levelScripts[currentIndex];
+    currentScript = arr[currentIndex];
     document.getElementById("script").innerText = currentScript;
     document.getElementById("feedback").innerHTML = "";
 }
 
-function handleResult(isCorrect) {
-    const feedback = document.getElementById("feedback");
-    const gameArea = document.getElementById("gameArea");
-
-    gameArea.className = "card"; // reset
-
-    if (isCorrect) {
-        feedback.innerHTML += "<br>" + missions[selectedRole].success;
-    } else {
-        feedback.innerHTML += "<br>" + missions[selectedRole].fail;
-        gameArea.classList.add(missions[selectedRole].effect);
-    }
+function goToMenu() {
+    document.getElementById("game").classList.add("hidden");
+    document.getElementById("menu").classList.remove("hidden");
 }
