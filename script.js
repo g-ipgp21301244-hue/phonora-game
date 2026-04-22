@@ -10,6 +10,38 @@ let currentScript = "";
 let selectedRole = "";
 let currentIndex = 0;
 let currentLevel = "";
+const missions = {
+    pilot: {
+        title: "✈️ Flight Mission",
+        success: "Smooth flight! Good pronunciation!",
+        fail: "⚠️ Turbulence! Fix your pronunciation!",
+        effect: "shake"
+    },
+    news: {
+        title: "📡 Live News",
+        success: "Clear broadcast!",
+        fail: "📡 Signal glitch detected!",
+        effect: "glitch"
+    },
+    customer: {
+        title: "☎️ Customer Service",
+        success: "Customer satisfied 😊",
+        fail: "😡 Customer is angry!",
+        effect: "angry"
+    },
+    host: {
+        title: "🎬 TV Show",
+        success: "Audience loves you!",
+        fail: "😬 Awkward silence...",
+        effect: "awkward"
+    },
+    minister: {
+        title: "🏛️ Public Speech",
+        success: "👏 Crowd is impressed!",
+        fail: "😠 Crowd dissatisfied!",
+        effect: "crowd"
+    }
+};
 
 // 🎭 SCRIPTS (ALL ROLES COMPLETE)
 const scripts = {
