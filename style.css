@@ -75,3 +75,16 @@ h1, h2 {
 .speak:hover {
     background: #c53030;
 }
+.wrong {
+    color: red;
+    font-weight: bold;
+}
+
+.correct {
+    color: green;
+}
+
+.missing {
+    background-color: yellow;
+    font-weight: bold;
+}
