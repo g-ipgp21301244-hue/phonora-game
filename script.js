@@ -1,6 +1,9 @@
+// 🎤 Load voices
 speechSynthesis.onvoiceschanged = () => {
     speechSynthesis.getVoices();
 };
+
+// 🎮 GAME STATE
 let lives = 6;
 let score = 0;
 let currentScript = "";
@@ -8,7 +11,7 @@ let selectedRole = "";
 let currentIndex = 0;
 let currentLevel = "";
 
-// 🎭 Scripts with levels
+// 🎭 SCRIPTS (ALL ROLES COMPLETE)
 const scripts = {
     pilot: {
         easy: [
@@ -44,26 +47,71 @@ const scripts = {
             "Authorities have issued a warning",
             "More updates will follow shortly"
         ]
+    },
+
+    service: {
+        easy: [
+            "How can I help you",
+            "Please wait a moment"
+        ],
+        medium: [
+            "Please hold while I check",
+            "I will assist you shortly"
+        ],
+        hard: [
+            "We apologise for the inconvenience caused",
+            "Your request is being processed now"
+        ]
+    },
+
+    host: {
+        easy: [
+            "Welcome to the show",
+            "We are live now"
+        ],
+        medium: [
+            "We have an exciting guest today",
+            "Stay tuned for more"
+        ],
+        hard: [
+            "Stay tuned for an exciting performance",
+            "We will be back after this short break"
+        ]
+    },
+
+    minister: {
+        easy: [
+            "We must work together",
+            "This is important"
+        ],
+        medium: [
+            "This is important for our country",
+            "We must act now"
+        ],
+        hard: [
+            "We will implement policies for national development",
+            "This decision will benefit future generations"
+        ]
     }
 };
 
+// 🎤 SPEECH RECOGNITION
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 recognition.lang = 'en-GB';
 
-// NAVIGATION
+// ================= NAVIGATION =================
+
 function goToRoles() {
     document.getElementById("menu").classList.add("hidden");
     document.getElementById("roles").classList.remove("hidden");
 }
 
-// SELECT ROLE → GO TO LEVEL
 function selectRole(role) {
     selectedRole = role;
     document.getElementById("roles").classList.add("hidden");
     document.getElementById("levels").classList.remove("hidden");
 }
 
-// START GAME AFTER LEVEL
 function startGame(level) {
     document.getElementById("levels").classList.add("hidden");
     document.getElementById("game").classList.remove("hidden");
@@ -89,11 +137,20 @@ function startGame(level) {
     document.getElementById("script").innerText = currentScript;
 
     updateHearts();
-    document.getElementById("score").innerText = "⭐ " + score;
-    document.getElementById("feedback").innerText = "";
+    updateScore();
+    document.getElementById("feedback").innerHTML = "";
 }
 
-// SPEECH
+function goToMenu() {
+    document.getElementById("game").classList.add("hidden");
+    document.getElementById("levels").classList.add("hidden");
+    document.getElementById("roles").classList.add("hidden");
+
+    document.getElementById("menu").classList.remove("hidden");
+}
+
+// ================= SPEECH =================
+
 function startListening() {
     recognition.start();
 }
@@ -103,19 +160,27 @@ recognition.onresult = function(event) {
     checkPronunciation(speechResult);
 };
 
-// CHECK
+// ================= PRONUNCIATION CHECK =================
+
 function checkPronunciation(spoken) {
+    spoken = spoken.replace(/[.,!?]/g, "").toLowerCase();
+
     let spokenWords = spoken.split(" ");
-    let targetWords = currentScript.toLowerCase().split(" ");
+    let targetWords = currentScript
+        .toLowerCase()
+        .replace(/[.,!?]/g, "")
+        .split(" ");
 
     let resultHTML = "";
     let mistakes = 0;
 
     targetWords.forEach((word, index) => {
-        if (!spokenWords[index]) {
+        let spokenWord = spokenWords[index];
+
+        if (!spokenWord) {
             resultHTML += `<span class="missing">${word}</span> `;
             mistakes++;
-        } else if (spokenWords[index] !== word) {
+        } else if (spokenWord !== word) {
             resultHTML += `<span class="wrong">${word}</span> `;
             mistakes++;
             speakWord(word);
@@ -128,40 +193,51 @@ function checkPronunciation(spoken) {
 
     if (mistakes > 0) {
         lives -= mistakes;
-        score -= mistakes * 2; // penalty
+        score -= mistakes * 2;
+        if (score < 0) score = 0;
+
         updateHearts();
 
         if (lives <= 0) {
             document.getElementById("feedback").innerHTML += "<br>💀 Game Over!";
         }
     } else {
-        score += 10; // reward
+        score += 10;
         document.getElementById("feedback").innerHTML += "<br>🎉 Perfect!";
     }
-    document.getElementById("score").innerText = "⭐ " + score;
 
-// HEARTS
+    updateScore();
+}
+
+// ================= UI =================
+
 function updateHearts() {
     document.getElementById("hearts").innerText = "❤️".repeat(lives);
 }
 
-// AUDIO
+function updateScore() {
+    document.getElementById("score").innerText = "⭐ " + score;
+}
+
+// ================= AUDIO =================
+
 function speakWord(word) {
     const utterance = new SpeechSynthesisUtterance(word);
     utterance.lang = 'en-GB';
 
-    // ensure voices are loaded
     let voices = speechSynthesis.getVoices();
 
     if (voices.length > 0) {
         utterance.voice = voices.find(v => v.lang === 'en-GB') || voices[0];
     }
 
-    // slight delay helps playback
     setTimeout(() => {
         speechSynthesis.speak(utterance);
     }, 200);
 }
+
+// ================= NEXT ROUND =================
+
 function nextRound() {
     let levelScripts = scripts[selectedRole][currentLevel];
 
@@ -175,12 +251,5 @@ function nextRound() {
 
     currentScript = levelScripts[currentIndex];
     document.getElementById("script").innerText = currentScript;
-    document.getElementById("feedback").innerText = "";
-}
-    function goToMenu() {
-    document.getElementById("game").classList.add("hidden");
-    document.getElementById("levels").classList.add("hidden");
-    document.getElementById("roles").classList.add("hidden");
-
-    document.getElementById("menu").classList.remove("hidden");
+    document.getElementById("feedback").innerHTML = "";
 }
