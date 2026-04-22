@@ -82,30 +82,33 @@ function checkPronunciation(spoken) {
     let spokenWords = spoken.split(" ");
     let targetWords = currentScript.toLowerCase().split(" ");
 
-    let mistakes = [];
+    let resultHTML = "";
+    let mistakes = 0;
 
     targetWords.forEach((word, index) => {
-        if (spokenWords[index] !== word) {
-            mistakes.push(word);
+        if (!spokenWords[index]) {
+            resultHTML += `<span class="missing">${word}</span> `;
+            mistakes++;
+        } else if (spokenWords[index] !== word) {
+            resultHTML += `<span class="wrong">${word}</span> `;
+            mistakes++;
+            speakWord(word);
+        } else {
+            resultHTML += `<span class="correct">${word}</span> `;
         }
     });
 
-    if (mistakes.length > 0) {
-        lives -= mistakes.length;
+    document.getElementById("feedback").innerHTML = resultHTML;
+
+    if (mistakes > 0) {
+        lives -= mistakes;
         updateHearts();
 
-        document.getElementById("feedback").innerText =
-            "❌ Try again: " + mistakes.join(", ");
-
-        mistakes.forEach(word => speakWord(word));
-
         if (lives <= 0) {
-            document.getElementById("feedback").innerText = "💀 Game Over!";
+            document.getElementById("feedback").innerHTML += "<br>💀 Game Over!";
         }
-
     } else {
-        document.getElementById("feedback").innerText =
-            "🎉 Perfect pronunciation!";
+        document.getElementById("feedback").innerHTML += "<br>🎉 Perfect!";
     }
 }
 
@@ -130,4 +133,17 @@ function speakWord(word) {
     setTimeout(() => {
         speechSynthesis.speak(utterance);
     }, 200);
+}
+.wrong {
+    color: red;
+    font-weight: bold;
+}
+
+.correct {
+    color: green;
+}
+
+.missing {
+    background-color: yellow;
+    font-weight: bold;
 }
