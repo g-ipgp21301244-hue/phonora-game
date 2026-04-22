@@ -14,9 +14,9 @@
         <button class="btn" onclick="goToRoles()">Start Game</button>
     </div>
 
-    <!-- ROLE SELECTION -->
+    <!-- ROLE -->
     <div id="roles" class="screen hidden">
-        <h2>Select Your Role</h2>
+        <h2>Select Role</h2>
         <div class="grid">
             <button onclick="selectRole('pilot')">Pilot</button>
             <button onclick="selectRole('news')">News</button>
@@ -26,40 +26,45 @@
         </div>
     </div>
 
-    <!-- 🎯 LEVEL SELECTION -->
+    <!-- LEVEL -->
     <div id="levels" class="screen hidden">
         <h2>Select Difficulty</h2>
-
         <button onclick="startGame('easy')">Easy</button>
-        <button onclick="startGame('medium')">Intermediate</button>
+        <button onclick="startGame('medium')">Medium</button>
         <button onclick="startGame('hard')">Hard</button>
     </div>
 
-    <!-- 🎮 GAME -->
+    <!-- GAME -->
     <div id="game" class="screen hidden">
 
-<div class="top-bar">
-    <div>
-        <div id="roleTitle"></div>
-        <div id="missionTitle"></div>
+        <div class="top-bar">
+            <div>
+                <div id="roleTitle"></div>
+                <div id="missionTitle"></div>
+            </div>
+            <div>
+                <span id="score">⭐ 0</span>
+                <span id="hearts"></span>
+            </div>
+        </div>
+
+        <div class="card" id="gameArea">
+            <p id="script"></p>
+        </div>
+
+        <button class="btn speak" onclick="startListening()">🎙️ Speak</button>
+
+        <div id="feedback"></div>
+
+        <div style="margin-top:15px;">
+            <button class="btn" onclick="nextRound()">➡️ Next</button>
+            <button class="btn" onclick="goToMenu()">🏠 Menu</button>
+        </div>
+
     </div>
-    <div>
-        <span id="score">⭐ 0</span>
-        <span id="hearts"></span>
-    </div>
-</div>
-
-<div class="card" id="gameArea">
-    <p id="script"></p>
-</div>
-
-<button class="btn speak" onclick="startListening()">🎙️ Speak</button>
-
-<div id="feedback"></div>
-
-<div style="margin-top:15px;">
-    <button class="btn" onclick="nextRound()">➡️ Next</button>
-    <button class="btn" onclick="goToMenu()">🏠 Menu</button>
-</div>
 
 </div>
+
+<script src="script.js"></script>
+</body>
+</html>
