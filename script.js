@@ -134,16 +134,3 @@ function speakWord(word) {
         speechSynthesis.speak(utterance);
     }, 200);
 }
-.wrong {
-    color: red;
-    font-weight: bold;
-}
-
-.correct {
-    color: green;
-}
-
-.missing {
-    background-color: yellow;
-    font-weight: bold;
-}
