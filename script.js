@@ -5,33 +5,45 @@ let lives = 6;
 let score = 0;
 let currentScript = "";
 let selectedRole = "";
+let currentIndex = 0;
+let currentLevel = "";
 
 // 🎭 Scripts with levels
 const scripts = {
     pilot: {
-        easy: "The plane is ready",
-        medium: "Prepare for takeoff now",
-        hard: "Passengers must fasten their seatbelts immediately"
+        easy: [
+            "The plane is ready",
+            "The sky is clear",
+            "We are flying high"
+        ],
+        medium: [
+            "Prepare for takeoff now",
+            "The passengers are seated",
+            "We will land soon"
+        ],
+        hard: [
+            "Passengers must fasten their seatbelts immediately",
+            "We are experiencing slight turbulence",
+            "Please remain seated during landing"
+        ]
     },
+
     news: {
-        easy: "This is the news",
-        medium: "Here is the latest update",
-        hard: "We are reporting live from the scene tonight"
-    },
-    service: {
-        easy: "How can I help you",
-        medium: "Please hold while I check",
-        hard: "We apologise for the inconvenience caused"
-    },
-    host: {
-        easy: "Welcome to the show",
-        medium: "We are live tonight",
-        hard: "Stay tuned for an exciting performance"
-    },
-    minister: {
-        easy: "We must work together",
-        medium: "This is important for our country",
-        hard: "We will implement policies for national development"
+        easy: [
+            "This is the news",
+            "Good morning everyone",
+            "Here is the update"
+        ],
+        medium: [
+            "Here is the latest update",
+            "We are live today",
+            "This just in"
+        ],
+        hard: [
+            "We are reporting live from the scene tonight",
+            "Authorities have issued a warning",
+            "More updates will follow shortly"
+        ]
     }
 };
 
@@ -56,7 +68,10 @@ function startGame(level) {
     document.getElementById("levels").classList.add("hidden");
     document.getElementById("game").classList.remove("hidden");
 
-    currentScript = scripts[selectedRole][level];
+    currentLevel = level;
+currentIndex = 0;
+
+currentScript = scripts[selectedRole][level][currentIndex];
     lives = 6;
     score = 0;
 document.getElementById("score").innerText = "⭐ " + score;
@@ -138,4 +153,26 @@ function speakWord(word) {
     setTimeout(() => {
         speechSynthesis.speak(utterance);
     }, 200);
+}
+function nextRound() {
+    let levelScripts = scripts[selectedRole][currentLevel];
+
+    currentIndex++;
+
+    if (currentIndex >= levelScripts.length) {
+        document.getElementById("feedback").innerHTML =
+            "🎉 You completed this level!";
+        return;
+    }
+
+    currentScript = levelScripts[currentIndex];
+    document.getElementById("script").innerText = currentScript;
+    document.getElementById("feedback").innerText = "";
+}
+    function goToMenu() {
+    document.getElementById("game").classList.add("hidden");
+    document.getElementById("levels").classList.add("hidden");
+    document.getElementById("roles").classList.add("hidden");
+
+    document.getElementById("menu").classList.remove("hidden");
 }
