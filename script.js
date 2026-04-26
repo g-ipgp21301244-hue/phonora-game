@@ -67,18 +67,19 @@ function startListening() {
 
 // SPEECH RESULT
 recognition.onresult = function(event) {
-    let spokenText = event.results[0][0].transcript.toLowerCase().trim();
-    let correct = currentScript.toLowerCase().trim();
+    let spokenText = event.results[0][0].transcript;
 
     let result = highlightWords(spokenText, currentScript);
 
-document.getElementById("feedback").innerHTML = result.html;
+    // ✅ SHOW WORD-BY-WORD FIRST
+    document.getElementById("feedback").innerHTML = result.html;
 
-if (result.mistakes === 0) {
-    handleResult(true);
-} else {
-    handleResult(false);
-}
+    // ✅ THEN ADD RESULT MESSAGE
+    if (result.mistakes === 0) {
+        handleResult(true);
+    } else {
+        handleResult(false);
+    }
 };
 
 // RESULT SYSTEM
@@ -86,13 +87,13 @@ function handleResult(isCorrect) {
     const feedback = document.getElementById("feedback");
     const gameArea = document.getElementById("gameArea");
 
-    gameArea.className = "card";
+    gameArea.className = "card"; // reset effect
 
     if (isCorrect) {
-        feedback.innerHTML = "✅ " + missions[selectedRole].success;
+        feedback.innerHTML += "<br>✅ " + missions[selectedRole].success;
         score += 10;
     } else {
-        feedback.innerHTML = "❌ " + missions[selectedRole].fail;
+        feedback.innerHTML += "<br>❌ " + missions[selectedRole].fail;
         lives--;
         gameArea.classList.add(missions[selectedRole].effect);
     }
