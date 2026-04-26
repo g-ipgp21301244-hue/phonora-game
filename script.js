@@ -70,11 +70,15 @@ recognition.onresult = function(event) {
     let spokenText = event.results[0][0].transcript.toLowerCase().trim();
     let correct = currentScript.toLowerCase().trim();
 
-    if (spokenText === correct) {
-        handleResult(true);
-    } else {
-        handleResult(false);
-    }
+    let result = highlightWords(spokenText, currentScript);
+
+document.getElementById("feedback").innerHTML = result.html;
+
+if (result.mistakes === 0) {
+    handleResult(true);
+} else {
+    handleResult(false);
+}
 };
 
 // RESULT SYSTEM
