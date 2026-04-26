@@ -124,3 +124,21 @@ function goToMenu() {
     document.getElementById("game").classList.add("hidden");
     document.getElementById("menu").classList.remove("hidden");
 }
+function highlightWords(spoken, correct) {
+    spoken = spoken.toLowerCase().split(" ");
+    correct = correct.toLowerCase().split(" ");
+
+    let result = "";
+    let mistakes = 0;
+
+    correct.forEach((word, i) => {
+        if (spoken[i] === word) {
+            result += `<span class="correct">${word}</span> `;
+        } else {
+            result += `<span class="wrong">${word}</span> `;
+            mistakes++;
+        }
+    });
+
+    return { html: result, mistakes: mistakes };
+}
