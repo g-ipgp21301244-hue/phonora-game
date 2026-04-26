@@ -137,3 +137,12 @@ h1, h2 {
 .crowd {
     background-color: #ffe6cc;
 }
+.correct {
+    color: green;
+    font-weight: bold;
+}
+
+.wrong {
+    color: red;
+    font-weight: bold;
+}
