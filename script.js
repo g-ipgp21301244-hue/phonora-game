@@ -17,7 +17,7 @@ const missions = {
 
 // ================= SCRIPTS =================
 const scripts = {
-    customerservice: {
+    service: {
     easy: [["Please hold while I check"]],
     medium: [["I will assist you shortly"]],
     hard: [["Your request is being processed now"]]
