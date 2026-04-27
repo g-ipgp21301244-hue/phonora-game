@@ -1,4 +1,4 @@
-// GAME STATE
+// ================= GAME STATE =================
 let lives = 6;
 let score = 0;
 let currentScript = "";
@@ -6,7 +6,7 @@ let selectedRole = "";
 let currentIndex = 0;
 let currentLevel = "";
 
-// MISSIONS
+// ================= MISSIONS =================
 const missions = {
     pilot: { title: "✈️ Flight Mission", success: "Smooth flight!", fail: "⚠️ Turbulence!", effect: "shake" },
     news: { title: "📡 Live News", success: "Clear broadcast!", fail: "📡 Signal glitch!", effect: "glitch" },
@@ -15,23 +15,45 @@ const missions = {
     minister: { title: "🏛️ Speech", success: "👏 Crowd impressed!", fail: "😠 Crowd unhappy!", effect: "crowd" }
 };
 
-// SCRIPTS
-speechSynthesis.onvoiceschanged = () => {
-    speechSynthesis.getVoices();
-};
+// ================= SCRIPTS =================
 const scripts = {
-    pilot: { easy: ["The plane is ready"], medium: ["Prepare for takeoff now"], hard: ["Passengers must fasten seatbelts"] },
-    news: { easy: ["This is the news"], medium: ["Here is the latest update"], hard: ["We are reporting live"] },
-    customerservice: { easy: ["How can I help you"], medium: ["Please hold while I check"], hard: ["We apologise for inconvenience"] },
-    TVhost: { easy: ["Welcome to the show"], medium: ["We have a guest today"], hard: ["Stay tuned for performance"] },
-    minister: { easy: ["We must work together"], medium: ["We must act now"], hard: ["This will benefit future generations"] }
+    service: {
+        easy: ["Please hold while I check"],
+        medium: ["I will assist you shortly"],
+        hard: ["Your request is being processed now"]
+    },
+    pilot: {
+        easy: ["The plane is ready"],
+        medium: ["Prepare for takeoff now"],
+        hard: ["Passengers must fasten seatbelts"]
+    },
+    news: {
+        easy: ["This is the news"],
+        medium: ["Here is the latest update"],
+        hard: ["We are reporting live"]
+    },
+    host: {
+        easy: ["Welcome to the show"],
+        medium: ["We have a guest today"],
+        hard: ["Stay tuned for performance"]
+    },
+    minister: {
+        easy: ["We must work together"],
+        medium: ["We must act now"],
+        hard: ["This will benefit future generations"]
+    }
 };
 
-// SPEECH
+// ================= SPEECH SETUP =================
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 recognition.lang = 'en-GB';
 
-// NAVIGATION
+// Ensure voices load
+speechSynthesis.onvoiceschanged = () => {
+    speechSynthesis.getVoices();
+};
+
+// ================= NAVIGATION =================
 function goToRoles() {
     document.getElementById("menu").classList.add("hidden");
     document.getElementById("roles").classList.remove("hidden");
@@ -63,22 +85,19 @@ function startGame(level) {
     document.getElementById("feedback").innerHTML = "";
 }
 
-// SPEECH START
+// ================= SPEECH =================
 function startListening() {
     recognition.start();
 }
 
-// SPEECH RESULT
 recognition.onresult = function(event) {
     let spokenText = event.results[0][0].transcript;
 
     let result = highlightWords(spokenText, currentScript);
-console.log(result);
 
-    // ✅ SHOW WORD-BY-WORD FIRST
+    // show highlighted words
     document.getElementById("feedback").innerHTML = result.html;
 
-    // ✅ THEN ADD RESULT MESSAGE
     if (result.mistakes === 0) {
         handleResult(true);
     } else {
@@ -86,12 +105,12 @@ console.log(result);
     }
 };
 
-// RESULT SYSTEM
+// ================= RESULT =================
 function handleResult(isCorrect) {
     const feedback = document.getElementById("feedback");
     const gameArea = document.getElementById("gameArea");
 
-    gameArea.className = "card"; // reset effect
+    gameArea.className = "card";
 
     if (isCorrect) {
         feedback.innerHTML += "<br>✅ " + missions[selectedRole].success;
@@ -106,7 +125,46 @@ function handleResult(isCorrect) {
     updateScore();
 }
 
-// UI
+// ================= WORD HIGHLIGHT + AUDIO =================
+function highlightWords(spoken, correct) {
+    spoken = spoken.toLowerCase().split(" ");
+    correct = correct.toLowerCase().split(" ");
+
+    let result = "";
+    let mistakes = 0;
+
+    correct.forEach((word, i) => {
+        if (spoken[i] === word) {
+            result += `<span class="correct">${word}</span> `;
+        } else {
+            result += `<span class="wrong">${word}</span> `;
+            mistakes++;
+
+            // delay audio so it doesn't overlap
+            setTimeout(() => speakWord(word), 700 * i);
+        }
+    });
+
+    return { html: result, mistakes: mistakes };
+}
+
+// ================= AUDIO =================
+function speakWord(word) {
+    speechSynthesis.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(word);
+    utterance.lang = 'en-GB';
+    utterance.rate = 0.9;
+
+    let voices = speechSynthesis.getVoices();
+    if (voices.length > 0) {
+        utterance.voice = voices.find(v => v.lang === 'en-GB') || voices[0];
+    }
+
+    speechSynthesis.speak(utterance);
+}
+
+// ================= UI =================
 function updateHearts() {
     document.getElementById("hearts").innerText = "❤️".repeat(lives);
 }
@@ -132,73 +190,4 @@ function nextRound() {
 function goToMenu() {
     document.getElementById("game").classList.add("hidden");
     document.getElementById("menu").classList.remove("hidden");
-}
-// ================= WORD FEEDBACK + AUDIO =================
-
-function highlightWords(spoken, correct) {
-    spoken = spoken.toLowerCase().split(" ");
-    correct = correct.toLowerCase().split(" ");
-
-    let result = "";
-    let mistakes = 0;
-
-    correct.forEach((word, i) => {
-        if (spoken[i] === word) {
-            result += `<span class="correct">${word}</span> `;
-        } else {
-            result += `<span class="wrong">${word}</span> `;
-            mistakes++;
-
-            // 🔊 play correct pronunciation (with delay)
-            setTimeout(() => speakWord(word), 700 * i);
-        }
-    });
-
-    return { html: result, mistakes: mistakes };
-}
-
-
-// 🔊 SPEAK WORD FUNCTION
-function setTimeout(() => speakWord(word), 500 * i);
-    const utterance = new SpeechSynthesisUtterance(word);
-    utterance.lang = 'en-GB';
-
-    let voices = speechSynthesis.getVoices();
-    if (voices.length > 0) {
-        utterance.voice = voices.find(v => v.lang === 'en-GB') || voices[0];
-    }
-
-    speechSynthesis.speak(utterance);
-}
-    });
-
-    return { html: result, mistakes: mistakes };
-}
-    });
-
-    return { html: result, mistakes: mistakes };
-}
-
-// ================= AUDIO =================
-function speakWord(word) {
-function speakWord(word) {
-    // stop previous speech (avoid overlap)
-    speechSynthesis.cancel();
-
-    const utterance = new SpeechSynthesisUtterance(word);
-    utterance.lang = 'en-GB';
-    utterance.rate = 0.9; // slower (clearer for pupils)
-    utterance.pitch = 1;
-
-    let voices = speechSynthesis.getVoices();
-
-    // force a voice if available
-    if (voices.length > 0) {
-        let voice = voices.find(v => v.lang === 'en-GB') || voices[0];
-        utterance.voice = voice;
-    }
-
-    console.log("Speaking:", word); // debug
-
-    speechSynthesis.speak(utterance);
 }
