@@ -19,8 +19,8 @@ const missions = {
 const scripts = {
     pilot: { easy: ["The plane is ready"], medium: ["Prepare for takeoff now"], hard: ["Passengers must fasten seatbelts"] },
     news: { easy: ["This is the news"], medium: ["Here is the latest update"], hard: ["We are reporting live"] },
-    service: { easy: ["How can I help you"], medium: ["Please hold while I check"], hard: ["We apologise for inconvenience"] },
-    host: { easy: ["Welcome to the show"], medium: ["We have a guest today"], hard: ["Stay tuned for performance"] },
+    customerservice: { easy: ["How can I help you"], medium: ["Please hold while I check"], hard: ["We apologise for inconvenience"] },
+    TVhost: { easy: ["Welcome to the show"], medium: ["We have a guest today"], hard: ["Stay tuned for performance"] },
     minister: { easy: ["We must work together"], medium: ["We must act now"], hard: ["This will benefit future generations"] }
 };
 
@@ -130,6 +130,8 @@ function goToMenu() {
     document.getElementById("game").classList.add("hidden");
     document.getElementById("menu").classList.remove("hidden");
 }
+// ================= WORD FEEDBACK + AUDIO =================
+
 function highlightWords(spoken, correct) {
     spoken = spoken.toLowerCase().split(" ");
     correct = correct.toLowerCase().split(" ");
@@ -143,8 +145,48 @@ function highlightWords(spoken, correct) {
         } else {
             result += `<span class="wrong">${word}</span> `;
             mistakes++;
+
+            // 🔊 play correct pronunciation (with delay)
+            setTimeout(() => speakWord(word), 500 * i);
         }
     });
 
     return { html: result, mistakes: mistakes };
+}
+
+
+// 🔊 SPEAK WORD FUNCTION
+function speakWord(word) {
+    const utterance = new SpeechSynthesisUtterance(word);
+    utterance.lang = 'en-GB';
+
+    let voices = speechSynthesis.getVoices();
+    if (voices.length > 0) {
+        utterance.voice = voices.find(v => v.lang === 'en-GB') || voices[0];
+    }
+
+    speechSynthesis.speak(utterance);
+}
+    });
+
+    return { html: result, mistakes: mistakes };
+}
+    });
+
+    return { html: result, mistakes: mistakes };
+}
+
+// ================= AUDIO =================
+function speakWord(word) {
+    const utterance = new SpeechSynthesisUtterance(word);
+    utterance.lang = 'en-GB';
+
+    let voices = speechSynthesis.getVoices();
+    if (voices.length > 0) {
+        utterance.voice = voices.find(v => v.lang === 'en-GB') || voices[0];
+    }
+
+    setTimeout(() => {
+        speechSynthesis.speak(utterance);
+    }, 200);
 }
