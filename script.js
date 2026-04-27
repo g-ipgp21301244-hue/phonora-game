@@ -16,6 +16,9 @@ const missions = {
 };
 
 // SCRIPTS
+speechSynthesis.onvoiceschanged = () => {
+    speechSynthesis.getVoices();
+};
 const scripts = {
     pilot: { easy: ["The plane is ready"], medium: ["Prepare for takeoff now"], hard: ["Passengers must fasten seatbelts"] },
     news: { easy: ["This is the news"], medium: ["Here is the latest update"], hard: ["We are reporting live"] },
@@ -178,15 +181,24 @@ function setTimeout(() => speakWord(word), 500 * i);
 
 // ================= AUDIO =================
 function speakWord(word) {
+function speakWord(word) {
+    // stop previous speech (avoid overlap)
+    speechSynthesis.cancel();
+
     const utterance = new SpeechSynthesisUtterance(word);
     utterance.lang = 'en-GB';
+    utterance.rate = 0.9; // slower (clearer for pupils)
+    utterance.pitch = 1;
 
     let voices = speechSynthesis.getVoices();
+
+    // force a voice if available
     if (voices.length > 0) {
-        utterance.voice = voices.find(v => v.lang === 'en-GB') || voices[0];
+        let voice = voices.find(v => v.lang === 'en-GB') || voices[0];
+        utterance.voice = voice;
     }
 
-    setTimeout(() => {
-        speechSynthesis.speak(utterance);
-    }, 200);
+    console.log("Speaking:", word); // debug
+
+    speechSynthesis.speak(utterance);
 }
