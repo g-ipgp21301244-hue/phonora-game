@@ -17,12 +17,13 @@ const missions = {
 
 // ================= SCRIPTS =================
 const scripts = {
-    service: {
-        easy: ["Please hold while I check"],
-        medium: ["I will assist you shortly"],
-        hard: ["Your request is being processed now"]
-    },
-    scripts.pilot = {
+    customerservice: {
+    easy: [["Please hold while I check"]],
+    medium: [["I will assist you shortly"]],
+    hard: [["Your request is being processed now"]]
+},
+
+    pilot: {
     easy: [
         ["Welcome aboard our flight today."],
         ["Please fasten your seatbelt now."],
@@ -245,11 +246,6 @@ function nextRound() {
 
     currentScript = quests[currentIndex].join(" ");
 
-    document.getElementById("script").innerText = currentScript;
-    document.getElementById("feedback").innerHTML = "";
-}
-
-    currentScript = arr[currentIndex];
     document.getElementById("script").innerText = currentScript;
     document.getElementById("feedback").innerHTML = "";
 }
