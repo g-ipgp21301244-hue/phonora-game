@@ -136,6 +136,12 @@ function startGame(level) {
     lives = 6;
     score = 0;
 
+    // ✅ SAFETY CHECK (prevents crash)
+    if (!scripts[selectedRole] || !scripts[selectedRole][level]) {
+        alert("Error: Script not found for this role/level");
+        return;
+    }
+
     currentScript = scripts[selectedRole][level][currentIndex].join(" ");
 
     document.getElementById("roleTitle").innerText = selectedRole.toUpperCase();
