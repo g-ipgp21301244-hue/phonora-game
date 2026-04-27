@@ -22,11 +22,67 @@ const scripts = {
         medium: ["I will assist you shortly"],
         hard: ["Your request is being processed now"]
     },
-    pilot: {
-        easy: ["The plane is ready"],
-        medium: ["Prepare for takeoff now"],
-        hard: ["Passengers must fasten seatbelts"]
-    },
+    scripts.pilot = {
+    easy: [
+        ["Welcome aboard our flight today."],
+        ["Please fasten your seatbelt now."],
+        ["We are ready for takeoff."],
+        ["The weather is clear and sunny."],
+        ["We will land in one hour."],
+        ["Thank you for flying with us."]
+    ],
+
+    medium: [
+        [
+            "Please fasten your seatbelt securely.",
+            "Make sure your seat is upright.",
+            "Keep your tray table closed."
+        ],
+        [
+            "We are ready for takeoff.",
+            "Please remain seated at all times.",
+            "Enjoy your flight with us."
+        ],
+        [
+            "The weather today is calm.",
+            "There may be light clouds ahead.",
+            "The flight will be smooth."
+        ],
+        [
+            "We are flying over the ocean.",
+            "You may see islands below.",
+            "Our destination is Kuala Lumpur."
+        ],
+        [
+            "We may experience some turbulence.",
+            "Please stay seated for safety.",
+            "Keep your seatbelt fastened."
+        ],
+        [
+            "We are preparing to land now.",
+            "Please check your seatbelt again.",
+            "Thank you for flying with us."
+        ]
+    ],
+
+    hard: [
+        [
+            "Good morning passengers this is your captain speaking",
+            "Please fasten your seatbelts and ensure your seats are upright",
+            "Follow the instructions given by the cabin crew"
+        ],
+        [
+            "We are currently flying at thirty thousand feet",
+            "We will be passing over several islands",
+            "Our estimated arrival time is two hours"
+        ],
+        [
+            "We are experiencing slight turbulence",
+            "Please remain calm and stay seated",
+            "Our crew is here to ensure your safety"
+        ]
+    ]
+};
     news: {
         easy: ["This is the news"],
         medium: ["Here is the latest update"],
@@ -74,7 +130,7 @@ function startGame(level) {
     lives = 6;
     score = 0;
 
-    currentScript = scripts[selectedRole][level][0];
+    currentScript = scripts[selectedRole][level][currentIndex].join(" ");
 
     document.getElementById("roleTitle").innerText = selectedRole.toUpperCase();
     document.getElementById("missionTitle").innerText = missions[selectedRole].title;
@@ -174,13 +230,21 @@ function updateScore() {
 }
 
 function nextRound() {
-    let arr = scripts[selectedRole][currentLevel];
+    let quests = scripts[selectedRole][currentLevel];
+
     currentIndex++;
 
-    if (currentIndex >= arr.length) {
-        document.getElementById("feedback").innerHTML = "🎉 Level complete!";
+    if (currentIndex >= quests.length) {
+        document.getElementById("feedback").innerHTML =
+            "👑 You saved the princess! 🎉";
         return;
     }
+
+    currentScript = quests[currentIndex].join(" ");
+
+    document.getElementById("script").innerText = currentScript;
+    document.getElementById("feedback").innerHTML = "";
+}
 
     currentScript = arr[currentIndex];
     document.getElementById("script").innerText = currentScript;
