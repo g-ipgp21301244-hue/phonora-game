@@ -122,6 +122,7 @@ function selectRole(role) {
 }
 
 function startGame(level) {
+    document.getElementById("questTitle").innerText = "Quest 1";
     document.getElementById("levels").classList.add("hidden");
     document.getElementById("game").classList.remove("hidden");
 
@@ -230,6 +231,8 @@ function updateScore() {
 }
 
 function nextRound() {
+    document.getElementById("questTitle").innerText =
+    "Quest " + (currentIndex + 1);
     let quests = scripts[selectedRole][currentLevel];
 
     currentIndex++;
