@@ -150,7 +150,7 @@ function highlightWords(spoken, correct) {
             mistakes++;
 
             // 🔊 play correct pronunciation (with delay)
-            setTimeout(() => speakWord(word), 500 * i);
+            setTimeout(() => speakWord(word), 700 * i);
         }
     });
 
