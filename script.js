@@ -156,7 +156,7 @@ function highlightWords(spoken, correct) {
 
 
 // 🔊 SPEAK WORD FUNCTION
-function speakWord(word) {
+function setTimeout(() => speakWord(word), 500 * i);
     const utterance = new SpeechSynthesisUtterance(word);
     utterance.lang = 'en-GB';
 
