@@ -70,6 +70,7 @@ recognition.onresult = function(event) {
     let spokenText = event.results[0][0].transcript;
 
     let result = highlightWords(spokenText, currentScript);
+console.log(result);
 
     // ✅ SHOW WORD-BY-WORD FIRST
     document.getElementById("feedback").innerHTML = result.html;
