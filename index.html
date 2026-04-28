@@ -37,9 +37,10 @@
     <!-- GAME -->
     <div id="game" class="screen hidden">
 
+        <!-- ✅ ONLY ONE progress bar -->
         <div class="progress-container">
-    <div id="progressBar"></div>
-</div>
+            <div id="progressBar"></div>
+        </div>
 
         <div class="top-bar">
             <div>
@@ -51,9 +52,7 @@
                 <span id="hearts"></span>
             </div>
         </div>
-        <div class="progress-container">
-    <div id="progressBar"></div>
-</div>
+
         <h3 id="questTitle">Quest 1</h3>
 
         <div class="card" id="gameArea">
@@ -74,6 +73,9 @@
 </div>
 
 <script src="script.js"></script>
+
+<!-- ✅ KEEP INSIDE BODY -->
+<button onclick="speakWord('hello')">🔊 Test Sound</button>
+
 </body>
 </html>
-<button onclick="speakWord('hello')">🔊 Test Sound</button>
