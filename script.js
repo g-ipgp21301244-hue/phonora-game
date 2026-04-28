@@ -250,10 +250,13 @@ function nextRound() {
     currentIndex++;
 
     if (currentIndex >= quests.length) {
-        document.getElementById("feedback").innerHTML =
-            "👑 You saved the princess! 🎉";
-        return;
-    }
+    document.getElementById("script").innerText = "🏰 Final Castle Reached!";
+    document.getElementById("feedback").innerHTML =
+        "👑 You saved the princess! 🎉";
+
+    document.getElementById("progressBar").style.width = "100%";
+    return;
+}
 
     currentScript = quests[currentIndex].join(" ");
 
