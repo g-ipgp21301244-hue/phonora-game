@@ -137,7 +137,7 @@ const scripts = {
             ["In conclusion I thank everyone for your support", "Let us build a brighter future together", "Have a pleasant day"]
         ]
     }
-}; //
+}; 
 
 // ================= SPEECH SETUP =================
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
