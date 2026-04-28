@@ -169,6 +169,11 @@ function startGame(level) {
     lives = 6;
     score = 0;
 
+    if (!selectedRole || !scripts[selectedRole] || !scripts[selectedRole][level]) {
+    alert("Game error: role or level not found");
+    return;
+}
+
     currentScript = scripts[selectedRole][level][currentIndex].join(" ");
 
     document.getElementById("roleTitle").innerText = selectedRole.toUpperCase();
