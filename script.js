@@ -264,3 +264,19 @@ function goToMenu() {
     document.getElementById("game").classList.add("hidden");
     document.getElementById("menu").classList.remove("hidden");
 }
+
+.progress-container {
+    width: 100%;
+    height: 12px;
+    background: #ddd;
+    border-radius: 10px;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+#progressBar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #4ade80, #22c55e);
+    transition: width 0.4s ease;
+}
