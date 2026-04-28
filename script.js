@@ -152,6 +152,62 @@ const scripts = {
             ["In conclusion I thank everyone for your support", "Let us build a brighter future together", "Have a pleasant day"]
         ]
     }
+
+};
+
+    // 🎤 TV HOST
+    host: {
+        easy: [
+            ["Hello everyone, welcome to the show."],
+            ["Today we have a special guest."],
+            ["Let’s start the program now."],
+            ["This is very exciting."],
+            ["Thank you for joining us."],
+            ["See you next time."]
+        ],
+
+        medium: [
+            ["Hello everyone, welcome to our show.", "I am your host today.", "Let’s begin the program."],
+            ["Today we have a special guest.", "They are very talented.", "Let’s welcome them."],
+            ["Can you tell us about yourself?", "That is very interesting.", "Thank you for sharing."],
+            ["Now we will play a fun game.", "Everyone can join.", "Let’s have some fun."],
+            ["Thank you for being here.", "We enjoyed your time.", "It was amazing."],
+            ["That’s all for today.", "Thank you for watching.", "See you again soon."]
+        ],
+
+        hard: [
+            ["Hello everyone and welcome to our exciting show", "I am your host for today", "We have an amazing program lined up"],
+            ["Today we are joined by a special guest", "Thank you for being here with us", "Please share your experience with our audience"],
+            ["It has been a wonderful time today", "Thank you to our guest and viewers", "See you next time for more exciting content"]
+        ]
+    },
+
+    // 🏛️ MINISTER
+    minister: {
+        easy: [
+            ["Good morning, everyone."],
+            ["I am happy to be here today."],
+            ["Education is very important."],
+            ["We will improve our schools."],
+            ["Thank you for your support."],
+            ["Have a great day."]
+        ],
+
+        medium: [
+            ["Good morning, everyone.", "I am honoured to be here today.", "Thank you for attending."],
+            ["Education is very important.", "Students are our future.", "We must support learning."],
+            ["We will improve our schools.", "New facilities will be built.", "Teachers will be trained."],
+            ["We must work together.", "Strong communities build strong nations.", "Your support matters."],
+            ["Thank you for your cooperation.", "We value your contribution.", "Together we succeed."],
+            ["Thank you for your time.", "I appreciate your presence.", "Have a wonderful day."]
+        ],
+
+        hard: [
+            ["Good morning ladies and gentlemen", "It is a great honour to be here today", "Education shapes our nation’s future"],
+            ["Today I am proud to announce new initiatives", "We will improve facilities and teacher training", "Together we can achieve excellence"],
+            ["In conclusion I thank everyone for your support", "Let us build a brighter future together", "Have a pleasant day"]
+        ]
+    }
 };
 
 // ================= SPEECH SETUP =================
