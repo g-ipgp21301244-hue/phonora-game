@@ -184,11 +184,14 @@ function startGame(level) {
     currentIndex = 0;
     lives = 6;
     score = 0;
-    updateProgress();
 
-    // ✅ SAFETY CHECK (prevents crash)
-    if (!scripts[selectedRole] || !scripts[selectedRole][level]) {
-        alert("Error: Script not found for this role/level");
+    console.log("Selected Role:", selectedRole);
+    console.log("Level:", level);
+    console.log("Scripts:", scripts[selectedRole]);
+
+    // ✅ SAFETY CHECK
+    if (!selectedRole || !scripts[selectedRole] || !scripts[selectedRole][level]) {
+        alert("Game error: role or level not found");
         return;
     }
 
@@ -202,7 +205,6 @@ function startGame(level) {
     updateScore();
     document.getElementById("feedback").innerHTML = "";
 }
-
 // ================= SPEECH =================
 function startListening() {
     recognition.start();
