@@ -135,6 +135,7 @@ function startGame(level) {
     currentIndex = 0;
     lives = 6;
     score = 0;
+    updateProgress();
 
     // ✅ SAFETY CHECK (prevents crash)
     if (!scripts[selectedRole] || !scripts[selectedRole][level]) {
