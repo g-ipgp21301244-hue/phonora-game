@@ -138,3 +138,29 @@ body {
     50% { transform: translateY(-25px); }
     100% { transform: translateY(0); }
 }
+#enemy {
+    position: absolute;
+    left: 50%;
+    top: 5px;
+    font-size: 26px;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+/* 👾 show enemy */
+.show-enemy {
+    opacity: 1;
+}
+
+/* 💥 attack animation */
+.hit {
+    animation: hit 0.4s;
+}
+
+@keyframes hit {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
+}
