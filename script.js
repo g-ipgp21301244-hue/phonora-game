@@ -354,6 +354,7 @@ function jumpToStar() {
         character.style.transition = "left 0.4s ease";
         moveCharacter(); // continue normal progress
     }, 600);
+    star.classList.remove("show-star");
 }
 function showEnemy() {
     const enemy = document.getElementById("enemy");
