@@ -194,6 +194,7 @@ const characters = {
 };
 
 character.innerText = characters[selectedRole] || "🧍";
+    character.style.left = "0%";
 
     updateHearts();
     updateScore();
