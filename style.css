@@ -172,3 +172,9 @@ body {
     50% { transform: scale(1.6) rotate(180deg); opacity: 1; }
     100% { transform: scale(0) rotate(360deg); opacity: 0; }
 }
+#finish {
+    position: absolute;
+    right: 5%;
+    bottom: 40px;
+    font-size: 32px;
+}
