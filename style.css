@@ -172,3 +172,12 @@ body {
     font-size: 40px;
     z-index: 5;
 }
+.correct {
+    color: green;
+    font-weight: bold;
+}
+
+.wrong {
+    color: red;
+    font-weight: bold;
+}
