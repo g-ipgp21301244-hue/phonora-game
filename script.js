@@ -218,48 +218,38 @@ recognition.onresult = function(event) {
 
 // ================= RESULT =================
 function handleResult(isCorrect) {
-    const feedback = document.getElementById("feedback");
-    const gameArea = document.getElementById("gameArea");
     const character = document.getElementById("character");
     const star = document.getElementById("star");
     const enemy = document.getElementById("enemy");
 
-    gameArea.className = "card";
-
     if (isCorrect) {
-        feedback.innerHTML += "<br>✅ " + missions[selectedRole].success;
         score += 10;
 
-        // ⭐ SHOW STAR
-        star.classList.add("show-star", "sparkle");
+        // ⭐ show star
+        star.classList.add("show-star");
 
-        // 🦘 JUMP (arc feel)
+        // 🦘 jump to star
         character.classList.add("jump");
 
-        // 🚶 MOVE FORWARD
         setTimeout(() => {
             moveCharacter();
         }, 200);
 
-        // 🧹 CLEAN UP
         setTimeout(() => {
-            star.classList.remove("show-star", "sparkle");
+            star.classList.remove("show-star");
             character.classList.remove("jump");
-        }, 600);
+            nextRound(); // 🔥 AUTO NEXT
+        }, 700);
 
     } else {
-        feedback.innerHTML += "<br>❌ " + missions[selectedRole].fail;
         lives--;
 
-        // 👾 SHOW ENEMY
+        // 👾 show enemy
         enemy.classList.add("show-enemy");
 
-        // 💥 HIT EFFECT
+        // 💥 hit
         character.classList.add("hit");
 
-        gameArea.classList.add(missions[selectedRole].effect);
-
-        // 🧹 CLEAN UP
         setTimeout(() => {
             enemy.classList.remove("show-enemy");
             character.classList.remove("hit");
@@ -344,10 +334,9 @@ function goToMenu() {
 
 function moveCharacter() {
     let total = scripts[selectedRole][currentLevel].length;
-    let progress = (currentIndex / total) * 100;
+    let progress = (currentIndex / total) * 80;
 
     document.getElementById("character").style.left = progress + "%";
-    document.getElementById("progressBar").style.width = progress + "%";
 }
 function showStar() {
     const star = document.getElementById("star");
