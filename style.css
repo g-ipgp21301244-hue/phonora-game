@@ -198,3 +198,92 @@ body {
     from { left: 100%; }
     to { left: -100%; }
 }
+/* 🌍 WORLD */
+.world {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    background: url('https://i.imgur.com/2R8Q0kK.png') repeat-x;
+    background-size: cover;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+/* 🧍 CHARACTER */
+#character {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 40px;
+    transition: left 0.4s linear;
+}
+
+/* ⭐ STAR */
+#star {
+    position: absolute;
+    bottom: 90px;
+    left: 60%;
+    font-size: 28px;
+    opacity: 0;
+}
+
+/* 👾 ENEMY */
+#enemy {
+    position: absolute;
+    bottom: 20px;
+    left: 70%;
+    font-size: 30px;
+    opacity: 0;
+}
+
+/* 🗣️ PROMPT */
+.prompt-box {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* 🎤 BUTTON */
+.mic-btn {
+    font-size: 26px;
+    padding: 15px;
+    border-radius: 50%;
+    border: none;
+    background: #667eea;
+    color: white;
+    margin: 10px 0;
+}
+
+/* HUD */
+.hud {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+/* ⭐ SHOW */
+.show-star { opacity: 1; }
+
+/* 👾 SHOW */
+.show-enemy { opacity: 1; }
+
+/* 🦘 ARC JUMP */
+.jump {
+    animation: arcJump 0.6s ease;
+}
+
+@keyframes arcJump {
+    0% { transform: translate(0, 0); }
+    50% { transform: translate(40px, -60px); }
+    100% { transform: translate(80px, 0); }
+}
+
+/* 💥 HIT */
+.hit {
+    animation: hit 0.4s;
+}
+
+@keyframes hit {
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+}
