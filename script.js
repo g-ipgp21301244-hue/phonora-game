@@ -303,12 +303,13 @@ function nextRound() {
     currentIndex++; // ✅ MOVE FIRST
 
     if (currentIndex >= quests.length) {
-        document.getElementById("script").innerText = "🏰 Final Castle Reached!";
-        document.getElementById("feedback").innerHTML = "👑 You saved the princess! 🎉";
+    document.getElementById("script").innerText = "🏰 You reached the castle!";
+    document.getElementById("feedback").innerHTML = "👑 Victory! Well done!";
+    
+    sounds.win.play();
 
-        document.getElementById("progressBar").style.width = "100%";
-        return;
-    }
+    return;
+}
 
     document.getElementById("questTitle").innerText = "Quest " + (currentIndex + 1);
 
