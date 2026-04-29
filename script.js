@@ -186,7 +186,6 @@ function startGame(level) {
     updateHearts();
     updateScore();
 
-    // ✅ IMPORTANT: clear feedback (NOT result.html ❌)
     document.getElementById("feedback").innerHTML = "";
 }
 
