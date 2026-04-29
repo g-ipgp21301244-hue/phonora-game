@@ -390,3 +390,6 @@ const sounds = {
     wrong: new Audio("https://actions.google.com/sounds/v1/cartoon/boing.ogg"),
     win: new Audio("https://actions.google.com/sounds/v1/cartoon/ta_da.ogg")
 };
+function restartGame() {
+    goToMenu();
+}
