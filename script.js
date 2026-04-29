@@ -230,10 +230,14 @@ function handleResult(isCorrect) {
     showStar();      // ⭐ show star
     jumpToStar();    // 🦘 jump + then move
 } else {
-        feedback.innerHTML += "<br>❌ " + missions[selectedRole].fail;
-        lives--;
-        gameArea.classList.add(missions[selectedRole].effect);
-    }
+    feedback.innerHTML += "<br>❌ " + missions[selectedRole].fail;
+    lives--;
+
+    showEnemy();      // 👾 enemy appears
+    enemyAttack();    // 💥 character gets hit
+
+    gameArea.classList.add(missions[selectedRole].effect);
+}
 
     updateHearts();
     updateScore();
@@ -337,4 +341,22 @@ function jumpToStar() {
         character.classList.remove("jump");
         moveCharacter(); // move AFTER jump
     }, 500);
+}
+function showEnemy() {
+    const enemy = document.getElementById("enemy");
+    enemy.classList.add("show-enemy");
+
+    setTimeout(() => {
+        enemy.classList.remove("show-enemy");
+    }, 1200);
+}
+
+function enemyAttack() {
+    const character = document.getElementById("character");
+
+    character.classList.add("hit");
+
+    setTimeout(() => {
+        character.classList.remove("hit");
+    }, 400);
 }
