@@ -345,7 +345,7 @@ function jumpToStar() {
 
     // Apply jump-forward animation
     character.style.transition = "transform 0.6s ease, left 0.6s ease";
-    character.style.transform = "translateY(-80%)";
+    character.style.transform = `translateY(${-arc}px)`;
     character.style.left = charPos + distance + "px";
 
     // Reset after animation
@@ -362,7 +362,7 @@ function showEnemy() {
 
     setTimeout(() => {
         enemy.classList.remove("show-enemy");
-    }, 1200);
+    }, 800);
 }
 
 function enemyAttack() {
