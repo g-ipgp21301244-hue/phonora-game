@@ -178,3 +178,23 @@ body {
     bottom: 40px;
     font-size: 32px;
 }
+#character {
+    transition: left 0.4s ease, transform 0.2s ease;
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+.track::before {
+    content: "☁️ ☁️ ☁️";
+    position: absolute;
+    top: 10px;
+    left: 0;
+    font-size: 24px;
+    animation: clouds 20s linear infinite;
+}
+
+@keyframes clouds {
+    from { left: 100%; }
+    to { left: -100%; }
+}
