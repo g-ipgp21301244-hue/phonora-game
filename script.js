@@ -220,6 +220,9 @@ recognition.onresult = function(event) {
 function handleResult(isCorrect) {
     const feedback = document.getElementById("feedback");
     const gameArea = document.getElementById("gameArea");
+    const character = document.getElementById("character");
+    const star = document.getElementById("star");
+    const enemy = document.getElementById("enemy");
 
     gameArea.className = "card";
 
@@ -227,25 +230,40 @@ function handleResult(isCorrect) {
         feedback.innerHTML += "<br>✅ " + missions[selectedRole].success;
         score += 10;
 
-        // 🔊 SOUND
-        sounds.correct.play();
+        // ⭐ SHOW STAR
+        star.classList.add("show-star", "sparkle");
 
-        // ⭐ STAR + JUMP
-        showStar();
-        jumpToStar();
+        // 🦘 JUMP (arc feel)
+        character.classList.add("jump");
+
+        // 🚶 MOVE FORWARD
+        setTimeout(() => {
+            moveCharacter();
+        }, 200);
+
+        // 🧹 CLEAN UP
+        setTimeout(() => {
+            star.classList.remove("show-star", "sparkle");
+            character.classList.remove("jump");
+        }, 600);
 
     } else {
         feedback.innerHTML += "<br>❌ " + missions[selectedRole].fail;
         lives--;
 
-        // 🔊 SOUND
-        sounds.wrong.play();
+        // 👾 SHOW ENEMY
+        enemy.classList.add("show-enemy");
 
-        // 👾 ENEMY
-        showEnemy();
-        enemyAttack();
+        // 💥 HIT EFFECT
+        character.classList.add("hit");
 
         gameArea.classList.add(missions[selectedRole].effect);
+
+        // 🧹 CLEAN UP
+        setTimeout(() => {
+            enemy.classList.remove("show-enemy");
+            character.classList.remove("hit");
+        }, 600);
     }
 
     updateHearts();
