@@ -227,6 +227,7 @@ function handleResult(isCorrect, resultHTML, wrongWords = []) {
     const feedback = document.getElementById("feedback");
 
     feedback.innerHTML = resultHTML;
+    console.log("Wrong words:", wrongWords);
 
     if (isCorrect) {
         feedback.innerHTML += "<br>✅ " + missions[selectedRole].success;
@@ -246,8 +247,10 @@ function handleResult(isCorrect, resultHTML, wrongWords = []) {
         showEnemy();
         enemyAttack();
 
-        // 🔊 RE-PRONOUNCE WRONG WORDS
-        speakWrongWords(wrongWords);
+        // ✅ DELAY SPEECH (VERY IMPORTANT)
+        setTimeout(() => {
+            speakWrongWords(wrongWords);
+        }, 800);
     }
 
     updateHearts();
@@ -277,7 +280,6 @@ function highlightWords(spoken, correct) {
 
 // ================= AUDIO =================
 function speakWord(word) {
-    speechSynthesis.cancel();
 
     const utterance = new SpeechSynthesisUtterance(word);
     utterance.lang = 'en-GB';
@@ -396,6 +398,9 @@ function restartGame() {
 function speakWrongWords(words) {
     if (!words || words.length === 0) return;
 
+    // ✅ stop previous speech safely
+    speechSynthesis.cancel();
+
     let index = 0;
 
     function speakNext() {
@@ -403,11 +408,12 @@ function speakWrongWords(words) {
 
         const utterance = new SpeechSynthesisUtterance(words[index]);
         utterance.lang = "en-GB";
-        utterance.rate = 0.85;
+        utterance.rate = 0.8;
+        utterance.pitch = 1;
 
         utterance.onend = () => {
             index++;
-            speakNext(); // next word after previous finishes
+            speakNext();
         };
 
         speechSynthesis.speak(utterance);
