@@ -165,3 +165,10 @@ body {
     25% { transform: translateX(-10px); }
     50% { transform: translateX(10px); }
 }
+#character {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 40px;
+    z-index: 5;
+}
