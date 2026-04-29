@@ -363,6 +363,8 @@ function jumpToStar() {
         moveCharacter(); // continue normal progress
     }, 600);
     star.classList.remove("show-star");
+    star.classList.add("sparkle");
+setTimeout(() => star.classList.remove("sparkle"), 400);
 }
 function showEnemy() {
     const enemy = document.getElementById("enemy");
