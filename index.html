@@ -37,21 +37,35 @@
     <!-- GAME -->
     <div id="game" class="screen hidden">
 
-        <!-- ✅ ONLY ONE progress bar -->
-        <div class="progress-container">
-            <div id="progressBar"></div>
-        </div>
+    <!-- 🗣️ SPEAKING PROMPT -->
+    <div class="prompt-box">
+        <p id="script"></p>
+    </div>
 
-        <div class="top-bar">
-            <div>
-                <div id="roleTitle"></div>
-                <div id="missionTitle"></div>
-            </div>
-            <div>
-                <span id="score">⭐ 0</span>
-                <span id="hearts"></span>
-            </div>
-        </div>
+    <!-- 🎤 SPEAK BUTTON -->
+    <button class="mic-btn" onclick="startListening()">🎤</button>
+
+    <!-- 🎮 GAME WORLD -->
+    <div class="world">
+        
+        <!-- character -->
+        <div id="character">🧍</div>
+
+        <!-- star -->
+        <div id="star">⭐</div>
+
+        <!-- enemy -->
+        <div id="enemy">👾</div>
+
+    </div>
+
+    <!-- UI -->
+    <div class="hud">
+        <span id="score">⭐ 0</span>
+        <span id="hearts"></span>
+    </div>
+
+</div>
 
         <h3 id="questTitle">Quest 1</h3>
 
