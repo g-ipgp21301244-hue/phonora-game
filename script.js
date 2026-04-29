@@ -168,6 +168,7 @@ function selectRole(role) {
 }
 
 function startGame(level) {
+    document.getElementById("menu").classList.add("hidden");
     document.getElementById("levels").classList.add("hidden");
     document.getElementById("game").classList.remove("hidden");
 
