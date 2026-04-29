@@ -219,11 +219,11 @@ recognition.onresult = function(event) {
     let spokenText = event.results[0][0].transcript;
     let result = highlightWords(spokenText, currentScript);
 
-    handleResult(result.mistakes === 0, result.html);
+    handleResult(result.mistakes === 0, result.html, result.wrongWords);
 };
 
 // ================= RESULT =================
-function handleResult(isCorrect, resultHTML) {
+function handleResult(isCorrect, resultHTML, wrongWords = []) {
     const feedback = document.getElementById("feedback");
 
     feedback.innerHTML = resultHTML;
@@ -232,7 +232,7 @@ function handleResult(isCorrect, resultHTML) {
         feedback.innerHTML += "<br>✅ " + missions[selectedRole].success;
         score += 10;
 
-        sounds.correct.play(); // ✅ ADD THIS
+        sounds.correct.play();
 
         showStar();
         jumpToStar();
@@ -241,10 +241,13 @@ function handleResult(isCorrect, resultHTML) {
         feedback.innerHTML += "<br>❌ " + missions[selectedRole].fail;
         lives--;
 
-        sounds.wrong.play(); // ✅ ADD THIS
+        sounds.wrong.play();
 
         showEnemy();
         enemyAttack();
+
+        // 🔊 RE-PRONOUNCE WRONG WORDS
+        speakWrongWords(wrongWords);
     }
 
     updateHearts();
@@ -257,6 +260,7 @@ function highlightWords(spoken, correct) {
 
     let result = "";
     let mistakes = 0;
+    let wrongWords = []; // ✅ store wrong words
 
     correct.forEach((word, i) => {
         if (spoken[i] === word) {
@@ -264,10 +268,11 @@ function highlightWords(spoken, correct) {
         } else {
             result += `<span class="wrong">${word}</span> `;
             mistakes++;
+            wrongWords.push(word); // ✅ collect wrong word
         }
     });
 
-    return { html: result, mistakes };
+    return { html: result, mistakes, wrongWords };
 }
 
 // ================= AUDIO =================
@@ -387,4 +392,26 @@ const sounds = {
 };
 function restartGame() {
     goToMenu();
+}
+function speakWrongWords(words) {
+    if (!words || words.length === 0) return;
+
+    let index = 0;
+
+    function speakNext() {
+        if (index >= words.length) return;
+
+        const utterance = new SpeechSynthesisUtterance(words[index]);
+        utterance.lang = "en-GB";
+        utterance.rate = 0.85;
+
+        utterance.onend = () => {
+            index++;
+            speakNext(); // next word after previous finishes
+        };
+
+        speechSynthesis.speak(utterance);
+    }
+
+    speakNext();
 }
