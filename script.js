@@ -334,13 +334,26 @@ function showStar() {
 
 function jumpToStar() {
     const character = document.getElementById("character");
+    const star = document.getElementById("star");
 
-    character.classList.add("jump");
+    // Get positions
+    const charPos = character.offsetLeft;
+    const starPos = star.offsetLeft;
 
+    // Distance to move
+    const distance = starPos - charPos;
+
+    // Apply jump-forward animation
+    character.style.transition = "transform 0.6s ease, left 0.6s ease";
+    character.style.transform = "translateY(-80%)";
+    character.style.left = charPos + distance + "px";
+
+    // Reset after animation
     setTimeout(() => {
-        character.classList.remove("jump");
-        moveCharacter(); // move AFTER jump
-    }, 500);
+        character.style.transform = "translateY(-50%)";
+        character.style.transition = "left 0.4s ease";
+        moveCharacter(); // continue normal progress
+    }, 600);
 }
 function showEnemy() {
     const enemy = document.getElementById("enemy");
