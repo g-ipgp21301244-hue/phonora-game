@@ -178,10 +178,11 @@ document.getElementById("progressBar").style.width = "0%";
 }
 
     currentScript = scripts[selectedRole][level][currentIndex].join(" ");
+    document.getElementById("script").innerText = currentScript;
 
     document.getElementById("roleTitle").innerText = selectedRole.toUpperCase();
     document.getElementById("missionTitle").innerText = missions[selectedRole].title;
-    document.getElementById("script").innerText = currentScript;
+    
 
     const character = document.getElementById("character");
 
@@ -284,22 +285,26 @@ function updateScore() {
 }
 
 function nextRound() {
-    document.getElementById("questTitle").innerText = "Quest " + (currentIndex + 1);
-
     let quests = scripts[selectedRole][currentLevel];
-    currentIndex++;
+
+    currentIndex++; // ✅ MOVE FIRST
 
     if (currentIndex >= quests.length) {
         document.getElementById("script").innerText = "🏰 Final Castle Reached!";
         document.getElementById("feedback").innerHTML = "👑 You saved the princess! 🎉";
+
+        document.getElementById("progressBar").style.width = "100%";
         return;
     }
+
+    document.getElementById("questTitle").innerText = "Quest " + (currentIndex + 1);
 
     currentScript = quests[currentIndex].join(" ");
     document.getElementById("script").innerText = currentScript;
     document.getElementById("feedback").innerHTML = "";
-}
 
+    moveCharacter(); // keep your animation
+}
 function goToMenu() {
     document.getElementById("game").classList.add("hidden");
     document.getElementById("menu").classList.remove("hidden");
