@@ -200,7 +200,7 @@ function startGame(level) {
 
     updateHearts();
     updateScore();
-    document.getElementById("feedback").innerHTML = "";
+    document.getElementById("feedback").innerHTML = result.html;
 }
 // ================= SPEECH =================
 function startListening() {
@@ -213,47 +213,29 @@ recognition.onresult = function(event) {
 
     document.getElementById("feedback").innerHTML = result.html;
 
-    handleResult(result.mistakes === 0);
+    handleResult(result.mistakes === 0, result.html);
 };
 
 // ================= RESULT =================
-function handleResult(isCorrect) {
-    const character = document.getElementById("character");
-    const star = document.getElementById("star");
-    const enemy = document.getElementById("enemy");
+function handleResult(isCorrect, resultHTML) {
+    const feedback = document.getElementById("feedback");
+
+    // 👇 KEEP highlighted words
+    feedback.innerHTML = resultHTML;
 
     if (isCorrect) {
+        feedback.innerHTML += "<br>✅ " + missions[selectedRole].success;
         score += 10;
 
-        // ⭐ show star
-        star.classList.add("show-star");
-
-        // 🦘 jump to star
-        character.classList.add("jump");
-
-        setTimeout(() => {
-            moveCharacter();
-        }, 200);
-
-        setTimeout(() => {
-            star.classList.remove("show-star");
-            character.classList.remove("jump");
-            nextRound(); // 🔥 AUTO NEXT
-        }, 700);
+        showStar();
+        jumpToStar();
 
     } else {
+        feedback.innerHTML += "<br>❌ " + missions[selectedRole].fail;
         lives--;
 
-        // 👾 show enemy
-        enemy.classList.add("show-enemy");
-
-        // 💥 hit
-        character.classList.add("hit");
-
-        setTimeout(() => {
-            enemy.classList.remove("show-enemy");
-            character.classList.remove("hit");
-        }, 600);
+        showEnemy();
+        enemyAttack();
     }
 
     updateHearts();
