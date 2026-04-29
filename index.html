@@ -37,55 +37,35 @@
     <!-- GAME -->
     <div id="game" class="screen hidden">
 
-    <!-- 🗣️ SPEAKING PROMPT -->
-    <div class="prompt-box">
-        <p id="script"></p>
-    </div>
+        <!-- 🗣️ SPEAKING PROMPT -->
+        <div class="prompt-box">
+            <p id="script"></p>
+        </div>
 
-    <!-- 🎤 SPEAK BUTTON -->
-    <button class="mic-btn" onclick="startListening()">🎤</button>
+        <!-- 🎤 SPEAK BUTTON -->
+        <button class="mic-btn" onclick="startListening()">🎤</button>
 
-    <!-- 🎮 GAME WORLD -->
-    <div class="world">
-        
-        <!-- character -->
-        <div id="character">🧍</div>
+        <!-- 🎮 GAME WORLD -->
+        <div class="world">
+            <div id="character">🧍</div>
+            <div id="star">⭐</div>
+            <div id="enemy">👾</div>
+            <div id="finish">🏰</div>
+        </div>
 
-        <!-- star -->
-        <div id="star">⭐</div>
+        <!-- HUD -->
+        <div class="hud">
+            <span id="score">⭐ 0</span>
+            <span id="hearts"></span>
+        </div>
 
-        <!-- enemy -->
-        <div id="enemy">👾</div>
-
-    </div>
-
-    <!-- UI -->
-    <div class="hud">
-        <span id="score">⭐ 0</span>
-        <span id="hearts"></span>
-    </div>
-
-</div>
-
+        <!-- QUEST -->
         <h3 id="questTitle">Quest 1</h3>
 
-<div class="card" id="gameArea">
-
-<div class="track">
-    <div id="character">🧍</div>
-    <div id="star">⭐</div>
-    <div id="enemy">👾</div>
-    <div id="finish">🏰</div>
-</div>
-
-    <p id="script"></p>
-
-</div>
-
-        <button class="btn speak" onclick="startListening()">🎙️ Speak</button>
-
+        <!-- FEEDBACK -->
         <div id="feedback"></div>
 
+        <!-- CONTROLS -->
         <div style="margin-top:15px;">
             <button class="btn" onclick="nextRound()">➡️ Next</button>
             <button class="btn" onclick="goToMenu()">🏠 Menu</button>
@@ -95,15 +75,10 @@
 
 </div>
 
+<!-- TEST AUDIO (optional) -->
 <button onclick="speakWord('hello')">🔊 Test Sound</button>
 
 <script src="script.js"></script>
+
 </body>
 </html>
-
-<button onclick="showStar()">⭐</button>
-<button onclick="jumpToStar()">🦘</button>
-<button onclick="showEnemy()">👾</button>
-<button onclick="enemyAttack()">💥</button>
-
-<button class="btn" onclick="restartGame()">🔄 Restart</button>
