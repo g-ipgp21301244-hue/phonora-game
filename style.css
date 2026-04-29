@@ -94,3 +94,22 @@ body {
 .angry { background-color: #ff9999; }
 .awkward { background-color: #f0f0f0; }
 .crowd { background-color: #ffe6cc; }
+
+.track {
+    width: 100%;
+    height: 60px;
+    background: #eee;
+    border-radius: 10px;
+    position: relative;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+#character {
+    position: absolute;
+    left: 0%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 30px;
+    transition: left 0.4s ease;
+}
