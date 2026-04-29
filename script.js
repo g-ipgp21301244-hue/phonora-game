@@ -224,25 +224,33 @@ function handleResult(isCorrect) {
     gameArea.className = "card";
 
     if (isCorrect) {
-    feedback.innerHTML += "<br>✅ " + missions[selectedRole].success;
-    score += 10;
+        feedback.innerHTML += "<br>✅ " + missions[selectedRole].success;
+        score += 10;
 
-    showStar();      // ⭐ show star
-    jumpToStar();    // 🦘 jump + then move
-} else {
-    feedback.innerHTML += "<br>❌ " + missions[selectedRole].fail;
-    lives--;
+        // 🔊 SOUND
+        sounds.correct.play();
 
-    showEnemy();      // 👾 enemy appears
-    enemyAttack();    // 💥 character gets hit
+        // ⭐ STAR + JUMP
+        showStar();
+        jumpToStar();
 
-    gameArea.classList.add(missions[selectedRole].effect);
-}
+    } else {
+        feedback.innerHTML += "<br>❌ " + missions[selectedRole].fail;
+        lives--;
+
+        // 🔊 SOUND
+        sounds.wrong.play();
+
+        // 👾 ENEMY
+        showEnemy();
+        enemyAttack();
+
+        gameArea.classList.add(missions[selectedRole].effect);
+    }
 
     updateHearts();
     updateScore();
 }
-
 // ================= WORD HIGHLIGHT + AUDIO =================
 function highlightWords(spoken, correct) {
     spoken = spoken.toLowerCase().split(" ");
@@ -374,3 +382,8 @@ function enemyAttack() {
         character.classList.remove("hit");
     }, 400);
 }
+const sounds = {
+    correct: new Audio("https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"),
+    wrong: new Audio("https://actions.google.com/sounds/v1/cartoon/boing.ogg"),
+    win: new Audio("https://actions.google.com/sounds/v1/cartoon/ta_da.ogg")
+};
