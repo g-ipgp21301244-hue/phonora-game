@@ -15,6 +15,14 @@ const missions = {
     minister: { title: "🏛️ Speech", success: "👏 Crowd impressed!", fail: "😠 Crowd unhappy!", effect: "crowd" }
 };
 
+const characters = {
+    pilot: "🧑‍✈️",
+    news: "🧑‍💼",
+    service: "📞",
+    host: "🎤",
+    minister: "🏛️"
+};
+
 // ================= SCRIPTS =================
 const scripts = {
 
@@ -185,17 +193,8 @@ document.getElementById("progressBar").style.width = "0%";
     
 
     const character = document.getElementById("character");
-
-const characters = {
-    pilot: "🧑‍✈️",
-    news: "🧑‍💼",
-    service: "📞",
-    host: "🎤",
-    minister: "🏛️"
-};
-
 character.innerText = characters[selectedRole] || "🧍";
-    character.style.left = "0%";
+character.style.left = "0%";
 
     updateHearts();
     updateScore();
