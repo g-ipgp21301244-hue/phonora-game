@@ -168,7 +168,6 @@ function selectRole(role) {
 }
 
 function startGame(level) {
-    document.getElementById("questTitle").innerText = "Quest 1";
     document.getElementById("levels").classList.add("hidden");
     document.getElementById("game").classList.remove("hidden");
 
@@ -177,10 +176,19 @@ function startGame(level) {
     lives = 6;
     score = 0;
 
-    if (!selectedRole || !scripts[selectedRole] || !scripts[selectedRole][level]) {
-        alert("Game error: role or level not found");
-        return;
-    }
+    currentScript = scripts[selectedRole][level][0].join(" ");
+    document.getElementById("script").innerText = currentScript;
+
+    const character = document.getElementById("character");
+    character.innerText = characters[selectedRole] || "🧍";
+    character.style.left = "5%";
+
+    updateHearts();
+    updateScore();
+
+    // ✅ IMPORTANT: clear feedback (NOT result.html ❌)
+    document.getElementById("feedback").innerHTML = "";
+}
 
     // ✅ SET SCRIPT FIRST
     currentScript = scripts[selectedRole][level][0].join(" ");
@@ -218,12 +226,13 @@ recognition.onresult = function(event) {
 function handleResult(isCorrect, resultHTML) {
     const feedback = document.getElementById("feedback");
 
-    // ✅ ALWAYS show highlighted words FIRST
     feedback.innerHTML = resultHTML;
 
     if (isCorrect) {
         feedback.innerHTML += "<br>✅ " + missions[selectedRole].success;
         score += 10;
+
+        sounds.correct.play(); // ✅ ADD THIS
 
         showStar();
         jumpToStar();
@@ -231,6 +240,8 @@ function handleResult(isCorrect, resultHTML) {
     } else {
         feedback.innerHTML += "<br>❌ " + missions[selectedRole].fail;
         lives--;
+
+        sounds.wrong.play(); // ✅ ADD THIS
 
         showEnemy();
         enemyAttack();
@@ -241,8 +252,8 @@ function handleResult(isCorrect, resultHTML) {
 }
 // ================= WORD HIGHLIGHT + AUDIO =================
 function highlightWords(spoken, correct) {
-    spoken = spoken.toLowerCase().split(" ");
-    correct = correct.toLowerCase().split(" ");
+    spoken = spoken.toLowerCase().trim().split(/\s+/);
+    correct = correct.toLowerCase().trim().split(/\s+/);
 
     let result = "";
     let mistakes = 0;
@@ -256,7 +267,7 @@ function highlightWords(spoken, correct) {
         }
     });
 
-    return { html: result, mistakes: mistakes };
+    return { html: result, mistakes };
 }
 
 // ================= AUDIO =================
@@ -331,27 +342,25 @@ function jumpToStar() {
     const character = document.getElementById("character");
     const star = document.getElementById("star");
 
-    // Get positions
     const charPos = character.offsetLeft;
     const starPos = star.offsetLeft;
-
-    // Distance to move
     const distance = starPos - charPos;
 
-    // Apply jump-forward animation
-    character.style.transition = "transform 0.6s ease, left 0.6s ease";
-    character.style.transform = `translateY(${-arc}px)`;
+    // ✅ REAL ARC (no undefined variable)
+    character.style.transition = "all 0.6s ease";
+    character.style.transform = "translateY(-60px)";
     character.style.left = charPos + distance + "px";
 
-    // Reset after animation
     setTimeout(() => {
-        character.style.transform = "translateY(-50%)";
+        character.style.transform = "translateY(0)";
         character.style.transition = "left 0.4s ease";
-        moveCharacter(); // continue normal progress
+        moveCharacter();
     }, 600);
+
+    // ⭐ sparkle effect
     star.classList.remove("show-star");
     star.classList.add("sparkle");
-setTimeout(() => star.classList.remove("sparkle"), 400);
+    setTimeout(() => star.classList.remove("sparkle"), 400);
 }
 function showEnemy() {
     const enemy = document.getElementById("enemy");
