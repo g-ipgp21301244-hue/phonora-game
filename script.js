@@ -211,8 +211,6 @@ recognition.onresult = function(event) {
     let spokenText = event.results[0][0].transcript;
     let result = highlightWords(spokenText, currentScript);
 
-    document.getElementById("feedback").innerHTML = result.html;
-
     handleResult(result.mistakes === 0, result.html);
 };
 
@@ -220,7 +218,7 @@ recognition.onresult = function(event) {
 function handleResult(isCorrect, resultHTML) {
     const feedback = document.getElementById("feedback");
 
-    // 👇 KEEP highlighted words
+    // ✅ ALWAYS show highlighted words FIRST
     feedback.innerHTML = resultHTML;
 
     if (isCorrect) {
@@ -255,7 +253,6 @@ function highlightWords(spoken, correct) {
         } else {
             result += `<span class="wrong">${word}</span> `;
             mistakes++;
-            setTimeout(() => speakWord(word), 700 * i);
         }
     });
 
