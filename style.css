@@ -1,4 +1,4 @@
-body {
+body { 
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(135deg, #667eea, #764ba2);
@@ -8,14 +8,15 @@ body {
     height: 100vh;
 }
 
+/* CONTAINER */
 .container {
-    width: 350px;
+    width: 360px;
     background: white;
     border-radius: 20px;
     padding: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
+/* SCREENS */
 .screen {
     text-align: center;
 }
@@ -24,6 +25,7 @@ body {
     display: none;
 }
 
+/* BUTTONS */
 .btn {
     background: #667eea;
     color: white;
@@ -31,166 +33,27 @@ body {
     padding: 12px 20px;
     margin: 8px;
     border-radius: 12px;
-    font-size: 16px;
     cursor: pointer;
 }
 
-.btn:hover {
-    background: #5a67d8;
-}
+/* ================== GAME WORLD ================== */
 
-.grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-
-.card {
-    background: #f3f4f6;
-    padding: 15px;
-    border-radius: 12px;
-    margin: 15px 0;
-    font-size: 18px;
-}
-
-.top-bar {
-    display: flex;
-    justify-content: space-between;
-}
-
-.correct {
-    color: green;
-    font-weight: bold;
-}
-
-.wrong {
-    color: red;
-    font-weight: bold;
-}
-
-.progress-container {
-    width: 100%;
-    height: 12px;
-    background: #ddd;
-    border-radius: 10px;
-    margin: 10px 0;
-    overflow: hidden;
-}
-
-#progressBar {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #4ade80, #22c55e);
-}
-
-/* Effects */
-.shake { animation: shake 0.4s; }
-
-@keyframes shake {
-    25% { transform: translateX(-5px); }
-    50% { transform: translateX(5px); }
-}
-
-.glitch { background-color: #ffcccc; }
-.angry { background-color: #ff9999; }
-.awkward { background-color: #f0f0f0; }
-.crowd { background-color: #ffe6cc; }
-
-.track {
-    width: 100%;
-    height: 140px;
-    background: linear-gradient(#87CEEB, #cfe9ff); /* sky */
-    border-radius: 10px;
+/* 🌍 WORLD (TRACK AREA) */
+.world {
     position: relative;
-    margin: 15px 0;
-    overflow: hidden;
-}
-
-/* ground */
-.track::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
     width: 100%;
-    height: 40px;
-    background: #8B4513;
+    height: 180px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: linear-gradient(#87CEEB 70%, #8B4513 70%);
 }
 
-#character {
-    position: absolute;
-    bottom: 20px;   /* 👈 IMPORTANT */
-    left: 5%;
-    font-size: 40px;
-    transition: left 0.4s linear;
-    z-index: 5;     /* 👈 stay above ground */
-}
-
-#star {
-    position: absolute;
-    left: 70%;
-    bottom: 80px; /* above ground */
-    font-size: 28px;
-    opacity: 0;
-    transition: 0.3s;
-}
-
-/* ⭐ Star appears */
-.show-star {
-    opacity: 1;
-}
-
-#enemy {
-    position: absolute;
-    left: 50%;
-    bottom: 40px; /* on ground */
-    font-size: 28px;
-    opacity: 0;
-}
-
-/* 👾 show enemy */
-.show-enemy {
-    opacity: 1;
-}
-
-/* 💥 attack animation */
-.hit {
-    animation: hit 0.4s;
-}
-
-@keyframes hit {
-    0% { transform: translate(-0%, -50%); }
-    25% { transform: translate(-10px, -50%); }
-    50% { transform: translate(10px, -50%); }
-    75% { transform: translate(-10px, -50%); }
-    100% { transform: translate(0, -50%); }
-}
-/* ✨ STAR SPARKLE EFFECT */
-.sparkle {
-    animation: sparkle 0.6s ease;
-}
-
-@keyframes sparkle {
-    0% { transform: scale(1) rotate(0deg); opacity: 1; }
-    50% { transform: scale(1.6) rotate(180deg); opacity: 1; }
-    100% { transform: scale(0) rotate(360deg); opacity: 0; }
-}
-#finish {
-    position: absolute;
-    right: 5%;
-    bottom: 40px;
-    font-size: 32px;
-}
-#character {
-    transition: left 0.4s ease, transform 0.2s ease;
-}
-
-.btn:active {
-    transform: scale(0.95);
-}
-.track::before {
+/* ☁️ MOVING CLOUDS */
+.world::before {
     content: "☁️ ☁️ ☁️";
     position: absolute;
     top: 10px;
-    left: 0;
+    left: 100%;
     font-size: 24px;
     animation: clouds 20s linear infinite;
 }
@@ -198,15 +61,6 @@ body {
 @keyframes clouds {
     from { left: 100%; }
     to { left: -100%; }
-}
-/* 🌍 WORLD */
-.world {
-    position: relative;
-    width: 100%;
-    height: 200px;
-    background: linear-gradient(#87CEEB, #87CEEB 70%, #8B4513 70%);
-    border-radius: 12px;
-    overflow: hidden;
 }
 
 /* 🧍 CHARACTER */
@@ -216,13 +70,14 @@ body {
     left: 20px;
     font-size: 40px;
     transition: left 0.4s linear;
+    z-index: 5;
 }
 
 /* ⭐ STAR */
 #star {
     position: absolute;
     bottom: 90px;
-    left: 60%;
+    left: 65%;
     font-size: 28px;
     opacity: 0;
 }
@@ -236,14 +91,24 @@ body {
     opacity: 0;
 }
 
+/* 🏁 FINISH */
+#finish {
+    position: absolute;
+    right: 5%;
+    bottom: 20px;
+    font-size: 32px;
+}
+
+/* ================== UI ================== */
+
 /* 🗣️ PROMPT */
 .prompt-box {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
-/* 🎤 BUTTON */
+/* 🎤 MIC */
 .mic-btn {
     font-size: 26px;
     padding: 15px;
@@ -251,21 +116,24 @@ body {
     border: none;
     background: #667eea;
     color: white;
-    margin: 10px 0;
 }
 
 /* HUD */
 .hud {
     display: flex;
     justify-content: space-between;
-    margin-top: 10px;
+    margin: 10px 0;
 }
 
-/* ⭐ SHOW */
-.show-star { opacity: 1; }
+/* ================== STATES ================== */
 
-/* 👾 SHOW */
-.show-enemy { opacity: 1; }
+.show-star {
+    opacity: 1;
+}
+
+.show-enemy {
+    opacity: 1;
+}
 
 /* 🦘 ARC JUMP */
 .jump {
@@ -276,6 +144,16 @@ body {
     0% { transform: translate(0, 0); }
     50% { transform: translate(40px, -60px); }
     100% { transform: translate(80px, 0); }
+}
+
+/* ✨ STAR COLLECT */
+.sparkle {
+    animation: sparkle 0.6s ease;
+}
+
+@keyframes sparkle {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0); opacity: 0; }
 }
 
 /* 💥 HIT */
