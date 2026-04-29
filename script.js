@@ -163,6 +163,9 @@ function startGame(level) {
     document.getElementById("questTitle").innerText = "Quest 1";
     document.getElementById("levels").classList.add("hidden");
     document.getElementById("game").classList.remove("hidden");
+    document.getElementById("character").style.left = "0%";
+document.getElementById("progressBar").style.width = "0%";
+    document.getElementById("character").innerText = characters[selectedRole];
 
     currentLevel = level;
     currentIndex = 0;
@@ -179,6 +182,18 @@ function startGame(level) {
     document.getElementById("roleTitle").innerText = selectedRole.toUpperCase();
     document.getElementById("missionTitle").innerText = missions[selectedRole].title;
     document.getElementById("script").innerText = currentScript;
+
+    const character = document.getElementById("character");
+
+const characters = {
+    pilot: "🧑‍✈️",
+    news: "🧑‍💼",
+    service: "📞",
+    host: "🎤",
+    minister: "🏛️"
+};
+
+character.innerText = characters[selectedRole] || "🧍";
 
     updateHearts();
     updateScore();
@@ -209,6 +224,8 @@ function handleResult(isCorrect) {
     if (isCorrect) {
         feedback.innerHTML += "<br>✅ " + missions[selectedRole].success;
         score += 10;
+        
+        moveCharacter();
     } else {
         feedback.innerHTML += "<br>❌ " + missions[selectedRole].fail;
         lives--;
@@ -285,4 +302,12 @@ function nextRound() {
 function goToMenu() {
     document.getElementById("game").classList.add("hidden");
     document.getElementById("menu").classList.remove("hidden");
+}
+
+function moveCharacter() {
+    let total = scripts[selectedRole][currentLevel].length;
+    let progress = (currentIndex / total) * 100;
+
+    document.getElementById("character").style.left = progress + "%";
+    document.getElementById("progressBar").style.width = progress + "%";
 }
