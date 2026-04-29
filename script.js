@@ -224,11 +224,12 @@ function handleResult(isCorrect) {
     gameArea.className = "card";
 
     if (isCorrect) {
-        feedback.innerHTML += "<br>✅ " + missions[selectedRole].success;
-        score += 10;
-        
-        moveCharacter();
-    } else {
+    feedback.innerHTML += "<br>✅ " + missions[selectedRole].success;
+    score += 10;
+
+    showStar();      // ⭐ show star
+    jumpToStar();    // 🦘 jump + then move
+} else {
         feedback.innerHTML += "<br>❌ " + missions[selectedRole].fail;
         lives--;
         gameArea.classList.add(missions[selectedRole].effect);
@@ -316,4 +317,24 @@ function moveCharacter() {
 
     document.getElementById("character").style.left = progress + "%";
     document.getElementById("progressBar").style.width = progress + "%";
+}
+function showStar() {
+    const star = document.getElementById("star");
+    star.classList.add("show-star");
+
+    // Hide after some time
+    setTimeout(() => {
+        star.classList.remove("show-star");
+    }, 1200);
+}
+
+function jumpToStar() {
+    const character = document.getElementById("character");
+
+    character.classList.add("jump");
+
+    setTimeout(() => {
+        character.classList.remove("jump");
+        moveCharacter(); // move AFTER jump
+    }, 500);
 }
