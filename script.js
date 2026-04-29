@@ -171,9 +171,6 @@ function startGame(level) {
     document.getElementById("questTitle").innerText = "Quest 1";
     document.getElementById("levels").classList.add("hidden");
     document.getElementById("game").classList.remove("hidden");
-    document.getElementById("character").style.left = "0%";
-document.getElementById("progressBar").style.width = "0%";
-    document.getElementById("character").innerText = characters[selectedRole];
 
     currentLevel = level;
     currentIndex = 0;
@@ -181,26 +178,30 @@ document.getElementById("progressBar").style.width = "0%";
     score = 0;
 
     if (!selectedRole || !scripts[selectedRole] || !scripts[selectedRole][level]) {
-    alert("Game error: role or level not found");
-    return;
-}
+        alert("Game error: role or level not found");
+        return;
+    }
 
-    currentScript = scripts[selectedRole][level][currentIndex].join(" ");
+    // ✅ SET SCRIPT FIRST
+    currentScript = scripts[selectedRole][level][0].join(" ");
     document.getElementById("script").innerText = currentScript;
 
+    // ✅ UI
     document.getElementById("roleTitle").innerText = selectedRole.toUpperCase();
     document.getElementById("missionTitle").innerText = missions[selectedRole].title;
-    
 
+    // ✅ CHARACTER (ONLY ONCE)
     const character = document.getElementById("character");
-character.innerText = characters[selectedRole] || "🧍";
-character.style.left = "0%";
+    character.innerText = characters[selectedRole] || "🧍";
+    character.style.left = "0%";
+
+    // ✅ RESET PROGRESS
+    document.getElementById("progressBar").style.width = "0%";
 
     updateHearts();
     updateScore();
     document.getElementById("feedback").innerHTML = "";
 }
-
 // ================= SPEECH =================
 function startListening() {
     recognition.start();
