@@ -69,7 +69,7 @@ const scripts = {
     news: {
         easy: [
             ["Good evening, this is the news."],
-            ["Today’s story is very important."],
+            ["Today's story is very important."],
             ["There is heavy rain today."],
             ["Many people are affected."],
             ["The situation is improving."],
@@ -86,7 +86,7 @@ const scripts = {
         hard: [
             ["Good evening, this is your live news report", "Heavy rain has caused flooding in several areas", "Rescue teams have been deployed to assist families"],
             ["In other news, a new community school was opened", "The event was attended by local leaders and students", "This school will improve learning opportunities"],
-            ["That concludes today’s news update", "We will continue to bring you updates", "Thank you for watching and stay safe"]
+            ["That concludes today's news update", "We will continue to bring you updates", "Thank you for watching and stay safe"]
         ]
     },
 
@@ -94,18 +94,18 @@ const scripts = {
         easy: [
             ["Hello everyone, welcome to the show."],
             ["Today we have a special guest."],
-            ["Let’s start the program now."],
+            ["Let's start the program now."],
             ["This is very exciting."],
             ["Thank you for joining us."],
             ["See you next time."]
         ],
         medium: [
-            ["Hello everyone, welcome to our show.", "I am your host today.", "Let’s begin the program."],
-            ["Today we have a special guest.", "They are very talented.", "Let’s welcome them."],
+            ["Hello everyone, welcome to our show.", "I am your host today.", "Let's begin the program."],
+            ["Today we have a special guest.", "They are very talented.", "Let's welcome them."],
             ["Can you tell us about yourself?", "That is very interesting.", "Thank you for sharing."],
-            ["Now we will play a fun game.", "Everyone can join.", "Let’s have some fun."],
+            ["Now we will play a fun game.", "Everyone can join.", "Let's have some fun."],
             ["Thank you for being here.", "We enjoyed your time.", "It was amazing."],
-            ["That’s all for today.", "Thank you for watching.", "See you again soon."]
+            ["That's all for today.", "Thank you for watching.", "See you again soon."]
         ],
         hard: [
             ["Hello everyone and welcome to our exciting show", "I am your host for today", "We have an amazing program lined up"],
@@ -132,7 +132,7 @@ const scripts = {
             ["Thank you for your time.", "I appreciate your presence.", "Have a wonderful day."]
         ],
         hard: [
-            ["Good morning ladies and gentlemen", "It is a great honour to be here today", "Education shapes our nation’s future"],
+            ["Good morning ladies and gentlemen", "It is a great honour to be here today", "Education shapes our nation's future"],
             ["Today I am proud to announce new initiatives", "We will improve facilities and teacher training", "Together we can achieve excellence"],
             ["In conclusion I thank everyone for your support", "Let us build a brighter future together", "Have a pleasant day"]
         ]
