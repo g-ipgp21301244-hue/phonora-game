@@ -169,7 +169,12 @@ function selectRole(role) {
 }
 
 function startGame(level) {
-function startGame(level) {
+
+    if (!selectedRole) {
+        alert("Please select a role first!");
+        return;
+    }
+
     document.getElementById("menu").classList.add("hidden");
     document.getElementById("levels").classList.add("hidden");
     document.getElementById("game").classList.remove("hidden");
@@ -182,13 +187,18 @@ function startGame(level) {
     currentScript = scripts[selectedRole][level][0].join(" ");
     document.getElementById("script").innerText = currentScript;
 
+    // ✅ NEW (fix UI titles)
+    document.getElementById("roleTitle").innerText = selectedRole.toUpperCase();
+    document.getElementById("missionTitle").innerText = missions[selectedRole].title;
+
     const character = document.getElementById("character");
     character.innerText = characters[selectedRole] || "🧍";
     character.style.left = "5%";
 
+    document.getElementById("progressBar").style.width = "0%";
+
     updateHearts();
     updateScore();
-
     document.getElementById("feedback").innerHTML = "";
 }
 
