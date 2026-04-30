@@ -148,13 +148,14 @@ const scripts = {
 }; 
 
 // ================= SPEECH SETUP =================
-const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-recognition.lang = 'en-GB';
+let recognition;
 
-speechSynthesis.onvoiceschanged = () => {
-    speechSynthesis.getVoices();
-};
-
+if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
+    recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = "en-GB";
+} else {
+    alert("Speech recognition not supported in this browser 😢");
+}
 // ================= NAVIGATION =================
 function goToRoles() {
     document.getElementById("menu").classList.add("hidden");
@@ -213,6 +214,10 @@ function startGame(level) {
 }
 // ================= SPEECH =================
 function startListening() {
+    if (!recognition) {
+        alert("Speech recognition not available");
+        return;
+    }
     recognition.start();
 }
 
