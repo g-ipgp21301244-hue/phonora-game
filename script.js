@@ -169,7 +169,7 @@ function selectRole(role) {
 }
 
 function startGame(level) {
-
+console.log("Selected role:", selectedRole);
     if (!selectedRole) {
         alert("Please select a role first!");
         return;
