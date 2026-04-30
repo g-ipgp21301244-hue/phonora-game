@@ -333,6 +333,7 @@ function nextRound() {
 function goToMenu() {
     document.getElementById("game").classList.add("hidden");
     document.getElementById("menu").classList.remove("hidden");
+    document.getElementById("progressBar").style.width = progress + "%";
 }
 
 function moveCharacter() {
