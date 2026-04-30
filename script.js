@@ -169,7 +169,7 @@ function selectRole(role) {
 }
 
 function startGame(level) {
-console.log("Selected role:", selectedRole);
+
     if (!selectedRole) {
         alert("Please select a role first!");
         return;
@@ -187,7 +187,6 @@ console.log("Selected role:", selectedRole);
     currentScript = scripts[selectedRole][level][0].join(" ");
     document.getElementById("script").innerText = currentScript;
 
-    // ✅ NEW (fix UI titles)
     document.getElementById("roleTitle").innerText = selectedRole.toUpperCase();
     document.getElementById("missionTitle").innerText = missions[selectedRole].title;
 
