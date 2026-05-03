@@ -545,3 +545,14 @@ body {
     
     border-radius: 50%;
 }
+.hidden {
+    display: none;
+}
+
+#menu {
+    z-index: 10;
+}
+
+#menu * {
+    z-index: 20;
+}
