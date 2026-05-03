@@ -23,7 +23,6 @@ const characters = {
     minister: "🏛️"
 };
 const scripts = {
-
     pilot: {
         easy: [
             ["Welcome aboard our flight today."],
@@ -143,7 +142,6 @@ const scripts = {
             ["In conclusion I thank everyone for your support", "Let us build a brighter future together", "Have a pleasant day"]
         ]
     }
-
 };
 // ================= SPEECH =================
 let recognition;
@@ -181,10 +179,7 @@ function startGame(level) {
     currentIndex = 0;
     lives = 6;
     score = 0;
-
-    currentScript = scripts[selectedRole][level][0].join(" ");
-    document.getElementById("script").innerText = currentScript;
-
+    
     document.getElementById("roleTitle").innerText = selectedRole.toUpperCase();
     document.getElementById("missionTitle").innerText = missions[selectedRole].title;
 
@@ -201,15 +196,17 @@ function startGame(level) {
 
 // ================= SPEECH =================
 function startListening() {
-    if (!recognition) return;
+    if (!recognition) {
+        alert("Speech recognition not available");
+        return;
+    }
+
+    try {
+        recognition.stop(); // prevent already started error
+    } catch (e) {}
+
     recognition.start();
 }
-
-recognition.onresult = function(event) {
-    let spokenText = event.results[0][0].transcript;
-    let result = highlightWords(spokenText, currentScript);
-    handleResult(result.mistakes === 0, result.html, result.wrongWords);
-};
 
 // ================= RESULT =================
 function handleResult(isCorrect, resultHTML, wrongWords = []) {
