@@ -66,10 +66,14 @@ function selectRole(role) {
 }
 
 function startGame(level) {
+
     if (!selectedRole) {
-        alert("Select a role first!");
+        alert("Please select a role first!");
         return;
     }
+
+    document.getElementById("levels").classList.add("hidden");
+    document.getElementById("game").classList.remove("hidden");
 
     currentLevel = level;
     currentIndex = 0;
@@ -79,26 +83,32 @@ function startGame(level) {
     updateHearts();
     updateScore();
 
-    document.getElementById("levels").classList.add("hidden");
-    document.getElementById("game").classList.remove("hidden");
-
-    showPrompt();
+    moveToObstacle(); // 🔥 IMPORTANT
 }
+function moveToObstacle() {
+    document.getElementById("character").style.left = "10%";
 
+    setTimeout(() => {
+        showPrompt();
+    }, 500);
+}
 // ================= PROMPT =================
 function showPrompt() {
     const box = document.getElementById("promptBox");
 
     let quests = scripts[selectedRole][currentLevel];
+
+    if (!quests || !quests[currentIndex]) {
+        console.error("No script found");
+        return;
+    }
+
     currentScript = quests[currentIndex].join(" ");
 
     document.getElementById("script").innerText = currentScript;
     document.getElementById("feedback").innerHTML = "";
 
     box.classList.remove("hidden");
-    box.classList.remove("show");
-    void box.offsetWidth;
-    box.classList.add("show");
 }
 
 // ================= SPEECH CONTROL =================
