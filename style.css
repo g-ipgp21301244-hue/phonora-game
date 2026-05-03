@@ -422,24 +422,34 @@ body {
 /* START BUTTON */
 .start-btn {
     position: absolute;
-    top: 55%;
+    bottom: 32%;   /* 🔥 was too low before */
     left: 50%;
     transform: translateX(-50%);
-    padding: 15px 40px;
-    font-size: 20px;
+    
+    padding: 18px 50px;
+    font-size: 22px;
     border: none;
-    border-radius: 30px;
-    background: linear-gradient(45deg, #ff7e5f, #feb47b);
+    border-radius: 40px;
+
+    background: linear-gradient(180deg, #ff9966, #ff5e62);
     color: white;
+
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    transition: 0.3s;
+
+    box-shadow: 
+        0 6px 0 #c94b4b,
+        0 10px 20px rgba(0,0,0,0.25);
+
+    transition: all 0.2s ease;
 }
 
-.start-btn:hover {
-    transform: translateX(-50%) scale(1.1);
+/* click effect */
+.start-btn:active {
+    transform: translate(-50%, 4px);
+    box-shadow: 
+        0 2px 0 #c94b4b,
+        0 6px 10px rgba(0,0,0,0.2);
 }
-
 /* CLOUDS reuse */
 .menu-sky .cloud {
     position: absolute;
