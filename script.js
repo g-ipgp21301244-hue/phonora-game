@@ -220,7 +220,9 @@ function handleResult(isCorrect, resultHTML, wrongWords) {
         updateScore();
 
         setTimeout(() => {
-            document.getElementById("promptBox").classList.add("hidden");
+            const box = document.getElementById("promptBox");
+box.classList.remove("show");
+box.classList.add("hidden");
             currentIndex++;
             moveForward();
         }, 1200); // let pupils SEE feedback first
@@ -367,7 +369,15 @@ function moveToObstacle() {
 }
 
 function showPrompt() {
-    document.getElementById("promptBox").classList.remove("hidden");
+    const box = document.getElementById("promptBox");
+
+    box.classList.remove("hidden");
+    box.classList.remove("show"); // reset animation
+
+    // small delay so animation triggers
+    setTimeout(() => {
+        box.classList.add("show");
+    }, 50);
 
     let quests = scripts[selectedRole][currentLevel];
     currentScript = quests[currentIndex].join(" ");
