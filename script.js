@@ -199,13 +199,15 @@ function startListening() {
 
     recognition.start();
 }
-recognition.onresult = function(event) {
-    let spokenText = event.results[0][0].transcript;
+if (recognition) {
+    recognition.onresult = function(event) {
+        let spokenText = event.results[0][0].transcript;
 
-    let result = highlightWords(spokenText, currentScript);
+        let result = highlightWords(spokenText, currentScript);
 
-    handleResult(result.mistakes === 0, result.html, result.wrongWords);
-};
+        handleResult(result.mistakes === 0, result.html, result.wrongWords);
+    };
+}
 // ================= RESULT =================
 function handleResult(isCorrect, resultHTML, wrongWords) {
 
@@ -380,4 +382,8 @@ function moveForward() {
     setTimeout(() => {
         moveToObstacle();
     }, 1000);
+}
+function gameOver() {
+    document.getElementById("script").innerText = "💀 Game Over!";
+    document.getElementById("feedback").innerHTML = "Try again!";
 }
