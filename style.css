@@ -1,12 +1,10 @@
-body { 
+/* ================== GLOBAL ================== */
+body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(135deg, #667eea, #764ba2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
 }
+
 /* SCREENS */
 .screen {
     text-align: center;
@@ -27,294 +25,7 @@ body {
     cursor: pointer;
 }
 
-/* ================== GAME WORLD ================== */
-
-/* 🌍 WORLD (TRACK AREA) */
-.world {
-    position: relative;
-    width: 100%;
-    height: 180px;
-    border-radius: 12px;
-    overflow: hidden;
-    background: linear-gradient(#87CEEB 70%, #8B4513 70%);
-}
-
-/* ☁️ MOVING CLOUDS */
-.world::before {
-    content: "☁️ ☁️ ☁️";
-    position: absolute;
-    top: 10px;
-    left: 100%;
-    font-size: 24px;
-    animation: clouds 20s linear infinite;
-}
-
-@keyframes clouds {
-    from { left: 100%; }
-    to { left: -100%; }
-}
-
-/* 🧍 CHARACTER */
-#character {
-    position: absolute;
-    bottom: 42%;   /* align with ground */
-    left: 5%;
-    font-size: 40px;
-}
-
-/* ⭐ STAR */
-#star {
-    position: absolute;
-    bottom: 90px;
-    left: 65%;
-    font-size: 28px;
-    opacity: 0;
-}
-
-/* 👾 ENEMY */
-#enemy {
-    position: absolute;
-    bottom: 20px;
-    left: 70%;
-    font-size: 30px;
-    opacity: 0;
-}
-
-/* 🏁 FINISH */
-#finish {
-    position: absolute;
-    right: 5%;
-    bottom: 20px;
-    font-size: 32px;
-}
-
-/* ================== UI ================== */
-
-/* 🗣️ PROMPT */
-.prompt-box {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-/* 🎤 MIC */
-.mic-btn {
-    font-size: 26px;
-    padding: 15px;
-    border-radius: 50%;
-    border: none;
-    background: #667eea;
-    color: white;
-}
-
-/* HUD */
-.hud {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 0;
-}
-
-/* ================== STATES ================== */
-
-.show-star {
-    opacity: 1;
-}
-
-.show-enemy {
-    opacity: 1;
-}
-
-/* 🦘 ARC JUMP */
-.jump {
-    animation: arcJump 0.6s ease;
-}
-
-@keyframes arcJump {
-    0% { transform: translate(0, 0); }
-    50% { transform: translate(40px, -60px); }
-    100% { transform: translate(80px, 0); }
-}
-
-/* ✨ STAR COLLECT */
-.sparkle {
-    animation: sparkle 0.6s ease;
-}
-
-@keyframes sparkle {
-    0% { transform: scale(1); opacity: 1; }
-    100% { transform: scale(0); opacity: 0; }
-}
-
-/* 💥 HIT */
-.hit {
-    animation: hit 0.4s;
-}
-
-@keyframes hit {
-    25% { transform: translateX(-10px); }
-    50% { transform: translateX(10px); }
-}
-
-.correct {
-    color: green;
-    font-weight: bold;
-}
-
-.wrong {
-    color: red;
-    font-weight: bold;
-}
-.progress-container {
-    width: 100%;
-    height: 10px;
-    background: #ddd;
-    border-radius: 10px;
-    margin: 10px 0;
-    overflow: hidden;
-}
-
-#progressBar {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(to right, #6a11cb, #2575fc);
-    transition: width 0.3s ease;
-}
-.game-world {
-    position: relative;
-    height: 300px;
-    background: linear-gradient(#6ec6ff, #b3e5fc); /* sky */
-    overflow: hidden;
-}
-
-.background {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 120px;
-    background: #8B4513; /* ground */
-}
-#obstacle {
-    position: absolute;
-    bottom: 42%;
-    left: 60%;
-    font-size: 40px;
-}
-
-#finish {
-    position: absolute;
-    bottom: 42%;
-    right: 5%;
-    font-size: 40px;
-}
-/* ===== PROMPT POPUP (VISIBLE ON GAME) ===== */
-#promptBox {
-    position: absolute;
-
-    /* 🔥 CENTER IN SKY */
-    top: 25%;                 /* move up into sky */
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.95);
-
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    width: 500px;
-max-width: 90%;
-    text-align: center;
-
-    z-index: 9999;
-
-    opacity: 0;
-    transition: all 0.4s ease;
-}
-
-#promptBox.show {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
-/* ===== CLOUDS ===== */
-.cloud {
-    position: absolute;
-    top: 30px;
-    width: 60px;
-    height: 30px;
-    background: white;
-    border-radius: 50px;
-    opacity: 0.9;
-}
-
-/* extra bumps */
-.cloud::before,
-.cloud::after {
-    content: "";
-    position: absolute;
-    background: white;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    top: -10px;
-}
-
-.cloud::before {
-    left: 10px;
-}
-
-.cloud::after {
-    right: 10px;
-}
-
-/* animation */
-@keyframes moveCloud {
-    from { left: -80px; }
-    to { left: 100%; }
-}
-
-.cloud1 {
-    animation: moveCloud 20s linear infinite;
-    top: 20px;
-}
-
-.cloud2 {
-    animation: moveCloud 25s linear infinite;
-    top: 60px;
-}
-
-.cloud3 {
-    animation: moveCloud 30s linear infinite;
-    top: 40px;
-}
-#feedback {
-    margin-top: 10px;
-    font-size: 18px;
-    line-height: 1.4;
-}
-
-.correct {
-    color: #2ecc71;
-    background: #eafaf1;
-    padding: 2px 6px;
-    border-radius: 6px;
-}
-
-.wrong {
-    color: #e74c3c;
-    background: #fdecea;
-    padding: 2px 6px;
-    border-radius: 6px;
-}
-#script {
-    font-size: 18px;
-    margin-bottom: 12px;
-}
-
-#promptBox.show {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
-
-#promptBox.hidden {
-    display: none;
-}
+/* ================== GAME LAYOUT ================== */
 
 .container {
     width: 100vw;
@@ -327,29 +38,179 @@ max-width: 90%;
     position: relative;
 }
 
+/* 🌍 GAME WORLD (FULL SCREEN) */
 .game-world {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     position: relative;
+    overflow: hidden;
+
+    /* SKY + GROUND */
     background: linear-gradient(#87CEEB 60%, #8B4513 60%);
 }
-.correct {
-    background: #c8f7c5;
-    padding: 5px;
-    margin: 3px;
-    border-radius: 5px;
-}
 
-.wrong {
-    background: #f7c5c5;
-    padding: 5px;
-    margin: 3px;
-    border-radius: 5px;
-}
+/* 🌱 GROUND (visual layer) */
 .background {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 40%; /* MUST match 100 - 60 */
+    height: 40%; /* matches 100 - 60 */
     background: #8B4513;
+}
+
+/* ================== CLOUDS ================== */
+.cloud {
+    position: absolute;
+    width: 60px;
+    height: 30px;
+    background: white;
+    border-radius: 50px;
+    opacity: 0.9;
+}
+
+.cloud::before,
+.cloud::after {
+    content: "";
+    position: absolute;
+    background: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    top: -10px;
+}
+
+.cloud::before { left: 10px; }
+.cloud::after { right: 10px; }
+
+@keyframes moveCloud {
+    from { left: -80px; }
+    to { left: 100%; }
+}
+
+.cloud1 { top: 20px; animation: moveCloud 20s linear infinite; }
+.cloud2 { top: 60px; animation: moveCloud 25s linear infinite; }
+.cloud3 { top: 40px; animation: moveCloud 30s linear infinite; }
+
+/* ================== GAME OBJECTS ================== */
+
+/* ✅ ALL OBJECTS SIT PERFECTLY ON GROUND */
+#character,
+#obstacle,
+#finish {
+    position: absolute;
+    bottom: 40%; /* aligns exactly with ground line */
+}
+
+/* Individual positioning */
+#character {
+    left: 5%;
+    font-size: 40px;
+}
+
+#obstacle {
+    left: 60%;
+    font-size: 40px;
+}
+
+#finish {
+    right: 5%;
+    font-size: 40px;
+}
+
+/* ================== PROMPT BOX (FIXED IN SKY) ================== */
+#promptBox {
+    position: absolute;
+
+    /* 🌤 CENTER IN SKY */
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    width: 500px;
+    max-width: 90%;
+    text-align: center;
+
+    z-index: 9999;
+
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+#promptBox.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* ================== TEXT + FEEDBACK ================== */
+
+#script {
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+#feedback {
+    margin-top: 10px;
+    font-size: 18px;
+    line-height: 1.4;
+}
+
+/* Word feedback */
+.correct {
+    color: #2ecc71;
+    background: #eafaf1;
+    padding: 4px 6px;
+    border-radius: 6px;
+    margin: 2px;
+}
+
+.wrong {
+    color: #e74c3c;
+    background: #fdecea;
+    padding: 4px 6px;
+    border-radius: 6px;
+    margin: 2px;
+}
+
+/* ================== HUD ================== */
+.top-bar {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 10000;
+}
+
+/* ================== ANIMATIONS ================== */
+
+.jump {
+    animation: arcJump 0.6s ease;
+}
+
+@keyframes arcJump {
+    0% { transform: translate(0, 0); }
+    50% { transform: translate(40px, -60px); }
+    100% { transform: translate(80px, 0); }
+}
+
+.hit {
+    animation: hit 0.4s;
+}
+
+@keyframes hit {
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+}
+
+.sparkle {
+    animation: sparkle 0.6s ease;
+}
+
+@keyframes sparkle {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0); opacity: 0; }
 }
