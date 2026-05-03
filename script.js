@@ -6,7 +6,7 @@ let selectedRole = "";
 let currentIndex = 0;
 let currentLevel = "";
 
-// ================= SCRIPTS =================
+const monsters = ["👾", "👹", "👻", "🤖", "🐲", "🧟"];
 const scripts = {
 
     // ✈️ PILOT
@@ -373,10 +373,11 @@ function moveForward() {
 function moveMonster() {
     let monster = document.getElementById("obstacle");
 
-    // random new position ahead of character
-    let newPosition = 50 + Math.random() * 30; // between 50% - 80%
-
+    let newPosition = 50 + Math.random() * 30;
     monster.style.left = newPosition + "%";
+
+    // 🔥 change monster each quest
+    monster.innerText = monsters[Math.floor(Math.random() * monsters.length)];
 
     // reset animation
     monster.classList.remove("attack");
