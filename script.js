@@ -281,3 +281,5 @@ function speakWrongWords(words) {
 
     next();
 }
+function showPrompt() {
+    console.log("SHOW PROMPT RUNNING"); // 👈 add this
