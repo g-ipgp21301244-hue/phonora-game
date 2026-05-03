@@ -439,7 +439,7 @@ function showPrompt() {
 function moveForward() {
     let total = scripts[selectedRole][currentLevel].length;
 
-    // ✅ CHECK IF FINISHED
+    // ✅ STOP properly at end
     if (currentIndex >= total) {
         showEndScreen();
         return;
@@ -489,8 +489,19 @@ function startNextLevel(level) {
     currentLevel = level;
     currentIndex = 0;
 
+    // ✅ Reset UI
     document.getElementById("feedback").innerHTML = "";
     document.getElementById("script").innerText = "";
 
+    const box = document.getElementById("promptBox");
+    box.classList.remove("hidden");
+    box.classList.remove("show");
+
+    // ✅ small delay to retrigger animation properly
+    setTimeout(() => {
+        box.classList.add("show");
+    }, 50);
+
+    // ✅ restart game flow properly
     moveToObstacle();
 }
