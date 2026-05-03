@@ -256,6 +256,7 @@ setTimeout(() => {
             startListening(); // 🎤 listen again automatically
         }, 1500); // wait so pupil hears feedback first
     }
+}    
 }
 // ================= WORD CHECK =================
 function highlightWords(spoken, correct) {
