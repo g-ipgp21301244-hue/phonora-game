@@ -437,8 +437,15 @@ function showPrompt() {
 }
 
 function moveForward() {
-    let progress = (currentIndex / scripts[selectedRole][currentLevel].length) * 80;
+    let total = scripts[selectedRole][currentLevel].length;
 
+    // ✅ CHECK IF FINISHED
+    if (currentIndex >= total) {
+        showEndScreen();
+        return;
+    }
+
+    let progress = (currentIndex / total) * 80;
     document.getElementById("character").style.left = progress + "%";
 
     setTimeout(() => {
@@ -452,3 +459,38 @@ function gameOver() {
 recognition.onend = function() {
     console.log("Speech ended");
 };
+function showEndScreen() {
+    const box = document.getElementById("promptBox");
+
+    box.classList.remove("hidden");
+    box.classList.add("show");
+
+    document.getElementById("script").innerText = "🏰 You've reached the castle!";
+    
+    document.getElementById("feedback").innerHTML = `
+        <div style="margin-top:10px;">🎉 Great job!</div>
+        ${getNextLevelButton()}
+    `;
+
+    sounds.win.play();
+}
+
+function getNextLevelButton() {
+    if (currentLevel === "easy") {
+        return `<button onclick="startNextLevel('medium')">Next Level: Medium ➡️</button>`;
+    }
+    if (currentLevel === "medium") {
+        return `<button onclick="startNextLevel('hard')">Next Level: Hard ➡️</button>`;
+    }
+    return `<button onclick="goToMenu()">🏁 Finish Game</button>`;
+}
+
+function startNextLevel(level) {
+    currentLevel = level;
+    currentIndex = 0;
+
+    document.getElementById("feedback").innerHTML = "";
+    document.getElementById("script").innerText = "";
+
+    moveToObstacle();
+}
