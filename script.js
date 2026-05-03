@@ -434,12 +434,10 @@ function showPrompt() {
     box.classList.remove("hidden");
     box.classList.remove("show");
 
-    // force reflow (important for animation)
-    void box.offsetWidth;
+    void box.offsetWidth; // force reflow
 
     box.classList.add("show");
 }
-
 function moveForward() {
     let total = scripts[selectedRole][currentLevel].length;
 
