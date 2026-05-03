@@ -57,7 +57,7 @@ body {
 /* 🧍 CHARACTER */
 #character {
     position: absolute;
-    bottom: 40%;  /* ✅ sits on ground line */
+    bottom: 40%;   /* align with ground */
     left: 5%;
     font-size: 40px;
 }
@@ -218,7 +218,8 @@ body {
     background: white;
     padding: 20px;
     border-radius: 15px;
-    width: 60%;
+    width: 500px;
+max-width: 90%;
     text-align: center;
 
     z-index: 9999;
