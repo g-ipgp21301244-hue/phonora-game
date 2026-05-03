@@ -1,8 +1,8 @@
 /* ================== GLOBAL ================== */
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
 }
 
 /* SCREENS */
@@ -365,66 +365,92 @@ body {
 }
 /* ================= MENU GAME STYLE ================= */
 
-.menu-screen {
+#menu {
     position: relative;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
-    overflow: hidden;
-    text-align: center;
+    background: linear-gradient(to top, #8B4513 35%, #87CEEB 35%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* ================= SKY ================= */
+#menu::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 65%;
+    background: #87CEEB;
     z-index: 0;
 }
 
-/* SKY */
-.menu-sky {
-    position: absolute;
-    width: 100%;
-    height: 60%;
-    background: linear-gradient(#6ec6ff, #b3e5fc);
-}
-
-/* GROUND */
-.menu-ground {
+/* ================= GROUND ================= */
+#menu::after {
+    content: "";
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 40%;
+    height: 35%;
     background: #8B4513;
-
-    z-index: 1;   /* 🔥 ensure it's behind */
+    z-index: 0;
 }
 
-/* TITLE */
-.game-title {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
+/* ================= TITLE ================= */
+#menu h1 {
     font-size: 60px;
     color: white;
-    text-shadow: 0 0 20px rgba(0,0,0,0.3);
-    animation: floatTitle 3s ease-in-out infinite;
+    text-shadow: 3px 3px 0 #00000030;
+    margin-bottom: 20px;
+    z-index: 2;
 }
 
-@keyframes floatTitle {
-    0%,100% { transform: translate(-50%, 0); }
-    50% { transform: translate(-50%, -10px); }
+/* ================= START BUTTON ================= */
+#menu button {
+    padding: 15px 40px;
+    font-size: 20px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(to right, #ff9966, #ff5e62);
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 6px 0 #cc4b4b;
+    transition: 0.2s;
+    z-index: 2;
 }
 
-/* CHARACTER */
-.menu-character {
+#menu button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 9px 0 #cc4b4b;
+}
+
+#menu button:active {
+    transform: translateY(3px);
+    box-shadow: 0 3px 0 #cc4b4b;
+}
+
+/* ================= CHARACTER (DECORATION ONLY) ================= */
+#menu .menu-character {
     position: absolute;
-    bottom: 40%;
+    bottom: 35%; /* sits nicely above ground */
+    width: 40px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 60px;
-
-    animation: idleBounce 1.2s infinite;
+    z-index: 1;
 }
 
-@keyframes idleBounce {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+/* ================= CLOUDS ================= */
+.cloud {
+    position: absolute;
+    width: 80px;
+    opacity: 0.8;
+    z-index: 1;
 }
+
+.cloud:nth-child(1) { top: 50px; left: 20%; }
+.cloud:nth-child(2) { top: 80px; right: 20%; }
 
 /* START BUTTON */
 .start-btn {
