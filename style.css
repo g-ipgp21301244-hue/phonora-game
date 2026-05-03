@@ -328,3 +328,15 @@ body {
 #promptBox button:hover {
     background: #43a047;
 }
+/* ===== POPUP ANIMATION ===== */
+#promptBox {
+    opacity: 0;
+    transform: translate(-50%, 20px); /* start slightly lower */
+    transition: all 0.4s ease;
+}
+
+/* ACTIVE STATE (when shown) */
+#promptBox.show {
+    opacity: 1;
+    transform: translate(-50%, 0); /* slide up */
+}
