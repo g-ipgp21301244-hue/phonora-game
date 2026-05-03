@@ -57,7 +57,7 @@ body {
 /* 🧍 CHARACTER */
 #character {
     position: absolute;
-    bottom: 40%;   /* align with ground */
+    bottom: 42%;   /* align with ground */
     left: 5%;
     font-size: 40px;
 }
@@ -195,14 +195,14 @@ body {
 }
 #obstacle {
     position: absolute;
-    bottom: 40%;
+    bottom: 42%;
     left: 60%;
     font-size: 40px;
 }
 
 #finish {
     position: absolute;
-    bottom: 40%;
+    bottom: 42%;
     right: 5%;
     font-size: 40px;
 }
@@ -309,7 +309,7 @@ max-width: 90%;
 
 #promptBox.show {
     opacity: 1;
-    transform: translate(-50%, 0) scale(1);
+    transform: translate(-50%, -50%) scale(1);
 }
 
 #promptBox.hidden {
