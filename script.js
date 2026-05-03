@@ -180,11 +180,14 @@ function startGame(level) {
     currentIndex = 0;
     lives = 6;
     score = 0;
-    
+
     updateHearts();
     updateScore();
 
-    showPrompt(); // ✅ FORCE FIRST PROMPT
+    // 🔥 FORCE FIRST PROMPT
+    setTimeout(() => {
+        showPrompt();
+    }, 300);
 }
 
 // ================= SPEECH =================
