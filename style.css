@@ -400,13 +400,16 @@ body {
 
 /* ================= TITLE ================= */
 #menu h1 {
-    font-size: 60px;
-    color: white;
-    text-shadow: 3px 3px 0 #00000030;
+    font-size: 70px;
     margin-bottom: 20px;
     z-index: 2;
-}
 
+    background: linear-gradient(to right, #fff, #ffd700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    text-shadow: 3px 3px 0 #00000030;
+}
 /* ================= START BUTTON ================= */
 #menu button {
     padding: 15px 40px;
