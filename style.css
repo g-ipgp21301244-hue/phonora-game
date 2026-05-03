@@ -90,7 +90,9 @@ body {
 .cloud1 { top: 20px; animation: moveCloud 20s linear infinite; }
 .cloud2 { top: 60px; animation: moveCloud 25s linear infinite; }
 .cloud3 { top: 40px; animation: moveCloud 30s linear infinite; }
-
+.cloud1 { opacity: 0.9; }
+.cloud2 { opacity: 0.6; }
+.cloud3 { opacity: 0.4; }
 /* ================== GAME OBJECTS ================== */
 
 /* ✅ ALL OBJECTS SIT PERFECTLY ON GROUND */
@@ -409,9 +411,11 @@ body {
 .menu-character {
     position: absolute;
     bottom: 40%;
-    left: 45%;
-    font-size: 50px;
-    animation: idleBounce 1.5s infinite;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 60px;
+
+    animation: idleBounce 1.2s infinite;
 }
 
 @keyframes idleBounce {
@@ -493,4 +497,18 @@ body {
 @keyframes floatLogo {
     0%,100% { transform: translate(-50%, 0); }
     50% { transform: translate(-50%, -12px); }
+}
+.menu-sky::after {
+    content: "";
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    width: 300px;
+    height: 300px;
+    
+    background: radial-gradient(circle, rgba(255,255,150,0.6), transparent 70%);
+    
+    border-radius: 50%;
 }
