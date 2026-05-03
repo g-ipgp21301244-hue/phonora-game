@@ -200,6 +200,11 @@ function startGame(level) {
     moveToObstacle(); // 🔥 IMPORTANT
 }
 function moveToObstacle() {
+    const char = document.getElementById("character");
+
+char.classList.remove("walk");
+void char.offsetWidth;
+char.classList.add("walk");
     document.getElementById("character").style.left = "10%";
 
     setTimeout(() => {
