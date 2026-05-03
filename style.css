@@ -325,7 +325,10 @@ body {
     transform: translate(-50%, 20px); /* start slightly lower */
     transition: all 0.4s ease;
 }
-
+#promptBox.show {
+    opacity: 1 !important;
+    transform: translate(-50%, 0) scale(1) !important;
+}
 /* ACTIVE STATE (when shown) */
 #promptBox.show {
     opacity: 1;
