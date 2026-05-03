@@ -8,7 +8,34 @@ let currentLevel = "";
 
 // ================= SCRIPTS =================
 const scripts = {
-    service: {
+
+    // ✈️ PILOT
+    pilot: {
+        easy: [
+            ["Welcome aboard our flight today."],
+            ["Please fasten your seatbelt now."],
+            ["We are ready for takeoff."],
+            ["The weather is clear and sunny."],
+            ["We will land in one hour."],
+            ["Thank you for flying with us."]
+        ],
+        medium: [
+            ["Please fasten your seatbelt securely.", "Make sure your seat is upright.", "Keep your tray table closed."],
+            ["We are ready for takeoff.", "Please remain seated at all times.", "Enjoy your flight with us."],
+            ["The weather today is calm.", "There may be light clouds ahead.", "The flight will be smooth."],
+            ["We are flying over the ocean.", "You may see islands below.", "Our destination is Kuala Lumpur."],
+            ["We may experience some turbulence.", "Please stay seated for safety.", "Keep your seatbelt fastened."],
+            ["We are preparing to land now.", "Please check your seatbelt again.", "Thank you for flying with us."]
+        ],
+        hard: [
+            ["Good morning passengers this is your captain speaking please fasten your seatbelts and ensure your seats are upright thank you for your cooperation"],
+            ["Ladies and gentlemen we are currently flying at thirty thousand feet please enjoy your flight and relax"],
+            ["Attention passengers we are experiencing turbulence please remain seated and stay calm thank you"]
+        ]
+    },
+
+    // ☎️ CUSTOMER SERVICE
+    customerservice: {
         easy: [
             ["Hello, how can I help you?"],
             ["Please tell me your problem."],
@@ -18,13 +45,95 @@ const scripts = {
             ["Have a nice day."]
         ],
         medium: [
-            ["Hello, welcome to our service center.", "How may I assist you today?", "I am here to help you."]
+            ["Hello welcome to our service center", "How may I assist you today", "I am here to help you"],
+            ["Can you explain your problem", "Please provide more information", "I will check it for you"],
+            ["We are sorry for the inconvenience", "We understand your concern", "We will fix this issue quickly"],
+            ["Your issue has been identified", "We are working on a solution", "Please wait for a moment"],
+            ["Your problem has been resolved", "Please check again", "Let us know if you need help"],
+            ["Thank you for contacting us", "We appreciate your patience", "Have a wonderful day ahead"]
         ],
         hard: [
-            ["Good day, thank you for contacting customer service"]
+            ["Good day thank you for contacting customer service I understand your issue and will assist you shortly"],
+            ["After checking your account I have identified the issue and will resolve it immediately"],
+            ["Your issue has been resolved thank you for your patience and have a great day"]
+        ]
+    },
+
+    // 📰 NEWS ANCHOR
+    anchor: {
+        easy: [
+            ["Good evening this is the news"],
+            ["Today story is very important"],
+            ["There is heavy rain today"],
+            ["Many people are affected"],
+            ["The situation is improving"],
+            ["Stay safe and take care"]
+        ],
+        medium: [
+            ["Good evening this is the news", "I am your news anchor today", "Here are the top stories"],
+            ["There is heavy rain today", "Flooding has been reported", "People are advised to stay safe"],
+            ["A new school has opened", "Many students are excited", "The event was successful"],
+            ["Doctors advise people to stay healthy", "Drink enough water daily", "Exercise regularly"],
+            ["The situation is improving", "Rescue teams are helping", "More updates will follow"],
+            ["That is all for today", "Thank you for watching", "Stay safe and take care"]
+        ],
+        hard: [
+            ["Good evening this is your live news report heavy rain has caused flooding in several areas"],
+            ["In other news a new community school was opened today with many excited students"],
+            ["That concludes today news update thank you for watching and stay safe"]
+        ]
+    },
+
+    // 🎤 TV HOST
+    host: {
+        easy: [
+            ["Hello everyone welcome to the show"],
+            ["Today we have a special guest"],
+            ["Let us start the program now"],
+            ["This is very exciting"],
+            ["Thank you for joining us"],
+            ["See you next time"]
+        ],
+        medium: [
+            ["Hello everyone welcome to our show", "I am your host today", "Let us begin the program"],
+            ["Today we have a special guest", "They are very talented", "Let us welcome them"],
+            ["Can you tell us about yourself", "That is very interesting", "Thank you for sharing"],
+            ["Now we will play a fun game", "Everyone can join", "Let us have some fun"],
+            ["Thank you for being here", "We enjoyed your time", "It was amazing"],
+            ["That is all for today", "Thank you for watching", "See you again soon"]
+        ],
+        hard: [
+            ["Hello everyone and welcome to our exciting show we have an amazing program for you"],
+            ["Today we are joined by a special guest please share your experience with us"],
+            ["It has been a wonderful time thank you for watching and see you next time"]
+        ]
+    },
+
+    // 🏛️ MINISTER
+    minister: {
+        easy: [
+            ["Good morning everyone"],
+            ["I am happy to be here today"],
+            ["Education is very important"],
+            ["We will improve our schools"],
+            ["Thank you for your support"],
+            ["Have a great day"]
+        ],
+        medium: [
+            ["Good morning everyone", "I am honoured to be here today", "Thank you for attending"],
+            ["Education is very important", "Students are our future", "We must support learning"],
+            ["We will improve our schools", "New facilities will be built", "Teachers will be trained"],
+            ["We must work together", "Strong communities build strong nations", "Your support matters"],
+            ["Thank you for your cooperation", "We value your contribution", "Together we succeed"],
+            ["Thank you for your time", "I appreciate your presence", "Have a wonderful day"]
+        ],
+        hard: [
+            ["Good morning ladies and gentlemen it is an honour to be here education is important for our future"],
+            ["Today I announce new initiatives to improve education including facilities and training"],
+            ["Thank you for your support let us build a better future together"]
         ]
     }
-}; //
+};
 
 // ================= SPEECH =================
 let recognition = null;
@@ -36,14 +145,14 @@ if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
     recognition.interimResults = false;
 
     recognition.onresult = function(event) {
-        const spoken = event.results[0][0].transcript;
-        const result = checkSpeech(spoken, currentScript);
+    const spoken = event.results[0][0].transcript;
+    const result = checkSpeech(spoken, currentScript);
 
-        const isCorrect = result.mistakes === 0;
-        const isCorrect = result.mistakes <= allowedMistakes;
+    const allowedMistakes = Math.ceil(result.total * 0.4); // 🔥 tolerance
+    const isCorrect = result.mistakes <= allowedMistakes;
 
-        handleResult(isCorrect, result.html, result.wrongWords);
-    };
+    handleResult(isCorrect, result.html, result.wrongWords);
+};
 
     recognition.onend = function() {
         console.log("Speech ended");
