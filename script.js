@@ -39,7 +39,7 @@ if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
         const spoken = event.results[0][0].transcript;
         const result = checkSpeech(spoken, currentScript);
 
-        const allowedMistakes = Math.ceil(result.total * 0.5);
+        const isCorrect = result.mistakes === 0;
         const isCorrect = result.mistakes <= allowedMistakes;
 
         handleResult(isCorrect, result.html, result.wrongWords);
@@ -181,28 +181,30 @@ function handleResult(isCorrect, html, wrongWords) {
         score += 10;
         updateScore();
 
+        speakCorrect();
+
         setTimeout(() => {
             currentIndex++;
             moveForward();
-        }, 1000);
+        }, 1500);
 
     } else {
         lives--;
         updateHearts();
 
+        speakWrongWords(wrongWords);
+
         if (lives <= 0) {
             gameOver();
-        } else {
-            speakWrongWords(wrongWords);
-
-            // 🔥 AUTO RETRY
-            setTimeout(() => {
-                startListening();
-            }, 1500);
+            return;
         }
+
+        // ✅ ADD AUTO-RETRY HERE
+        setTimeout(() => {
+            startListening();
+        }, 1200);
     }
 }
-
 // ================= GAME FLOW =================
 function moveForward() {
     let total = scripts[selectedRole][currentLevel].length;
@@ -288,4 +290,24 @@ function speakWord(word) {
     let u = new SpeechSynthesisUtterance(word);
     u.lang = "en-GB";
     speechSynthesis.speak(u);
+}
+function speakCorrect() {
+    let u = new SpeechSynthesisUtterance("Good job!");
+    u.lang = "en-GB";
+    u.rate = 1;
+
+    speechSynthesis.cancel(); // stop previous
+    speechSynthesis.speak(u);
+}
+function gameOver() {
+    const box = document.getElementById("promptBox");
+
+    box.classList.remove("hidden");
+    box.classList.add("show");
+
+    document.getElementById("script").innerText = "💀 Game Over";
+    document.getElementById("feedback").innerHTML = `
+        Try again! <br><br>
+        <button onclick="goToMenu()">Back to Menu</button>
+    `;
 }
