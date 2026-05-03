@@ -194,9 +194,6 @@ body {
     height: 120px;
     background: #8B4513; /* ground */
 }
-#promptBox {
-    z-index: 9999;
-}
 #obstacle {
     position: absolute;
     bottom: 120px; /* same level as character */
@@ -306,46 +303,29 @@ body {
     margin-bottom: 12px;
 }
 
-#promptBox button {
-    background: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-#promptBox button:hover {
-    background: #43a047;
-}
-/* ===== POPUP ANIMATION ===== */
 #promptBox {
+    position: absolute;
+    bottom: 35px;
+    left: 50%;
+    transform: translate(-50%, 20px) scale(0.95);
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    width: 60%;
+    text-align: center;
+    z-index: 9999;
+
     opacity: 0;
-    transform: translate(-50%, 20px); /* start slightly lower */
     transition: all 0.4s ease;
 }
-#promptBox.show {
-    opacity: 1 !important;
-    transform: translate(-50%, 0) scale(1) !important;
-}
-/* ACTIVE STATE (when shown) */
-#promptBox.show {
-    opacity: 1;
-    transform: translate(-50%, 0); /* slide up */
-}
+
 #promptBox.show {
     opacity: 1;
     transform: translate(-50%, 0) scale(1);
 }
 
-#promptBox {
-    transform: translate(-50%, 20px) scale(0.95);
-}
-body {
-    margin: 0;
-    overflow: hidden;
-    font-family: Arial;
+#promptBox.hidden {
+    display: none;
 }
 
 .container {
