@@ -209,33 +209,28 @@ function startListening() {
 }
 
 // ================= RESULT =================
-function handleResult(isCorrect, resultHTML, wrongWords = []) {
-    const feedback = document.getElementById("feedback");
-
-    feedback.innerHTML = resultHTML;
+function handleResult(isCorrect, resultHTML, wrongWords) {
 
     if (isCorrect) {
-        feedback.innerHTML += "<br>✅ " + missions[selectedRole].success;
         score += 10;
-        sounds.correct.play();
-        showStar();
-        jumpToStar();
+        updateScore();
+
+        document.getElementById("promptBox").classList.add("hidden");
+
+        currentIndex++;
+
+        moveForward(); // go to next obstacle
     } else {
-        feedback.innerHTML += "<br>❌ " + missions[selectedRole].fail;
         lives--;
-        sounds.wrong.play();
-        showEnemy();
-        enemyAttack();
+        updateHearts();
 
-        setTimeout(() => {
-            speakWrongWords(wrongWords);
-        }, 800);
+        if (lives <= 0) {
+            gameOver();
+        } else {
+            speakWrongWords(wrongWords); // retry SAME quest
+        }
     }
-
-    updateHearts();
-    updateScore();
 }
-
 // ================= WORD CHECK =================
 function highlightWords(spoken, correct) {
     spoken = spoken.toLowerCase().trim().split(/\s+/);
@@ -357,3 +352,40 @@ const sounds = {
     wrong: new Audio("https://actions.google.com/sounds/v1/cartoon/boing.ogg"),
     win: new Audio("https://actions.google.com/sounds/v1/cartoon/ta_da.ogg")
 };
+function moveToObstacle() {
+    document.getElementById("character").style.left = "55%";
+
+    setTimeout(() => {
+        showPrompt();
+    }, 1000);
+}
+
+function showPrompt() {
+    document.getElementById("promptBox").classList.remove("hidden");
+
+    let quests = scripts[selectedRole][currentLevel];
+    currentScript = quests[currentIndex].join(" ");
+
+    document.getElementById("script").innerText = currentScript;
+}
+
+function moveForward() {
+    let progress = (currentIndex / scripts[selectedRole][currentLevel].length) * 80;
+
+    document.getElementById("character").style.left = progress + "%";
+
+    setTimeout(() => {
+        moveToObstacle();
+    }, 1000);
+}
+function startGame(level) {
+    currentLevel = level;
+    currentIndex = 0;
+    lives = 6;
+    score = 0;
+
+    updateHearts();
+    updateScore();
+
+    moveToObstacle(); // 🚀 START HERE
+}
