@@ -7,13 +7,6 @@ body {
     align-items: center;
     height: 100vh;
 }
-
-/* CONTAINER */
-.container {
-    width: 360px;
-    min-height: 500px;
-    position: relative;
-}
 /* SCREENS */
 .screen {
     text-align: center;
@@ -64,10 +57,9 @@ body {
 /* 🧍 CHARACTER */
 #character {
     position: absolute;
-    bottom: 20px;
+    bottom: 130px;  /* 🔥 ABOVE ground */
     left: 20px;
     font-size: 40px;
-    transition: left 0.4s linear;
     z-index: 5;
 }
 
@@ -202,18 +194,21 @@ body {
     height: 120px;
     background: #8B4513; /* ground */
 }
-
+#promptBox {
+    z-index: 9999;
+}
 #obstacle {
     position: absolute;
-    bottom: 120px;
+    bottom: 130px;
     left: 60%;
     font-size: 40px;
 }
 
 #finish {
     position: absolute;
-    bottom: 120px;
-    right: 10px;
+    bottom: 130px;
+    right: 5%;
+    font-size: 40px;
 }
 /* ===== PROMPT POPUP (VISIBLE ON GAME) ===== */
 #promptBox {
