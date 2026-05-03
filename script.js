@@ -359,9 +359,30 @@ function moveForward() {
         return;
     }
 
+    // 🔥 MOVE CHARACTER FORWARD EACH QUEST
+    let character = document.getElementById("character");
+    let currentLeft = parseInt(character.style.left) || 10;
+
+    character.style.left = (currentLeft + 12) + "%"; // move forward
+
+    // 🔥 MOVE MONSTER TO NEW POSITION
+    moveMonster();
+
     showPrompt();
 }
+function moveMonster() {
+    let monster = document.getElementById("obstacle");
 
+    // random new position ahead of character
+    let newPosition = 50 + Math.random() * 30; // between 50% - 80%
+
+    monster.style.left = newPosition + "%";
+
+    // reset animation
+    monster.classList.remove("attack");
+    void monster.offsetWidth;
+    monster.classList.add("bounce");
+}
 // ================= END =================
 function showEndScreen() {
     const box = document.getElementById("promptBox");
