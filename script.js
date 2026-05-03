@@ -284,3 +284,8 @@ function speakWrongWords(words) {
 
     next();
 }
+function speakWord(word) {
+    let u = new SpeechSynthesisUtterance(word);
+    u.lang = "en-GB";
+    speechSynthesis.speak(u);
+}
