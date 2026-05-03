@@ -6,47 +6,8 @@ let selectedRole = "";
 let currentIndex = 0;
 let currentLevel = "";
 
-// ================= MISSIONS =================
-const missions = {
-    pilot: { title: "✈️ Flight Mission", success: "Smooth flight!", fail: "⚠️ Turbulence!" },
-    news: { title: "📡 Live News", success: "Clear broadcast!", fail: "📡 Signal glitch!" },
-    service: { title: "☎️ Customer Service", success: "Customer happy!", fail: "😡 Customer angry!" },
-    host: { title: "🎬 TV Show", success: "Audience loves it!", fail: "😬 Awkward moment!" },
-    minister: { title: "🏛️ Speech", success: "👏 Crowd impressed!", fail: "😠 Crowd unhappy!" }
-};
-
-const characters = {
-    pilot: "🧑‍✈️",
-    news: "🧑‍💼",
-    service: "📞",
-    host: "🎤",
-    minister: "🏛️"
-};
+// ================= SCRIPTS =================
 const scripts = {
-    pilot: {
-        easy: [
-            ["Welcome aboard our flight today."],
-            ["Please fasten your seatbelt now."],
-            ["We are ready for takeoff."],
-            ["The weather is clear and sunny."],
-            ["We will land in one hour."],
-            ["Thank you for flying with us."]
-        ],
-        medium: [
-            ["Please fasten your seatbelt securely.", "Make sure your seat is upright.", "Keep your tray table closed."],
-            ["We are ready for takeoff.", "Please remain seated at all times.", "Enjoy your flight with us."],
-            ["The weather today is calm.", "There may be light clouds ahead.", "The flight will be smooth."],
-            ["We are flying over the ocean.", "You may see islands below.", "Our destination is Kuala Lumpur."],
-            ["We may experience some turbulence.", "Please stay seated for safety.", "Keep your seatbelt fastened."],
-            ["We are preparing to land now.", "Please check your seatbelt again.", "Thank you for flying with us."]
-        ],
-        hard: [
-            ["Good morning passengers this is your captain speaking", "Please fasten your seatbelts and ensure your seats are upright", "Follow the instructions given by the cabin crew"],
-            ["We are currently flying at thirty thousand feet", "We will be passing over several islands", "Our estimated arrival time is two hours"],
-            ["We are experiencing slight turbulence", "Please remain calm and stay seated", "Our crew is here to ensure your safety"]
-        ]
-    },
-
     service: {
         easy: [
             ["Hello, how can I help you?"],
@@ -57,104 +18,43 @@ const scripts = {
             ["Have a nice day."]
         ],
         medium: [
-            ["Hello, welcome to our service center.", "How may I assist you today?", "I am here to help you."],
-            ["Can you explain your problem?", "Please provide more information.", "I will check it for you."],
-            ["We are sorry for the inconvenience.", "We understand your concern.", "We will fix this issue quickly."],
-            ["Your issue has been identified.", "We are working on a solution.", "Please wait for a moment."],
-            ["Your problem has been resolved.", "Please check again.", "Let us know if you need help."],
-            ["Thank you for contacting us.", "We appreciate your patience.", "Have a wonderful day ahead."]
+            ["Hello, welcome to our service center.", "How may I assist you today?", "I am here to help you."]
         ],
         hard: [
-            ["Good day, thank you for contacting customer service", "I understand that you are facing an issue with your account", "Please allow me a moment to check the details for you"],
-            ["After checking your account, I have identified the issue", "We will take immediate action to resolve it", "Please rest assured that this will not happen again"],
-            ["Your issue has now been successfully resolved", "Thank you for your understanding and cooperation", "Please feel free to contact us again if needed"]
-        ]
-    },
-
-    news: {
-        easy: [
-            ["Good evening, this is the news."],
-            ["Today's story is very important."],
-            ["There is heavy rain today."],
-            ["Many people are affected."],
-            ["The situation is improving."],
-            ["Stay safe and take care."]
-        ],
-        medium: [
-            ["Good evening, this is the news.", "I am your news anchor today.", "Here are the top stories."],
-            ["There is heavy rain today.", "Flooding has been reported.", "People are advised to stay safe."],
-            ["A new school has opened.", "Many students are excited.", "The event was successful."],
-            ["Doctors advise people to stay healthy.", "Drink enough water daily.", "Exercise regularly."],
-            ["The situation is improving.", "Rescue teams are helping.", "More updates will follow."],
-            ["That is all for today.", "Thank you for watching.", "Stay safe and take care."]
-        ],
-        hard: [
-            ["Good evening, this is your live news report", "Heavy rain has caused flooding in several areas", "Rescue teams have been deployed to assist families"],
-            ["In other news, a new community school was opened", "The event was attended by local leaders and students", "This school will improve learning opportunities"],
-            ["That concludes today's news update", "We will continue to bring you updates", "Thank you for watching and stay safe"]
-        ]
-    },
-
-    host: {
-        easy: [
-            ["Hello everyone, welcome to the show."],
-            ["Today we have a special guest."],
-            ["Let's start the program now."],
-            ["This is very exciting."],
-            ["Thank you for joining us."],
-            ["See you next time."]
-        ],
-        medium: [
-            ["Hello everyone, welcome to our show.", "I am your host today.", "Let's begin the program."],
-            ["Today we have a special guest.", "They are very talented.", "Let's welcome them."],
-            ["Can you tell us about yourself?", "That is very interesting.", "Thank you for sharing."],
-            ["Now we will play a fun game.", "Everyone can join.", "Let's have some fun."],
-            ["Thank you for being here.", "We enjoyed your time.", "It was amazing."],
-            ["That's all for today.", "Thank you for watching.", "See you again soon."]
-        ],
-        hard: [
-            ["Hello everyone and welcome to our exciting show", "I am your host for today", "We have an amazing program lined up"],
-            ["Today we are joined by a special guest", "Thank you for being here with us", "Please share your experience with our audience"],
-            ["It has been a wonderful time today", "Thank you to our guest and viewers", "See you next time for more exciting content"]
-        ]
-    },
-
-    minister: {
-        easy: [
-            ["Good morning, everyone."],
-            ["I am happy to be here today."],
-            ["Education is very important."],
-            ["We will improve our schools."],
-            ["Thank you for your support."],
-            ["Have a great day."]
-        ],
-        medium: [
-            ["Good morning, everyone.", "I am honoured to be here today.", "Thank you for attending."],
-            ["Education is very important.", "Students are our future.", "We must support learning."],
-            ["We will improve our schools.", "New facilities will be built.", "Teachers will be trained."],
-            ["We must work together.", "Strong communities build strong nations.", "Your support matters."],
-            ["Thank you for your cooperation.", "We value your contribution.", "Together we succeed."],
-            ["Thank you for your time.", "I appreciate your presence.", "Have a wonderful day."]
-        ],
-        hard: [
-            ["Good morning ladies and gentlemen", "It is a great honour to be here today", "Education shapes our nation's future"],
-            ["Today I am proud to announce new initiatives", "We will improve facilities and teacher training", "Together we can achieve excellence"],
-            ["In conclusion I thank everyone for your support", "Let us build a brighter future together", "Have a pleasant day"]
+            ["Good day, thank you for contacting customer service"]
         ]
     }
+    // 👉 you can paste back other roles later (this is simplified clean base)
 };
+
 // ================= SPEECH =================
-let recognition;
+let recognition = null;
+
 if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
     recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
     recognition.lang = "en-GB";
+    recognition.continuous = false;
+    recognition.interimResults = false;
+
+    recognition.onresult = function(event) {
+        const spoken = event.results[0][0].transcript;
+        const result = checkSpeech(spoken, currentScript);
+
+        const allowedMistakes = Math.ceil(result.total * 0.5);
+        const isCorrect = result.mistakes <= allowedMistakes;
+
+        handleResult(isCorrect, result.html, result.wrongWords);
+    };
+
+    recognition.onend = function() {
+        console.log("Speech ended");
+    };
 } else {
     alert("Speech recognition not supported 😢");
 }
 
 // ================= NAVIGATION =================
 function goToRoles() {
-    alert("clicked"); // test
     document.getElementById("menu").classList.add("hidden");
     document.getElementById("roles").classList.remove("hidden");
 }
@@ -165,16 +65,11 @@ function selectRole(role) {
     document.getElementById("levels").classList.remove("hidden");
 }
 
-// ✅ CLEAN startGame (VERY IMPORTANT)
 function startGame(level) {
-
     if (!selectedRole) {
-        alert("Please select a role first!");
+        alert("Select a role first!");
         return;
     }
-
-    document.getElementById("levels").classList.add("hidden");
-    document.getElementById("game").classList.remove("hidden");
 
     currentLevel = level;
     currentIndex = 0;
@@ -184,137 +79,169 @@ function startGame(level) {
     updateHearts();
     updateScore();
 
-    // 🔥 FORCE FIRST PROMPT
-    setTimeout(() => {
-        showPrompt();
-    }, 300);
+    document.getElementById("levels").classList.add("hidden");
+    document.getElementById("game").classList.remove("hidden");
+
+    showPrompt();
 }
 
-// ================= SPEECH =================
-function startListening() {
-    if (!recognition) {
-        alert("Speech recognition not available");
-        return;
-    }
+// ================= PROMPT =================
+function showPrompt() {
+    const box = document.getElementById("promptBox");
 
-    try {
-        recognition.stop(); // prevent already started error
-    } catch (e) {}
+    let quests = scripts[selectedRole][currentLevel];
+    currentScript = quests[currentIndex].join(" ");
+
+    document.getElementById("script").innerText = currentScript;
+    document.getElementById("feedback").innerHTML = "";
+
+    box.classList.remove("hidden");
+    box.classList.remove("show");
+    void box.offsetWidth;
+    box.classList.add("show");
+}
+
+// ================= SPEECH CONTROL =================
+function startListening() {
+    if (!recognition) return;
+
+    try { recognition.stop(); } catch(e) {}
 
     recognition.start();
 }
-if (recognition) {
-    recognition.onresult = function(event) {
-    let spokenText = event.results[0][0].transcript;
 
-    let result = highlightWords(spokenText, currentScript);
+// ================= CHECK LOGIC =================
+function checkSpeech(spoken, correct) {
 
-    // ✅ FIX: use currentScript, not "correct"
-    let totalWords = currentScript.split(" ").length;
+    const clean = t => t.toLowerCase().replace(/[.,!?]/g, "").split(/\s+/);
 
-    // ✅ make it MUCH LESS STRICT (60% tolerance)
-    let allowedMistakes = Math.ceil(currentScript.split(" ").length * 0.4);
+    const spokenWords = clean(spoken);
+    const correctWords = clean(correct);
 
-    let isCorrect = result.mistakes <= allowedMistakes;
+    const easyWords = ["hello","hi","you","i","is","the","a","an","can"];
 
-    handleResult(isCorrect, result.html, result.wrongWords);
-};
+    let mistakes = 0;
+    let wrongWords = [];
+    let html = "";
+
+    correctWords.forEach(word => {
+        let match = spokenWords.some(w => similarity(w, word) > 0.5);
+
+        if (match || easyWords.includes(word)) {
+            html += `<span class="correct">${word}</span> `;
+        } else {
+            html += `<span class="wrong">${word}</span> `;
+            mistakes++;
+            wrongWords.push(word);
+        }
+    });
+
+    return {
+        html,
+        mistakes,
+        wrongWords,
+        total: correctWords.length
+    };
 }
-// ================= RESULT =================
-function handleResult(isCorrect, resultHTML, wrongWords) {
 
-    // ✅ ALWAYS show feedback
-    document.getElementById("feedback").innerHTML = resultHTML;
+function similarity(a, b) {
+    if (a === b) return 1;
+    if (a.includes(b) || b.includes(a)) return 0.8;
+
+    let match = 0;
+    for (let i = 0; i < Math.min(a.length, b.length); i++) {
+        if (a[i] === b[i]) match++;
+    }
+    return match / Math.max(a.length, b.length);
+}
+
+// ================= RESULT =================
+function handleResult(isCorrect, html, wrongWords) {
+
+    document.getElementById("feedback").innerHTML = html;
 
     if (isCorrect) {
         score += 10;
         updateScore();
 
         setTimeout(() => {
-            const box = document.getElementById("promptBox");
-setTimeout(() => {
-    box.classList.remove("show");
-    setTimeout(() => {
-        box.classList.add("hidden");
-    }, 300);
-}, 900);
             currentIndex++;
             moveForward();
-        }, 1200); // let pupils SEE feedback first
+        }, 1000);
 
     } else {
-    lives--;
-    updateHearts();
+        lives--;
+        updateHearts();
 
-    if (lives <= 0) {
-        gameOver();
-    } else {
-        speakWrongWords(wrongWords);
-
-        // ✅ IMPORTANT: allow retry after feedback
-        setTimeout(() => {
-            startListening(); // 🎤 listen again automatically
-        }, 1500); // wait so pupil hears feedback first
-    }
-}    
-}
-// ================= WORD CHECK =================
-function highlightWords(spoken, correct) {
-
-    function clean(text) {
-        return text
-            .toLowerCase()
-            .replace(/[.,!?]/g, "")
-            .trim()
-            .split(/\s+/);
-    }
-
-    function similarity(a, b) {
-        if (a === b) return 1;
-        if (a.includes(b) || b.includes(a)) return 0.8;
-
-        // simple fuzzy check
-        let matches = 0;
-        for (let i = 0; i < Math.min(a.length, b.length); i++) {
-            if (a[i] === b[i]) matches++;
-        }
-        return matches / Math.max(a.length, b.length);
-    }
-
-    // ✅ words we DON'T punish
-    const easyWords = ["hello", "hi", "you", "i", "is", "the", "a", "an", "can"];
-
-    let spokenWords = clean(spoken);
-    let correctWords = clean(correct);
-
-    let result = "";
-    let mistakes = 0;
-    let wrongWords = [];
-
-    correctWords.forEach(word => {
-
-        let bestScore = 0;
-
-        spokenWords.forEach(w => {
-            let score = similarity(w, word);
-            if (score > bestScore) bestScore = score;
-        });
-
-        // ✅ VERY LENIENT RULES
-        if (bestScore >= 0.5) {
-            result += `<span class="correct">${word}</span> `;
-        } else if (easyWords.includes(word)) {
-            // ✅ DON'T punish simple words
-            result += `<span class="correct">${word}</span> `;
+        if (lives <= 0) {
+            gameOver();
         } else {
-            result += `<span class="wrong">${word}</span> `;
-            mistakes++;
-            wrongWords.push(word);
-        }
-    });
+            speakWrongWords(wrongWords);
 
-    return { html: result, mistakes, wrongWords };
+            // 🔥 AUTO RETRY
+            setTimeout(() => {
+                startListening();
+            }, 1500);
+        }
+    }
 }
+
+// ================= GAME FLOW =================
+function moveForward() {
+    let total = scripts[selectedRole][currentLevel].length;
+
+    if (currentIndex >= total) {
+        showEndScreen();
+        return;
+    }
+
+    showPrompt();
+}
+
+// ================= END =================
+function showEndScreen() {
+    const box = document.getElementById("promptBox");
+
+    box.classList.remove("hidden");
+    box.classList.add("show");
+
+    document.getElementById("script").innerText = "🏰 You've reached the castle!";
+    document.getElementById("feedback").innerHTML = `
+        🎉 Great job! <br><br>
+        ${nextLevelButton()}
+    `;
+}
+
+function nextLevelButton() {
+    if (currentLevel === "easy") {
+        return `<button onclick="startNextLevel('medium')">Next Level ➡️</button>`;
+    }
+    if (currentLevel === "medium") {
+        return `<button onclick="startNextLevel('hard')">Next Level ➡️</button>`;
+    }
+    return `<button onclick="goToMenu()">Finish</button>`;
+}
+
+function startNextLevel(level) {
+    currentLevel = level;
+    currentIndex = 0;
+    showPrompt();
+}
+
+// ================= UI =================
+function updateHearts() {
+    document.getElementById("hearts").innerText = "❤️".repeat(lives);
+}
+
+function updateScore() {
+    document.getElementById("score").innerText = "⭐ " + score;
+}
+
+function goToMenu() {
+    document.getElementById("game").classList.add("hidden");
+    document.getElementById("menu").classList.remove("hidden");
+}
+
 // ================= AUDIO =================
 function speakWrongWords(words) {
     if (!words.length) return;
@@ -322,6 +249,7 @@ function speakWrongWords(words) {
     speechSynthesis.cancel();
 
     let i = 0;
+
     function next() {
         if (i >= words.length) return;
 
@@ -336,175 +264,6 @@ function speakWrongWords(words) {
 
         speechSynthesis.speak(u);
     }
+
     next();
-}
-
-function speakWord(word) {
-    let u = new SpeechSynthesisUtterance(word);
-    u.lang = "en-GB";
-    speechSynthesis.speak(u);
-}
-
-// ================= UI =================
-function updateHearts() {
-    document.getElementById("hearts").innerText = "❤️".repeat(lives);
-}
-
-function updateScore() {
-    document.getElementById("score").innerText = "⭐ " + score;
-}
-
-function nextRound() {
-    let quests = scripts[selectedRole][currentLevel];
-
-    currentIndex++;
-
-    if (currentIndex >= quests.length) {
-        document.getElementById("script").innerText = "🏰 You reached the castle!";
-        document.getElementById("feedback").innerHTML = "👑 Victory!";
-        sounds.win.play();
-        return;
-    }
-
-    document.getElementById("questTitle").innerText = "Quest " + (currentIndex + 1);
-    currentScript = quests[currentIndex].join(" ");
-    document.getElementById("script").innerText = currentScript;
-    document.getElementById("feedback").innerHTML = "";
-
-    moveCharacter();
-}
-
-function goToMenu() {
-    document.getElementById("game").classList.add("hidden");
-    document.getElementById("menu").classList.remove("hidden");
-}
-
-function moveCharacter() {
-    let total = scripts[selectedRole][currentLevel].length;
-    let progress = (currentIndex / total) * 80;
-    document.getElementById("character").style.left = progress + "%";
-}
-
-// ================= ANIMATION =================
-function showStar() {
-    document.getElementById("star").classList.add("show-star");
-    setTimeout(() => document.getElementById("star").classList.remove("show-star"), 1000);
-}
-
-function jumpToStar() {
-    const c = document.getElementById("character");
-    c.style.transform = "translateY(-60px)";
-    setTimeout(() => c.style.transform = "translateY(0)", 600);
-}
-
-function showEnemy() {
-    document.getElementById("enemy").classList.add("show-enemy");
-    setTimeout(() => document.getElementById("enemy").classList.remove("show-enemy"), 800);
-}
-
-function enemyAttack() {
-    const c = document.getElementById("character");
-    c.classList.add("hit");
-    setTimeout(() => c.classList.remove("hit"), 400);
-}
-
-// ================= SOUND =================
-const sounds = {
-    correct: new Audio("https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"),
-    wrong: new Audio("https://actions.google.com/sounds/v1/cartoon/boing.ogg"),
-    win: new Audio("https://actions.google.com/sounds/v1/cartoon/ta_da.ogg")
-};
-function moveToObstacle() {
-    document.getElementById("character").style.left = "55%";
-    document.getElementById("promptBox").classList.remove("hidden");
-
-    setTimeout(() => {
-        showPrompt();
-    }, 1000);
-}
-
-function showPrompt() {
-    const box = document.getElementById("promptBox");
-
-    let quests = scripts[selectedRole][currentLevel];
-    currentScript = quests[currentIndex].join(" ");
-
-    document.getElementById("script").innerText = currentScript;
-    document.getElementById("feedback").innerHTML = "";
-
-    box.classList.remove("hidden");
-    box.classList.remove("show");
-
-    void box.offsetWidth; // force reflow
-
-    box.classList.add("show");
-}
-function moveForward() {
-    let total = scripts[selectedRole][currentLevel].length;
-
-    // ✅ STOP properly at end
-    if (currentIndex >= total) {
-        showEndScreen();
-        return;
-    }
-
-    let progress = (currentIndex / total) * 80;
-    document.getElementById("character").style.left = progress + "%";
-
-    setTimeout(() => {
-        moveToObstacle();
-    }, 1000);
-}
-function gameOver() {
-    document.getElementById("script").innerText = "💀 Game Over!";
-    document.getElementById("feedback").innerHTML = "Try again!";
-}
-recognition.onend = function() {
-    console.log("Speech ended");
-};
-function showEndScreen() {
-    const box = document.getElementById("promptBox");
-
-    box.classList.remove("hidden");
-    box.classList.add("show");
-
-    document.getElementById("script").innerText = "🏰 You've reached the castle!";
-    
-    document.getElementById("feedback").innerHTML = `
-        <div style="margin-top:10px;">🎉 Great job!</div>
-        ${getNextLevelButton()}
-    `;
-
-    sounds.win.play();
-}
-
-function getNextLevelButton() {
-    if (currentLevel === "easy") {
-        return `<button onclick="startNextLevel('medium')">Next Level: Medium ➡️</button>`;
-    }
-    if (currentLevel === "medium") {
-        return `<button onclick="startNextLevel('hard')">Next Level: Hard ➡️</button>`;
-    }
-    return `<button onclick="goToMenu()">🏁 Finish Game</button>`;
-}
-
-function startNextLevel(level) {
-    currentLevel = level;
-    currentIndex = 0;
-
-    // ✅ Reset UI
-    document.getElementById("feedback").innerHTML = "";
-    document.getElementById("script").innerText = "";
-
-    const box = document.getElementById("promptBox");
-    box.classList.remove("hidden");
-    box.classList.remove("show");
-
-    // ✅ small delay to retrigger animation properly
-    setTimeout(() => {
-        box.classList.add("show");
-    }, 50);
-
-    // ✅ restart game flow properly
-    moveToObstacle();
 }
