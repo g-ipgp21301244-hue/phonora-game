@@ -109,9 +109,12 @@ function showPrompt() {
     document.getElementById("feedback").innerHTML = "";
 
     box.classList.remove("hidden");
+
+    // 🔥 FORCE animation trigger
+    box.classList.remove("show");
+    void box.offsetWidth; 
     box.classList.add("show");
 }
-
 // ================= SPEECH CONTROL =================
 function startListening() {
     if (!recognition) return;
