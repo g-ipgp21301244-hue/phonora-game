@@ -337,7 +337,13 @@ setTimeout(() => {
         lives--;
         updateHearts();
 
-        speakWrongWords(wrongWords);
+        // 🔥 monster attack animation
+let monster = document.getElementById("obstacle");
+monster.classList.remove("attack");
+void monster.offsetWidth;
+monster.classList.add("attack");
+
+speakWrongWords(wrongWords);
 
         if (lives <= 0) {
             gameOver();
