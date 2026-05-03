@@ -206,7 +206,8 @@ char.classList.remove("walk");
 void char.offsetWidth;
 char.classList.add("walk");
     document.getElementById("character").style.left = "10%";
-
+const monster = document.getElementById("obstacle");
+monster.classList.add("monster-idle");
     setTimeout(() => {
         showPrompt();
     }, 500);
@@ -306,6 +307,11 @@ char.classList.remove("jump-star");
 void char.offsetWidth;
 char.classList.add("jump-star");
 
+const monster = document.getElementById("obstacle");
+
+monster.classList.remove("monster-hit");
+void monster.offsetWidth;
+monster.classList.add("monster-hit");
 // remove star after animation
 setTimeout(() => {
     star.classList.remove("show-star");
