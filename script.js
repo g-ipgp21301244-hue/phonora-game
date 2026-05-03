@@ -206,7 +206,7 @@ if (recognition) {
 
         let result = highlightWords(spokenText, currentScript);
 
-        let allowedMistakes = 1; // 🔥 allow 1 mistake
+        let allowedMistakes = Math.ceil(correct.split(" ").length * 0.4);
 
 handleResult(result.mistakes <= allowedMistakes, result.html, result.wrongWords);
     };
@@ -243,11 +243,10 @@ box.classList.add("hidden");
 // ================= WORD CHECK =================
 function highlightWords(spoken, correct) {
 
-    // 🔥 CLEAN BOTH TEXTS
     function clean(text) {
         return text
             .toLowerCase()
-            .replace(/[.,!?]/g, "") // remove punctuation
+            .replace(/[.,!?]/g, "")
             .trim()
             .split(/\s+/);
     }
@@ -259,13 +258,10 @@ function highlightWords(spoken, correct) {
     let mistakes = 0;
     let wrongWords = [];
 
-    correctWords.forEach((word, i) => {
+    correctWords.forEach(word => {
 
-        // ✅ allow small flexibility
-        if (
-    spokenWords[i] && spokenWords[i].includes(word)
-    || i === correctWords.length - 1 // 🔥 ignore last word strictness
-) {
+        // ✅ check if word exists ANYWHERE in spoken input
+        if (spokenWords.includes(word)) {
             result += `<span class="correct">${word}</span> `;
         } else {
             result += `<span class="wrong">${word}</span> `;
