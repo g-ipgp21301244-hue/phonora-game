@@ -35,7 +35,7 @@ const scripts = {
     },
 
     // ☎️ CUSTOMER SERVICE
-    customerservice: {
+    service: {
         easy: [
             ["Hello, how can I help you?"],
             ["Please tell me your problem."],
