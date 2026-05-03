@@ -35,52 +35,42 @@
     </div>
 
     <!-- GAME -->
-    <div id="game" class="screen hidden">
+    <div id="game">
 
-        <!-- 🗣️ SPEAKING PROMPT -->
-        <h2 id="roleTitle"></h2>
-<h3 id="missionTitle"></h3>
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <span id="score">⭐ 0</span>
+        <span id="hearts">❤️❤️❤️❤️❤️❤️</span>
+    </div>
 
-<div class="progress-container">
-    <div id="progressBar"></div>
-</div>
-        <div class="prompt-box">
-            <p id="script"></p>
-        </div>
+    <!-- GAME WORLD -->
+    <div class="game-world">
 
-        <!-- 🎤 SPEAK BUTTON -->
-        <button class="mic-btn" onclick="startListening()">🎤</button>
+        <!-- SKY / CITY -->
+        <div class="background"></div>
 
-        <!-- 🎮 GAME WORLD -->
-        <div class="world">
-            <div id="character">🧍</div>
-            <div id="star">⭐</div>
-            <div id="enemy">👾</div>
-            <div id="finish">🏰</div>
-        </div>
+        <!-- CHARACTER -->
+        <div id="character">🧍</div>
 
-        <!-- HUD -->
-        <div class="hud">
-            <span id="score">⭐ 0</span>
-            <span id="hearts"></span>
-        </div>
+        <!-- OBSTACLE -->
+        <div id="obstacle">👾</div>
 
-        <!-- QUEST -->
-        <h3 id="questTitle">Quest 1</h3>
-
-        <!-- FEEDBACK -->
-        <div id="feedback"></div>
-
-        <!-- CONTROLS -->
-        <div style="margin-top:15px;">
-            <button class="btn" onclick="nextRound()">➡️ Next</button>
-            <button class="btn" onclick="goToMenu()">🏠 Menu</button>
-        </div>
+        <!-- FINISH -->
+        <div id="finish">🏰</div>
 
     </div>
 
+    <!-- PROMPT POPUP -->
+    <div id="promptBox" class="hidden">
+    <p id="script"></p>
+
+    <!-- ✅ FEEDBACK stays here -->
+    <div id="feedback"></div>
+
+    <button onclick="startListening()">🎤 Speak</button>
 </div>
 
+</div>
 <!-- TEST AUDIO (optional) -->
 <button onclick="speakWord('hello')">🔊 Test Sound</button>
 
