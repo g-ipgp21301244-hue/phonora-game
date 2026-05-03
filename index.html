@@ -6,12 +6,27 @@
 </head>
 <body>
 
-<!-- ================= MENU ================= -->
-<div id="menu">
+<!-- ================= MENU (GAME STYLE) ================= -->
+<div id="menu" class="menu-screen">
 
-    <h1>🎤 Phonora</h1>
+    <!-- Clouds -->
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
 
-    <button onclick="goToRoles()">Start Game</button>
+    <!-- Logo -->
+    <div class="logo">
+        <span class="logo-top">Phono</span>
+        <span class="logo-bottom">RA</span>
+    </div>
+
+    <!-- Character -->
+    <div class="menu-character">🧍</div>
+
+    <!-- Start Button -->
+    <button class="start-btn" onclick="goToRoles()">Start Game</button>
+
+    <!-- Ground -->
+    <div class="menu-ground"></div>
 
 </div>
 
@@ -51,6 +66,10 @@
     <div class="game-world">
 
         <div class="background"></div>
+
+        <!-- Clouds still exist in game -->
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
 
         <div id="character">🧍</div>
         <div id="obstacle">👾</div>
