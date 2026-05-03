@@ -298,3 +298,42 @@ body {
     25% { transform: translateX(-10px); }
     50% { transform: translateX(10px); }
 }
+/* 👾 MONSTER BASE */
+#obstacle {
+    position: absolute;
+    bottom: 42%;
+    left: 60%;
+    font-size: 45px;
+}
+
+/* 🟢 IDLE BOUNCE */
+.monster-idle {
+    animation: monsterBounce 1.2s infinite ease-in-out;
+}
+
+@keyframes monsterBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* 🔴 ATTACK (LUNGE FORWARD) */
+.monster-attack {
+    animation: monsterAttack 0.4s ease;
+}
+
+@keyframes monsterAttack {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(-20px) scale(1.2); }
+    100% { transform: translateX(0); }
+}
+
+/* 😄 HIT / DEFEATED REACTION */
+.monster-hit {
+    animation: monsterHit 0.4s ease;
+}
+
+@keyframes monsterHit {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.8) rotate(-10deg); }
+    100% { transform: scale(1); }
+}
