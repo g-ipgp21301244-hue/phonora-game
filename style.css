@@ -163,13 +163,7 @@ body {
     25% { transform: translateX(-10px); }
     50% { transform: translateX(10px); }
 }
-#character {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    font-size: 40px;
-    z-index: 5;
-}
+
 .correct {
     color: green;
     font-weight: bold;
@@ -209,14 +203,6 @@ body {
     background: #8B4513; /* ground */
 }
 
-#character {
-    position: absolute;
-    bottom: 120px;
-    left: 0;
-    font-size: 40px;
-    transition: left 1s linear;
-}
-
 #obstacle {
     position: absolute;
     bottom: 120px;
@@ -233,7 +219,7 @@ body {
 #promptBox {
     position: absolute;
 
-    bottom: 140px; /* 🔥 key line (moves it above lane) */
+    bottom: 160px; /* 🔥 slightly higher than before */
     left: 50%;
     transform: translateX(-50%);
 
@@ -250,7 +236,6 @@ body {
 
     z-index: 20;
 }
-
 /* smoother appearance */
 #promptBox.hidden {
     display: none;
@@ -342,18 +327,4 @@ body {
 
 #promptBox button:hover {
     background: #43a047;
-}
-#game::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-
-    background: rgba(0,0,0,0.3);
-
-    z-index: 5;
-
-    pointer-events: none; /* 🔥 IMPORTANT */
 }
