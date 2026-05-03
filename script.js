@@ -180,20 +180,10 @@ function startGame(level) {
     lives = 6;
     score = 0;
     
-    document.getElementById("roleTitle").innerText = selectedRole.toUpperCase();
-    document.getElementById("missionTitle").innerText = missions[selectedRole].title;
-
-    const character = document.getElementById("character");
-    character.innerText = characters[selectedRole];
-    character.style.left = "5%";
-
-    document.getElementById("progressBar").style.width = "0%";
-
     updateHearts();
     updateScore();
-    document.getElementById("feedback").innerHTML = "";
-    document.getElementById("promptBox").classList.remove("hidden");
-    showPrompt();
+
+    moveToObstacle(); // start flow
 }
 
 // ================= SPEECH =================
@@ -209,7 +199,13 @@ function startListening() {
 
     recognition.start();
 }
+recognition.onresult = function(event) {
+    let spokenText = event.results[0][0].transcript;
 
+    let result = highlightWords(spokenText, currentScript);
+
+    handleResult(result.mistakes === 0, result.html, result.wrongWords);
+};
 // ================= RESULT =================
 function handleResult(isCorrect, resultHTML, wrongWords) {
 
@@ -380,24 +376,4 @@ function moveForward() {
     setTimeout(() => {
         moveToObstacle();
     }, 1000);
-}
-function startGame(level) {
-    currentLevel = level;
-    currentIndex = 0;
-    lives = 6;
-    score = 0;
-
-    updateHearts();
-    updateScore();
-
-    moveToObstacle(); // 🚀 START HERE
-}
-function showPrompt() {
-    let quests = scripts[selectedRole][currentLevel];
-
-    currentScript = quests[currentIndex].join(" ");
-
-    document.getElementById("script").innerText = currentScript;
-
-    document.getElementById("promptBox").classList.remove("hidden");
 }
