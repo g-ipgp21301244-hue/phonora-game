@@ -206,7 +206,9 @@ if (recognition) {
 
         let result = highlightWords(spokenText, currentScript);
 
-        handleResult(result.mistakes === 0, result.html, result.wrongWords);
+        let allowedMistakes = 1; // 🔥 allow 1 mistake
+
+handleResult(result.mistakes <= allowedMistakes, result.html, result.wrongWords);
     };
 }
 // ================= RESULT =================
@@ -240,15 +242,30 @@ box.classList.add("hidden");
 }
 // ================= WORD CHECK =================
 function highlightWords(spoken, correct) {
-    spoken = spoken.toLowerCase().trim().split(/\s+/);
-    correct = correct.toLowerCase().trim().split(/\s+/);
+
+    // 🔥 CLEAN BOTH TEXTS
+    function clean(text) {
+        return text
+            .toLowerCase()
+            .replace(/[.,!?]/g, "") // remove punctuation
+            .trim()
+            .split(/\s+/);
+    }
+
+    let spokenWords = clean(spoken);
+    let correctWords = clean(correct);
 
     let result = "";
     let mistakes = 0;
     let wrongWords = [];
 
-    correct.forEach((word, i) => {
-        if (spoken[i] === word) {
+    correctWords.forEach((word, i) => {
+
+        // ✅ allow small flexibility
+        if (
+    spokenWords[i] && spokenWords[i].includes(word)
+    || i === correctWords.length - 1 // 🔥 ignore last word strictness
+) {
             result += `<span class="correct">${word}</span> `;
         } else {
             result += `<span class="wrong">${word}</span> `;
@@ -259,7 +276,6 @@ function highlightWords(spoken, correct) {
 
     return { html: result, mistakes, wrongWords };
 }
-
 // ================= AUDIO =================
 function speakWrongWords(words) {
     if (!words.length) return;
