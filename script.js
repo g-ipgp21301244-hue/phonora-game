@@ -449,3 +449,6 @@ function gameOver() {
     document.getElementById("script").innerText = "💀 Game Over!";
     document.getElementById("feedback").innerHTML = "Try again!";
 }
+recognition.onend = function() {
+    console.log("Speech ended");
+};
