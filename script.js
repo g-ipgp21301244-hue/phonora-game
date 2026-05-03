@@ -209,15 +209,19 @@ recognition.onresult = function(event) {
 // ================= RESULT =================
 function handleResult(isCorrect, resultHTML, wrongWords) {
 
+    // ✅ ALWAYS show feedback
+    document.getElementById("feedback").innerHTML = resultHTML;
+
     if (isCorrect) {
         score += 10;
         updateScore();
 
-        document.getElementById("promptBox").classList.add("hidden");
+        setTimeout(() => {
+            document.getElementById("promptBox").classList.add("hidden");
+            currentIndex++;
+            moveForward();
+        }, 1200); // let pupils SEE feedback first
 
-        currentIndex++;
-
-        moveForward(); // go to next obstacle
     } else {
         lives--;
         updateHearts();
@@ -225,7 +229,7 @@ function handleResult(isCorrect, resultHTML, wrongWords) {
         if (lives <= 0) {
             gameOver();
         } else {
-            speakWrongWords(wrongWords); // retry SAME quest
+            speakWrongWords(wrongWords);
         }
     }
 }
