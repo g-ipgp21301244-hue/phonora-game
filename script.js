@@ -192,6 +192,8 @@ function startGame(level) {
     updateHearts();
     updateScore();
     document.getElementById("feedback").innerHTML = "";
+    document.getElementById("promptBox").classList.remove("hidden");
+    showPrompt();
 }
 
 // ================= SPEECH =================
@@ -389,4 +391,13 @@ function startGame(level) {
     updateScore();
 
     moveToObstacle(); // 🚀 START HERE
+}
+function showPrompt() {
+    let quests = scripts[selectedRole][currentLevel];
+
+    currentScript = quests[currentIndex].join(" ");
+
+    document.getElementById("script").innerText = currentScript;
+
+    document.getElementById("promptBox").classList.remove("hidden");
 }
