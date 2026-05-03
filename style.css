@@ -337,3 +337,24 @@ body {
     50% { transform: scale(0.8) rotate(-10deg); }
     100% { transform: scale(1); }
 }
+/* 👾 MONSTER IDLE */
+#obstacle.bounce {
+    animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* ⚡ ATTACK */
+#obstacle.attack {
+    animation: attack 0.4s;
+}
+
+@keyframes attack {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    100% { transform: translateX(0); }
+}
