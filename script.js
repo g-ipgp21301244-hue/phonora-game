@@ -148,7 +148,7 @@ if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
     const spoken = event.results[0][0].transcript;
     const result = checkSpeech(spoken, currentScript);
 
-    const allowedMistakes = Math.ceil(result.total * 0.4); // 🔥 tolerance
+    const allowedMistakes = Math.ceil(result.total * 0.4);
     const isCorrect = result.mistakes <= allowedMistakes;
 
     handleResult(isCorrect, result.html, result.wrongWords);
@@ -179,6 +179,7 @@ function selectRole(role) {
 }
 
 function startGame(level) {
+    console.log("START CLICKED", selectedRole, level);
 
     if (!selectedRole) {
         alert("Please select a role first!");
