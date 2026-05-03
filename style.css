@@ -232,9 +232,10 @@ body {
 /* ===== PROMPT POPUP (VISIBLE ON GAME) ===== */
 #promptBox {
     position: absolute;
-    top: 50%;
+
+    bottom: 140px; /* 🔥 key line (moves it above lane) */
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
 
     width: 85%;
     max-width: 320px;
