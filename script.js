@@ -154,6 +154,7 @@ if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
 
 // ================= NAVIGATION =================
 function goToRoles() {
+    alert("clicked"); // test
     document.getElementById("menu").classList.add("hidden");
     document.getElementById("roles").classList.remove("hidden");
 }
