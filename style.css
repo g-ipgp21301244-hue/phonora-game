@@ -212,7 +212,7 @@ body {
     position: absolute;
 
     /* 🔥 CENTER IN SKY */
-    top: 30%;                 /* move up into sky */
+    top: 25%;                 /* move up into sky */
     left: 50%;
     transform: translate(-50%, -50%) scale(0.95);
 
