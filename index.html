@@ -46,32 +46,21 @@
     <!-- GAME WORLD -->
     <div class="game-world">
 
-        <!-- SKY / CITY -->
-        <div class="background"></div>
-        <div class="cloud cloud1"></div>
-<div class="cloud cloud2"></div>
-<div class="cloud cloud3"></div>
+    <div class="background"></div>
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="cloud cloud3"></div>
 
-        <!-- CHARACTER -->
-        <div id="character">🧍</div>
+    <div id="character">🧍</div>
+    <div id="obstacle">👾</div>
+    <div id="finish">🏰</div>
 
-        <!-- OBSTACLE -->
-        <div id="obstacle">👾</div>
-
-        <!-- FINISH -->
-        <div id="finish">🏰</div>
-
-    </div>
-
-    <!-- PROMPT POPUP -->
+    <!-- ✅ MOVE PROMPT HERE -->
     <div id="promptBox" class="hidden">
-    <p id="script"></p>
-
-    <!-- ✅ FEEDBACK stays here -->
-    <div id="feedback"></div>
-
-    <button onclick="startListening()">🎤 Speak</button>
-</div>
+        <p id="script"></p>
+        <div id="feedback"></div>
+        <button onclick="startListening()">🎤 Speak</button>
+    </div>
 
 </div>
 <!-- TEST AUDIO (optional) -->
@@ -81,3 +70,9 @@
 
 </body>
 </html>
+function selectRole(role) {
+    console.log("ROLE SELECTED:", role); // 🔥 debug
+    selectedRole = role;
+    document.getElementById("roles").classList.add("hidden");
+    document.getElementById("levels").classList.remove("hidden");
+}
