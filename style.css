@@ -556,3 +556,33 @@ body {
 #menu * {
     z-index: 20;
 }
+/* ================= FIX: MENU CLICK ISSUE ================= */
+
+/* Make sure menu layers don't block clicks */
+#menu::before,
+#menu::after {
+    z-index: 0;
+}
+
+/* Ensure ALL menu content is above background */
+#menu h1,
+.logo,
+.menu-character,
+.start-btn {
+    position: relative;
+    z-index: 5;
+}
+
+/* 🔥 FIX: START BUTTON MUST BE ABOVE EVERYTHING */
+.start-btn {
+    position: absolute;
+    bottom: 28%; /* adjust height nicely above ground */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999; /* VERY HIGH to ensure clickable */
+}
+
+/* OPTIONAL: make button easier to see */
+.start-btn:hover {
+    transform: translateX(-50%) scale(1.05);
+}
