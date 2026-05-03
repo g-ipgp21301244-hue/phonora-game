@@ -340,3 +340,11 @@ body {
     opacity: 1;
     transform: translate(-50%, 0); /* slide up */
 }
+#promptBox.show {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+}
+
+#promptBox {
+    transform: translate(-50%, 20px) scale(0.95);
+}
