@@ -11,11 +11,9 @@ body {
 /* CONTAINER */
 .container {
     width: 360px;
-    background: white;
-    border-radius: 20px;
-    padding: 20px;
+    min-height: 500px;
+    position: relative;
 }
-
 /* SCREENS */
 .screen {
     text-align: center;
