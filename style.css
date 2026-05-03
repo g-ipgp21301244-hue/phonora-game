@@ -196,3 +196,38 @@ body {
     background: linear-gradient(to right, #6a11cb, #2575fc);
     transition: width 0.3s ease;
 }
+.game-world {
+    position: relative;
+    height: 300px;
+    background: linear-gradient(#6ec6ff, #b3e5fc); /* sky */
+    overflow: hidden;
+}
+
+.background {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 120px;
+    background: #8B4513; /* ground */
+}
+
+#character {
+    position: absolute;
+    bottom: 120px;
+    left: 0;
+    font-size: 40px;
+    transition: left 1s linear;
+}
+
+#obstacle {
+    position: absolute;
+    bottom: 120px;
+    left: 60%;
+    font-size: 40px;
+}
+
+#finish {
+    position: absolute;
+    bottom: 120px;
+    right: 10px;
+}
