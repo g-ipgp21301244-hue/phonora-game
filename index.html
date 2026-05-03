@@ -6,58 +6,40 @@
 </head>
 <body>
 
-<div class="container">
+<!-- ================= MENU ================= -->
+<div id="menu">
 
-    <!-- MENU -->
-   <div id="menu">
     <h1>🎤 Phonora</h1>
-
-    <img src="character.png" class="menu-character">
 
     <button onclick="goToRoles()">Start Game</button>
 
-    <img src="cloud.png" class="cloud">
-    <img src="cloud.png" class="cloud">
 </div>
 
-    <!-- TITLE -->
-    <div class="logo">
-    <span class="logo-top">Phono</span>
-    <span class="logo-bottom">RA</span>
-</div>
 
-    <!-- CHARACTER PREVIEW -->
-    <div class="menu-character">🧍</div>
-
-    <!-- START BUTTON -->
-    <button class="start-btn" onclick="goToRoles()">Start Game</button>
-
-    <!-- GROUND -->
-    <div class="menu-ground"></div>
-
-</div>
-    <!-- ROLE -->
-    <div id="roles" class="screen hidden">
-        <h2>Select Role</h2>
-        <div class="grid">
-            <button onclick="selectRole('pilot')">✈️ Pilot</button>
-<button onclick="selectRole('news')">📰 News Anchor</button>
-<button onclick="selectRole('service')">☎️ Customer Service</button>
-<button onclick="selectRole('host')">🎤 TV Host</button>
-<button onclick="selectRole('minister')">🏛️ Minister</button>
-        </div>
+<!-- ================= ROLE ================= -->
+<div id="roles" class="screen hidden">
+    <h2>Select Role</h2>
+    <div class="grid">
+        <button onclick="selectRole('pilot')">✈️ Pilot</button>
+        <button onclick="selectRole('news')">📰 News Anchor</button>
+        <button onclick="selectRole('service')">☎️ Customer Service</button>
+        <button onclick="selectRole('host')">🎤 TV Host</button>
+        <button onclick="selectRole('minister')">🏛️ Minister</button>
     </div>
+</div>
 
-    <!-- LEVEL -->
-    <div id="levels" class="screen hidden">
-        <h2>Select Difficulty</h2>
-        <button onclick="startGame('easy')">Easy</button>
-        <button onclick="startGame('medium')">Medium</button>
-        <button onclick="startGame('hard')">Hard</button>
-    </div>
 
-    <!-- GAME -->
-    <div id="game" class="hidden">
+<!-- ================= LEVEL ================= -->
+<div id="levels" class="screen hidden">
+    <h2>Select Difficulty</h2>
+    <button onclick="startGame('easy')">Easy</button>
+    <button onclick="startGame('medium')">Medium</button>
+    <button onclick="startGame('hard')">Hard</button>
+</div>
+
+
+<!-- ================= GAME ================= -->
+<div id="game" class="hidden">
 
     <!-- TOP BAR -->
     <div class="top-bar">
@@ -68,27 +50,24 @@
     <!-- GAME WORLD -->
     <div class="game-world">
 
-    <div class="background"></div>
-    <div class="cloud cloud1"></div>
-    <div class="cloud cloud2"></div>
-    <div class="cloud cloud3"></div>
+        <div class="background"></div>
 
-    <div id="character">🧍</div>
-    <div id="obstacle">👾</div>
-    <div id="finish">🏰</div>
+        <div id="character">🧍</div>
+        <div id="obstacle">👾</div>
+        <div id="finish">🏰</div>
         <div id="star">⭐</div>
-<div id="lightning">⚡</div>
+        <div id="lightning">⚡</div>
 
-    <!-- ✅ MOVE PROMPT HERE -->
-    <div id="promptBox" class="hidden">
-        <p id="script"></p>
-        <div id="feedback"></div>
-        <button onclick="startListening()">🎤 Speak</button>
+        <!-- PROMPT -->
+        <div id="promptBox" class="hidden">
+            <p id="script"></p>
+            <div id="feedback"></div>
+            <button onclick="startListening()">🎤 Speak</button>
+        </div>
+
     </div>
 
 </div>
-<!-- TEST AUDIO (optional) -->
-<button onclick="speakWord('hello')">🔊 Test Sound</button>
 
 <script src="script.js"></script>
 
