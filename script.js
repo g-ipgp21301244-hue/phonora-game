@@ -109,7 +109,6 @@ function showPrompt() {
 
     box.classList.remove("hidden");
 
-    // 🔥 FORCE animation trigger
     box.classList.remove("show");
     void box.offsetWidth; 
     box.classList.add("show");
@@ -280,5 +279,3 @@ function speakWrongWords(words) {
 
     next();
 }
-function showPrompt() {
-    console.log("SHOW PROMPT RUNNING"); // 👈 add this
