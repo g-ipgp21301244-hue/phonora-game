@@ -210,7 +210,7 @@ if (recognition) {
     let totalWords = currentScript.split(" ").length;
 
     // ✅ make it MUCH LESS STRICT (60% tolerance)
-    let allowedMistakes = Math.ceil(totalWords * 0.75);
+    let allowedMistakes = Math.ceil(totalWords * 0.8);
 
     let isCorrect = result.mistakes <= allowedMistakes;
 
@@ -261,6 +261,21 @@ function highlightWords(spoken, correct) {
             .split(/\s+/);
     }
 
+    function similarity(a, b) {
+        if (a === b) return 1;
+        if (a.includes(b) || b.includes(a)) return 0.8;
+
+        // simple fuzzy check
+        let matches = 0;
+        for (let i = 0; i < Math.min(a.length, b.length); i++) {
+            if (a[i] === b[i]) matches++;
+        }
+        return matches / Math.max(a.length, b.length);
+    }
+
+    // ✅ words we DON'T punish
+    const easyWords = ["hello", "hi", "you", "i", "is", "the", "a", "an", "can"];
+
     let spokenWords = clean(spoken);
     let correctWords = clean(correct);
 
@@ -268,19 +283,21 @@ function highlightWords(spoken, correct) {
     let mistakes = 0;
     let wrongWords = [];
 
-    let usedIndexes = [];
-
     correctWords.forEach(word => {
 
-        // ✅ find CLOSE match (not exact rigid)
-        let foundIndex = spokenWords.findIndex((w, i) => {
-            return !usedIndexes.includes(i) &&
-                   (w === word || w.includes(word) || word.includes(w));
+        let bestScore = 0;
+
+        spokenWords.forEach(w => {
+            let score = similarity(w, word);
+            if (score > bestScore) bestScore = score;
         });
 
-        if (foundIndex !== -1) {
+        // ✅ VERY LENIENT RULES
+        if (bestScore >= 0.5) {
             result += `<span class="correct">${word}</span> `;
-            usedIndexes.push(foundIndex);
+        } else if (easyWords.includes(word)) {
+            // ✅ DON'T punish simple words
+            result += `<span class="correct">${word}</span> `;
         } else {
             result += `<span class="wrong">${word}</span> `;
             mistakes++;
