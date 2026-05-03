@@ -240,14 +240,18 @@ setTimeout(() => {
         }, 1200); // let pupils SEE feedback first
 
     } else {
-        lives--;
-        updateHearts();
+    lives--;
+    updateHearts();
 
-        if (lives <= 0) {
-            gameOver();
-        } else {
-            speakWrongWords(wrongWords);
-        }
+    if (lives <= 0) {
+        gameOver();
+    } else {
+        speakWrongWords(wrongWords);
+
+        // ✅ IMPORTANT: allow retry after feedback
+        setTimeout(() => {
+            startListening(); // 🎤 listen again automatically
+        }, 1500); // wait so pupil hears feedback first
     }
 }
 // ================= WORD CHECK =================
