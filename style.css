@@ -586,3 +586,7 @@ body {
 .start-btn:hover {
     transform: translateX(-50%) scale(1.05);
 }
+#menu::before,
+#menu::after {
+    pointer-events: none;
+}
