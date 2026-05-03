@@ -59,7 +59,12 @@ function goToRoles() {
 }
 
 function selectRole(role) {
+    if (!scripts[role]) {
+        role = "service"; // fallback
+    }
+
     selectedRole = role;
+
     document.getElementById("roles").classList.add("hidden");
     document.getElementById("levels").classList.remove("hidden");
 }
