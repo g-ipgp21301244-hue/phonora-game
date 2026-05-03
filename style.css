@@ -454,3 +454,43 @@ body {
 .menu-sky .cloud {
     position: absolute;
 }
+.logo {
+    position: absolute;
+    top: 18%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-weight: 900;
+}
+
+/* TOP TEXT */
+.logo-top {
+    display: block;
+    font-size: 70px;
+    color: #ffffff;
+
+    text-shadow:
+        0 5px 0 #2c3e50,
+        0 10px 20px rgba(0,0,0,0.3);
+}
+
+/* BOTTOM TEXT (COLOR POP) */
+.logo-bottom {
+    display: block;
+    font-size: 80px;
+    color: #ff4d6d;
+
+    text-shadow:
+        0 5px 0 #c9184a,
+        0 10px 20px rgba(0,0,0,0.3);
+}
+
+/* FLOAT ANIMATION */
+.logo {
+    animation: floatLogo 3s ease-in-out infinite;
+}
+
+@keyframes floatLogo {
+    0%,100% { transform: translate(-50%, 0); }
+    50% { transform: translate(-50%, -12px); }
+}
