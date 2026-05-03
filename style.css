@@ -249,3 +249,54 @@ body {
 #promptBox.hidden {
     display: none;
 }
+/* ===== CLOUDS ===== */
+.cloud {
+    position: absolute;
+    top: 30px;
+    width: 60px;
+    height: 30px;
+    background: white;
+    border-radius: 50px;
+    opacity: 0.9;
+}
+
+/* extra bumps */
+.cloud::before,
+.cloud::after {
+    content: "";
+    position: absolute;
+    background: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    top: -10px;
+}
+
+.cloud::before {
+    left: 10px;
+}
+
+.cloud::after {
+    right: 10px;
+}
+
+/* animation */
+@keyframes moveCloud {
+    from { left: -80px; }
+    to { left: 100%; }
+}
+
+.cloud1 {
+    animation: moveCloud 20s linear infinite;
+    top: 20px;
+}
+
+.cloud2 {
+    animation: moveCloud 25s linear infinite;
+    top: 60px;
+}
+
+.cloud3 {
+    animation: moveCloud 30s linear infinite;
+    top: 40px;
+}
