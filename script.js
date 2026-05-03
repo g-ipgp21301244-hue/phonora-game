@@ -109,6 +109,7 @@ function showPrompt() {
     document.getElementById("feedback").innerHTML = "";
 
     box.classList.remove("hidden");
+    box.classList.add("show");
 }
 
 // ================= SPEECH CONTROL =================
