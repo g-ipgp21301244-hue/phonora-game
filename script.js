@@ -202,14 +202,20 @@ function startListening() {
 }
 if (recognition) {
     recognition.onresult = function(event) {
-        let spokenText = event.results[0][0].transcript;
+    let spokenText = event.results[0][0].transcript;
 
-        let result = highlightWords(spokenText, currentScript);
+    let result = highlightWords(spokenText, currentScript);
 
-        let allowedMistakes = Math.ceil(correct.split(" ").length * 0.4);
+    // ✅ FIX: use currentScript, not "correct"
+    let totalWords = currentScript.split(" ").length;
 
-handleResult(result.mistakes <= allowedMistakes, result.html, result.wrongWords);
-    };
+    // ✅ make it MUCH LESS STRICT (60% tolerance)
+    let allowedMistakes = Math.ceil(totalWords * 0.75);
+
+    let isCorrect = result.mistakes <= allowedMistakes;
+
+    handleResult(isCorrect, result.html, result.wrongWords);
+};
 }
 // ================= RESULT =================
 function handleResult(isCorrect, resultHTML, wrongWords) {
@@ -223,8 +229,12 @@ function handleResult(isCorrect, resultHTML, wrongWords) {
 
         setTimeout(() => {
             const box = document.getElementById("promptBox");
-box.classList.remove("show");
-box.classList.add("hidden");
+setTimeout(() => {
+    box.classList.remove("show");
+    setTimeout(() => {
+        box.classList.add("hidden");
+    }, 300);
+}, 900);
             currentIndex++;
             moveForward();
         }, 1200); // let pupils SEE feedback first
@@ -258,11 +268,19 @@ function highlightWords(spoken, correct) {
     let mistakes = 0;
     let wrongWords = [];
 
+    let usedIndexes = [];
+
     correctWords.forEach(word => {
 
-        // ✅ check if word exists ANYWHERE in spoken input
-        if (spokenWords.includes(word)) {
+        // ✅ find CLOSE match (not exact rigid)
+        let foundIndex = spokenWords.findIndex((w, i) => {
+            return !usedIndexes.includes(i) &&
+                   (w === word || w.includes(word) || word.includes(w));
+        });
+
+        if (foundIndex !== -1) {
             result += `<span class="correct">${word}</span> `;
+            usedIndexes.push(foundIndex);
         } else {
             result += `<span class="wrong">${word}</span> `;
             mistakes++;
