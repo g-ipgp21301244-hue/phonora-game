@@ -214,3 +214,87 @@ body {
     0% { transform: scale(1); opacity: 1; }
     100% { transform: scale(0); opacity: 0; }
 }
+/* 🌆 CITY BACKGROUND */
+.game-world {
+    background: linear-gradient(#87CEEB 60%, #8B4513 60%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* simple buildings */
+.game-world::after {
+    content: "🏢 🏫 🏬 🏠 🏢 🏫";
+    position: absolute;
+    bottom: 40%;
+    left: 0;
+    width: 200%;
+    font-size: 60px;
+    animation: cityMove 20s linear infinite;
+}
+
+@keyframes cityMove {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+/* 🚶 WALKING */
+.walk {
+    animation: walkForward 2s linear forwards;
+}
+
+@keyframes walkForward {
+    from { left: 5%; }
+    to { left: 60%; }
+}
+
+/* ⭐ STAR */
+#star {
+    position: absolute;
+    bottom: 45%;
+    left: 65%;
+    font-size: 35px;
+    opacity: 0;
+}
+
+.show-star {
+    opacity: 1;
+}
+
+/* 🦘 JUMP TO STAR */
+.jump-star {
+    animation: jumpStar 0.8s ease forwards;
+}
+
+@keyframes jumpStar {
+    0% { transform: translate(0, 0); }
+    50% { transform: translate(40px, -80px); }
+    100% { transform: translate(80px, 0); }
+}
+
+/* ⚡ LIGHTNING ATTACK */
+#lightning {
+    position: absolute;
+    bottom: 50%;
+    left: 60%;
+    font-size: 40px;
+    opacity: 0;
+}
+
+.show-lightning {
+    animation: lightningStrike 0.5s ease;
+}
+
+@keyframes lightningStrike {
+    0% { opacity: 1; transform: translateY(-100px); }
+    100% { opacity: 0; transform: translateY(0); }
+}
+
+/* 💥 HIT REACTION */
+.hit {
+    animation: hitShake 0.4s;
+}
+
+@keyframes hitShake {
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+}
