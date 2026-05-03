@@ -184,7 +184,7 @@ function startGame(level) {
     updateHearts();
     updateScore();
 
-    moveToObstacle(); // start flow
+    showPrompt(); // ✅ FORCE FIRST PROMPT
 }
 
 // ================= SPEECH =================
@@ -210,7 +210,7 @@ if (recognition) {
     let totalWords = currentScript.split(" ").length;
 
     // ✅ make it MUCH LESS STRICT (60% tolerance)
-    let allowedMistakes = Math.ceil(totalWords * 0.8);
+    let allowedMistakes = Math.ceil(correct.split(" ").length * 0.4);
 
     let isCorrect = result.mistakes <= allowedMistakes;
 
@@ -422,18 +422,19 @@ function moveToObstacle() {
 function showPrompt() {
     const box = document.getElementById("promptBox");
 
-    box.classList.remove("hidden");
-    box.classList.remove("show"); // reset animation
-
-    // small delay so animation triggers
-    setTimeout(() => {
-        box.classList.add("show");
-    }, 50);
-
     let quests = scripts[selectedRole][currentLevel];
     currentScript = quests[currentIndex].join(" ");
 
     document.getElementById("script").innerText = currentScript;
+    document.getElementById("feedback").innerHTML = "";
+
+    box.classList.remove("hidden");
+    box.classList.remove("show");
+
+    // force reflow (important for animation)
+    void box.offsetWidth;
+
+    box.classList.add("show");
 }
 
 function moveForward() {
