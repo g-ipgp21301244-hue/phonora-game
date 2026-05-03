@@ -354,6 +354,7 @@ const sounds = {
 };
 function moveToObstacle() {
     document.getElementById("character").style.left = "55%";
+    document.getElementById("promptBox").classList.remove("hidden");
 
     setTimeout(() => {
         showPrompt();
