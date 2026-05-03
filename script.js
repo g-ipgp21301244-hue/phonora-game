@@ -210,7 +210,7 @@ if (recognition) {
     let totalWords = currentScript.split(" ").length;
 
     // ✅ make it MUCH LESS STRICT (60% tolerance)
-    let allowedMistakes = Math.ceil(correct.split(" ").length * 0.4);
+    let allowedMistakes = Math.ceil(currentScript.split(" ").length * 0.4);
 
     let isCorrect = result.mistakes <= allowedMistakes;
 
