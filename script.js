@@ -297,13 +297,37 @@ function handleResult(isCorrect, html, wrongWords) {
         updateScore();
 
         speakCorrect();
+        const char = document.getElementById("character");
+const star = document.getElementById("star");
 
+star.classList.add("show-star");
+
+char.classList.remove("jump-star");
+void char.offsetWidth;
+char.classList.add("jump-star");
+
+// remove star after animation
+setTimeout(() => {
+    star.classList.remove("show-star");
+}, 800);
         setTimeout(() => {
             currentIndex++;
             moveForward();
         }, 1500);
 
     } else {
+        const char = document.getElementById("character");
+    const lightning = document.getElementById("lightning");
+
+    lightning.classList.remove("show-lightning");
+    void lightning.offsetWidth;
+    lightning.classList.add("show-lightning");
+
+    char.classList.add("hit");
+
+    setTimeout(() => {
+        char.classList.remove("hit");
+    }, 400);
         lives--;
         updateHearts();
 
