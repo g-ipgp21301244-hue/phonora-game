@@ -283,6 +283,3 @@ function speakWrongWords(words) {
 }
 function showPrompt() {
     console.log("SHOW PROMPT RUNNING"); // 👈 add this
-if (!scripts[selectedRole]) {
-    selectedRole = "service";
-}
