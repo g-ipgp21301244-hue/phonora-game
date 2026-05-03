@@ -24,8 +24,7 @@ const scripts = {
             ["Good day, thank you for contacting customer service"]
         ]
     }
-    // 👉 you can paste back other roles later (this is simplified clean base)
-};
+}; //
 
 // ================= SPEECH =================
 let recognition = null;
