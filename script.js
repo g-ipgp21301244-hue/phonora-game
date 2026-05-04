@@ -1,4 +1,3 @@
-alert("JS LOADED");
 // ================= GAME STATE =================
 let lives = 6;
 let score = 0;
@@ -139,29 +138,40 @@ const scripts = {
 // ================= SPEECH =================
 let recognition = null;
 
-if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
-    recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    recognition.lang = "en-GB";
-    recognition.continuous = false;
-    recognition.interimResults = false;
+try {
+    if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
+        recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 
-    recognition.onresult = function(event) {
-    const spoken = event.results[0][0].transcript;
-    const result = checkSpeech(spoken, currentScript);
+        recognition.lang = "en-GB";
+        recognition.continuous = false;
+        recognition.interimResults = false;
 
-    const allowedMistakes = Math.ceil(result.total * 0.4);
-    const isCorrect = result.mistakes <= allowedMistakes;
+        recognition.onresult = function(event) {
+            const spoken = event.results[0][0].transcript;
+            console.log("USER SAID:", spoken);
 
-    handleResult(isCorrect, result.html, result.wrongWords);
-};
+            const result = checkSpeech(spoken, currentScript);
 
-    recognition.onend = function() {
-        console.log("Speech ended");
-    };
-} else {
-    alert("Speech recognition not supported 😢");
+            const allowedMistakes = Math.ceil(result.total * 0.4);
+            const isCorrect = result.mistakes <= allowedMistakes;
+
+            handleResult(isCorrect, result.html, result.wrongWords);
+        };
+
+        recognition.onerror = function(e) {
+            console.log("Speech error:", e.error);
+        };
+
+        recognition.onend = function() {
+            console.log("Speech ended");
+        };
+
+    } else {
+        console.warn("Speech Recognition not supported");
+    }
+} catch (e) {
+    console.error("Speech init failed:", e);
 }
-
 function selectRole(role) {
     console.log("ROLE SELECTED:", role);
     if (!scripts[role]) {
@@ -214,10 +224,11 @@ function showPrompt() {
 
     let quests = scripts[selectedRole][currentLevel];
 
-    if (!quests || !quests[currentIndex]) {
-        console.error("No script found");
-        return;
-    }
+   if (!quests || !quests[currentIndex]) {
+    console.error("No script found", selectedRole, currentLevel, currentIndex);
+    showEndScreen();
+    return;
+}
 
     currentScript = quests[currentIndex].join(" ");
 
@@ -232,11 +243,18 @@ function showPrompt() {
 }
 // ================= SPEECH CONTROL =================
 function startListening() {
-    if (!recognition) return;
+    if (!recognition) {
+        alert("Speech not supported in this browser");
+        return;
+    }
 
-    try { recognition.stop(); } catch(e) {}
-
-    recognition.start();
+    try {
+        recognition.stop();
+        recognition.start();
+    } catch(e) {
+        console.log("Restarting recognition...");
+        recognition.start();
+    }
 }
 
 // ================= CHECK LOGIC =================
@@ -337,7 +355,7 @@ setTimeout(() => {
 let monster = document.getElementById("obstacle");
 monster.classList.remove("attack");
 void monster.offsetWidth;
-monster.classList.add("attack");
+monster.classList.add("attack"); // keep this (matches CSS)
 
 speakWrongWords(wrongWords);
 
@@ -481,16 +499,18 @@ function gameOver() {
     `;
 }
 document.addEventListener("DOMContentLoaded", function () {
+
+    console.log("✅ DOM READY");
+
     const startBtn = document.querySelector(".start-btn");
 
     if (startBtn) {
         startBtn.addEventListener("click", function () {
-            console.log("BUTTON CLICKED ✅");
+            console.log("START CLICKED");
 
             document.getElementById("menu").classList.add("hidden");
             document.getElementById("roles").classList.remove("hidden");
         });
-    } else {
-        console.log("❌ Button not found");
     }
+
 });
