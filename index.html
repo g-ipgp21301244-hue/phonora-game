@@ -1,94 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Phonora Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ================= MENU (GAME STYLE) ================= -->
-<div id="menu" class="menu-screen">
-
-    <!-- Clouds -->
-    <div class="cloud cloud1"></div>
-    <div class="cloud cloud2"></div>
-
-    <!-- Logo -->
-    <div class="logo">
-        <span class="logo-top">Phono</span>
-        <span class="logo-bottom">RA</span>
-    </div>
-
-    <!-- Character -->
-    <div class="menu-character">🧍</div>
-
-    <!-- Start Button -->
+<!-- ================= MENU ================= -->
+<div id="menu">
     <button class="start-btn" onclick="goToRoles()">Start Game</button>
-
-    <!-- Ground -->
-    <div class="menu-ground"></div>
-
 </div>
 
-
-<!-- ================= ROLE ================= -->
-<div id="roles" class="screen hidden">
+<!-- ================= ROLE SELECTION ================= -->
+<div id="roles" class="hidden">
     <h2>Select Role</h2>
-    <div class="grid">
-        <button onclick="selectRole('pilot')">✈️ Pilot</button>
-<button onclick="selectRole('service')">☎️ Service</button>
-<button onclick="selectRole('anchor')">📰 News</button>
-<button onclick="selectRole('host')">🎤 Host</button>
-<button onclick="selectRole('minister')">🏛️ Minister</button>
-    </div>
+
+    <button onclick="selectRole('pilot')">✈️ Pilot</button>
+    <button onclick="selectRole('service')">☎️ Service</button>
+    <button onclick="selectRole('anchor')">📰 Anchor</button>
+    <button onclick="selectRole('host')">🎤 Host</button>
+    <button onclick="selectRole('minister')">🏛️ Minister</button>
 </div>
 
+<!-- ================= LEVEL SELECTION ================= -->
+<div id="levels" class="hidden">
+    <h2>Select Level</h2>
 
-<!-- ================= LEVEL ================= -->
-<div id="levels" class="screen hidden">
-    <h2>Select Difficulty</h2>
     <button onclick="startGame('easy')">Easy</button>
-<button onclick="startGame('medium')">Medium</button>
-<button onclick="startGame('hard')">Hard</button>
+    <button onclick="startGame('medium')">Medium</button>
+    <button onclick="startGame('hard')">Hard</button>
 </div>
-
 
 <!-- ================= GAME ================= -->
 <div id="game" class="hidden">
 
     <!-- TOP BAR -->
     <div class="top-bar">
-        <span id="score">⭐ 0</span>
-        <span id="hearts">❤️❤️❤️❤️❤️❤️</span>
+        <div id="hearts"></div>
+        <div id="score"></div>
     </div>
 
     <!-- GAME WORLD -->
     <div class="game-world">
 
-        <div class="background"></div>
-
-        <!-- Clouds still exist in game -->
-        <div class="cloud cloud1"></div>
-        <div class="cloud cloud2"></div>
-
+        <!-- CHARACTER -->
         <div id="character">🧍</div>
+
+        <!-- MONSTER -->
         <div id="obstacle">👾</div>
-        <div id="finish">🏰</div>
+
+        <!-- STAR -->
         <div id="star">⭐</div>
+
+        <!-- LIGHTNING -->
         <div id="lightning">⚡</div>
 
-        <!-- PROMPT -->
+        <!-- PROMPT BOX -->
         <div id="promptBox" class="hidden">
-            <p id="script"></p>
+            <div id="script"></div>
             <div id="feedback"></div>
-            <button onclick="startListening()">🎤 Speak</button>
         </div>
 
     </div>
-
 </div>
 
-<script src="./script.js"></script>
+<!-- JS -->
+<script src="script.js"></script>
 
 </body>
 </html>
