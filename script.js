@@ -507,16 +507,6 @@ function gameOver() {
         <button onclick="goToMenu()">Back to Menu</button>
     `;
 }
-document.addEventListener("DOMContentLoaded", function () {
-    const startBtn = document.querySelector(".start-btn");
-
-    startBtn.onclick = function () {
-        alert("CLICK WORKED"); // 🔥 MUST appear
-
-        document.getElementById("menu").classList.add("hidden");
-        document.getElementById("roles").classList.remove("hidden");
-    };
-});
 function goToRoles() {
     console.log("START GAME CLICKED ✅");
 
