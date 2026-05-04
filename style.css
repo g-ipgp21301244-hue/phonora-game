@@ -590,3 +590,6 @@ body {
 #menu::after {
     pointer-events: none;
 }
+.hidden {
+    display: none;
+}
