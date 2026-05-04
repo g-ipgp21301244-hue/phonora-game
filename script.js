@@ -499,18 +499,18 @@ function gameOver() {
     `;
 }
 document.addEventListener("DOMContentLoaded", function () {
-
-    console.log("✅ DOM READY");
-
     const startBtn = document.querySelector(".start-btn");
 
-    if (startBtn) {
-        startBtn.addEventListener("click", function () {
-            console.log("START CLICKED");
+    startBtn.onclick = function () {
+        alert("CLICK WORKED"); // 🔥 MUST appear
 
-            document.getElementById("menu").classList.add("hidden");
-            document.getElementById("roles").classList.remove("hidden");
-        });
-    }
-
+        document.getElementById("menu").classList.add("hidden");
+        document.getElementById("roles").classList.remove("hidden");
+    };
 });
+function goToRoles() {
+    console.log("START GAME CLICKED ✅");
+
+    document.getElementById("menu").classList.add("hidden");
+    document.getElementById("roles").classList.remove("hidden");
+}
