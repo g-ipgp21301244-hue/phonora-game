@@ -488,3 +488,6 @@ window.goToRoles = function () {
     document.getElementById("menu").classList.add("hidden");
     document.getElementById("roles").classList.remove("hidden");
 };
+function goToRoles() {
+    alert("CLICK WORKED");
+}
