@@ -219,12 +219,6 @@ function moveToObstacle() {
 
     setTimeout(() => {
         showPrompt();
-
-        // 🔥 AUTO START SPEECH (IMPORTANT FIX)
-        setTimeout(() => {
-            startListening();
-        }, 500);
-
     }, 800);
 }
 // ================= PROMPT =================
