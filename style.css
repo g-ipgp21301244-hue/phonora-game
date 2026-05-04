@@ -363,300 +363,34 @@ body {
 #character {
     transition: left 0.6s ease;
 }
-/* ================= MENU CLEAN FIX ================= */
+/* ================= SIMPLE MENU ================= */
 
 #menu {
-    position: relative;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
-    overflow: hidden;
+    background: #87CEEB; /* simple sky */
 
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    background: linear-gradient(to top, #8B4513 35%, #87CEEB 35%);
 }
 
-/* SKY */
-#menu::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 65%;
-    background: #87CEEB;
-    z-index: 0;
-    pointer-events: none;
-}
-
-/* GROUND */
-#menu::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 35%;
-    background: #8B4513;
-    z-index: 0;
-    pointer-events: none;
-}
-
-/* ================= LOGO ================= */
-.logo {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-
-    font-size: 60px;
-    font-weight: bold;
-    color: white;
-
-    text-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    z-index: 5;
-}
-
-/* FLOAT */
-@keyframes floatLogo {
-    0%,100% { transform: translate(-50%, 0); }
-    50% { transform: translate(-50%, -10px); }
-}
-
-.logo {
-    animation: floatLogo 3s ease-in-out infinite;
-}
-
-/* ================= CHARACTER ================= */
-.menu-character {
-    position: absolute;
-    top: 48%;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 35px;
-    z-index: 5;
-}
-
-/* ================= START BUTTON ================= */
+/* START BUTTON ONLY */
 .start-btn {
-    position: absolute;
-    top: 60%;
-    left: 50%;
-    transform: translateX(-50%);
-
-    padding: 18px 50px;
-    font-size: 22px;
-    border-radius: 40px;
-
-    background: linear-gradient(180deg, #ff9966, #ff5e62);
-    color: white;
+    padding: 20px 50px;
+    font-size: 24px;
     border: none;
+    border-radius: 12px;
+
+    background: #ff6b6b;
+    color: white;
     cursor: pointer;
 
-    z-index: 10;
-
-    box-shadow: 
-        0 6px 0 #c94b4b,
-        0 10px 20px rgba(0,0,0,0.25);
-
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 4px 0 #c94b4b;
 }
 
-.start-btn:hover {
-    transform: translateX(-50%) scale(1.05);
-}
-
+/* simple click effect */
 .start-btn:active {
-    transform: translateX(-50%) scale(0.98);
-    box-shadow: 
-        0 2px 0 #c94b4b,
-        0 5px 10px rgba(0,0,0,0.2);
-}
-
-/* ================= CLOUDS ================= */
-.cloud {
-    position: absolute;
-    width: 80px;
-    height: 40px;
-    background: white;
-    border-radius: 50px;
-    opacity: 0.8;
-    z-index: 2;
-}
-
-.cloud::before,
-.cloud::after {
-    content: "";
-    position: absolute;
-    background: white;
-    border-radius: 50%;
-}
-
-.cloud::before {
-    width: 40px;
-    height: 40px;
-    top: -15px;
-    left: 10px;
-}
-
-.cloud::after {
-    width: 30px;
-    height: 30px;
-    top: -10px;
-    right: 10px;
-}
-
-/* CLOUD POSITIONS */
-.cloud1 {
-    top: 60px;
-    left: 20%;
-}
-
-.cloud2 {
-    top: 100px;
-    right: 20%;
-}
-/* START BUTTON */
-.start-btn {
-    position: absolute;
-    bottom: 28%;
-    left: 50%;
-    
-    transform: translateX(-50%);
-    transform-origin: center;
-
-    z-index: 9999;
-
-    padding: 18px 50px;
-    font-size: 22px;
-    border-radius: 40px;
-
-    background: linear-gradient(180deg, #ff9966, #ff5e62);
-    color: white;
-    border: none;
-    cursor: pointer;
-
-    box-shadow: 
-        0 6px 0 #c94b4b,
-        0 10px 20px rgba(0,0,0,0.25);
-
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-/* ✅ FIXED HOVER (NO translateX reset!) */
-.start-btn:hover {
-    transform: translateX(-50%) scale(1.05);
-}
-
-/* ✅ FIXED CLICK */
-.start-btn:active {
-    transform: translateX(-50%) scale(0.98);
-    box-shadow: 
-        0 2px 0 #c94b4b,
-        0 5px 10px rgba(0,0,0,0.2);
-}
-/* CLOUDS reuse */
-.menu-sky .cloud {
-    position: absolute;
-}
-.logo {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    font-size: 50px;
-    font-weight: bold;
-    color: white;
-
-    text-shadow: 0 5px 15px rgba(0,0,0,0.3);
-
-    z-index: 5;
-    pointer-events: none;
-}
-/* FLOAT ANIMATION */
-.logo {
-    animation: floatLogo 3s ease-in-out infinite;
-}
-
-@keyframes floatLogo {
-    0%,100% { transform: translate(-50%, 0); }
-    50% { transform: translate(-50%, -12px); }
-}
-.logo {
-    pointer-events: none;
-}
-.menu-sky::after {
-    content: "";
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    
-    width: 300px;
-    height: 300px;
-    
-    background: radial-gradient(circle, rgba(255,255,150,0.6), transparent 70%);
-    
-    border-radius: 50%;
-}
-.hidden {
-    display: none;
-}
-
-#menu {
-    z-index: 10;
-}
-/* ================= FIX: MENU CLICK ISSUE ================= */
-
-/* Make sure menu layers don't block clicks */
-#menu::before,
-#menu::after {
-    z-index: 0;
-}
-
-/* Ensure ALL menu content is above background */
-#menu h1,
-.logo,
-.menu-character,
-.start-btn {
-    position: relative;
-    z-index: 5;
-}
-
-/* 🔥 FIX: START BUTTON MUST BE ABOVE EVERYTHING */
-.start-btn {
-    position: absolute;
-    bottom: 28%; /* adjust height nicely above ground */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 999; /* VERY HIGH to ensure clickable */
-}
-
-/* OPTIONAL: make button easier to see */
-.start-btn:hover {
-    transform: translateX(-50%) scale(1.05);
-}
-#menu::before,
-#menu::after {
-    pointer-events: none;
-}
-.hidden {
-    display: none;
-}
-.start-btn {
-    pointer-events: auto;
-}
-
-#menu {
-    pointer-events: none;
-}
-
-#menu * {
-    pointer-events: auto;
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #c94b4b;
 }
