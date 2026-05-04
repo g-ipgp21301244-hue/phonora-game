@@ -162,11 +162,6 @@ if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
     alert("Speech recognition not supported 😢");
 }
 
-// ================= NAVIGATION =================
-function goToRoles() {
-    document.getElementById("menu").classList.add("hidden");
-    document.getElementById("roles").classList.remove("hidden");
-}
 function selectRole(role) {
     if (!scripts[role]) {
         role = "service"; // fallback
@@ -487,13 +482,14 @@ function gameOver() {
 document.addEventListener("DOMContentLoaded", function () {
     const startBtn = document.querySelector(".start-btn");
 
-    if (startBtn) {
-        startBtn.addEventListener("click", function () {
-            console.log("BUTTON CLICKED ✅");
+    startBtn.addEventListener("click", function () {
+        console.log("BUTTON CLICKED ✅");
 
-            document.getElementById("menu").classList.add("hidden");
-            document.getElementById("roles").classList.remove("hidden");
-        });
+        // 🔥 THIS PART WAS MISSING
+        document.getElementById("menu").classList.add("hidden");
+        document.getElementById("roles").classList.remove("hidden");
+    });
+});
     } else {
         console.log("❌ Button not found");
     }
