@@ -163,10 +163,10 @@ if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
 
 // ================= NAVIGATION =================
 function goToRoles() {
+    console.log("BUTTON CLICKED"); // 👈 ADD THIS
     document.getElementById("menu").classList.add("hidden");
     document.getElementById("roles").classList.remove("hidden");
 }
-
 function selectRole(role) {
     if (!scripts[role]) {
         role = "service"; // fallback
@@ -484,3 +484,7 @@ function gameOver() {
         <button onclick="goToMenu()">Back to Menu</button>
     `;
 }
+window.goToRoles = function () {
+    document.getElementById("menu").classList.add("hidden");
+    document.getElementById("roles").classList.remove("hidden");
+};
