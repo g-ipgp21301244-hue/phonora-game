@@ -488,3 +488,17 @@ window.goToRoles = function () {
     document.getElementById("menu").classList.add("hidden");
     document.getElementById("roles").classList.remove("hidden");
 };
+document.addEventListener("DOMContentLoaded", function () {
+    const startBtn = document.querySelector(".start-btn");
+
+    if (startBtn) {
+        startBtn.addEventListener("click", function () {
+            console.log("BUTTON CLICKED ✅");
+
+            document.getElementById("menu").classList.add("hidden");
+            document.getElementById("roles").classList.remove("hidden");
+        });
+    } else {
+        console.log("❌ Button not found");
+    }
+});
