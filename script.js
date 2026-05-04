@@ -163,6 +163,7 @@ if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
 }
 
 function selectRole(role) {
+    console.log("ROLE SELECTED:", role);
     if (!scripts[role]) {
         role = "service"; // fallback
     }
