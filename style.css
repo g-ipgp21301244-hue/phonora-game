@@ -363,20 +363,23 @@ body {
 #character {
     transition: left 0.6s ease;
 }
-/* ================= MENU GAME STYLE ================= */
+/* ================= MENU CLEAN FIX ================= */
 
 #menu {
     position: relative;
     width: 100%;
     height: 100vh;
-    background: linear-gradient(to top, #8B4513 35%, #87CEEB 35%);
+    overflow: hidden;
+
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+
+    background: linear-gradient(to top, #8B4513 35%, #87CEEB 35%);
 }
 
-/* ================= SKY ================= */
+/* SKY */
 #menu::before {
     content: "";
     position: absolute;
@@ -385,9 +388,10 @@ body {
     height: 65%;
     background: #87CEEB;
     z-index: 0;
+    pointer-events: none;
 }
 
-/* ================= GROUND ================= */
+/* GROUND */
 #menu::after {
     content: "";
     position: absolute;
@@ -396,67 +400,123 @@ body {
     height: 35%;
     background: #8B4513;
     z-index: 0;
+    pointer-events: none;
 }
 
-/* ================= TITLE ================= */
-#menu h1 {
-    font-size: 70px;
-    margin-bottom: 20px;
-    z-index: 2;
-
-    background: linear-gradient(to right, #fff, #ffd700);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    text-shadow: 3px 3px 0 #00000030;
-}
-/* ================= START BUTTON ================= */
-#menu button {
-    padding: 15px 40px;
-    font-size: 20px;
-    border: none;
-    border-radius: 30px;
-    background: linear-gradient(to right, #ff9966, #ff5e62);
-    color: white;
-    cursor: pointer;
-    box-shadow: 0 6px 0 #cc4b4b;
-    transition: 0.2s;
-    z-index: 2;
-}
-
-#menu button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 9px 0 #cc4b4b;
-}
-
-#menu button:active {
-    transform: translateY(3px);
-    box-shadow: 0 3px 0 #cc4b4b;
-}
-
-/* ================= CHARACTER (DECORATION ONLY) ================= */
-#menu .menu-character {
+/* ================= LOGO ================= */
+.logo {
     position: absolute;
-    bottom: 42%;   /* 🔥 moved UP (was 35%) */
+    top: 20%;
     left: 50%;
     transform: translateX(-50%);
-    
+
+    font-size: 60px;
+    font-weight: bold;
+    color: white;
+
+    text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 5;
+}
+
+/* FLOAT */
+@keyframes floatLogo {
+    0%,100% { transform: translate(-50%, 0); }
+    50% { transform: translate(-50%, -10px); }
+}
+
+.logo {
+    animation: floatLogo 3s ease-in-out infinite;
+}
+
+/* ================= CHARACTER ================= */
+.menu-character {
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    transform: translateX(-50%);
     font-size: 35px;
-    z-index: 6;   /* above background, below button */
-    pointer-events: none;
+    z-index: 5;
+}
+
+/* ================= START BUTTON ================= */
+.start-btn {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    padding: 18px 50px;
+    font-size: 22px;
+    border-radius: 40px;
+
+    background: linear-gradient(180deg, #ff9966, #ff5e62);
+    color: white;
+    border: none;
+    cursor: pointer;
+
+    z-index: 10;
+
+    box-shadow: 
+        0 6px 0 #c94b4b,
+        0 10px 20px rgba(0,0,0,0.25);
+
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.start-btn:hover {
+    transform: translateX(-50%) scale(1.05);
+}
+
+.start-btn:active {
+    transform: translateX(-50%) scale(0.98);
+    box-shadow: 
+        0 2px 0 #c94b4b,
+        0 5px 10px rgba(0,0,0,0.2);
 }
 
 /* ================= CLOUDS ================= */
 .cloud {
     position: absolute;
     width: 80px;
+    height: 40px;
+    background: white;
+    border-radius: 50px;
     opacity: 0.8;
-    z-index: 1;
+    z-index: 2;
 }
 
-.cloud:nth-child(1) { top: 50px; left: 20%; }
-.cloud:nth-child(2) { top: 80px; right: 20%; }
+.cloud::before,
+.cloud::after {
+    content: "";
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+}
 
+.cloud::before {
+    width: 40px;
+    height: 40px;
+    top: -15px;
+    left: 10px;
+}
+
+.cloud::after {
+    width: 30px;
+    height: 30px;
+    top: -10px;
+    right: 10px;
+}
+
+/* CLOUD POSITIONS */
+.cloud1 {
+    top: 60px;
+    left: 20%;
+}
+
+.cloud2 {
+    top: 100px;
+    right: 20%;
+}
 /* START BUTTON */
 .start-btn {
     position: absolute;
