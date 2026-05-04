@@ -612,10 +612,6 @@ body {
 #menu {
     z-index: 10;
 }
-
-#menu * {
-    z-index: 20;
-}
 /* ================= FIX: MENU CLICK ISSUE ================= */
 
 /* Make sure menu layers don't block clicks */
@@ -652,4 +648,15 @@ body {
 }
 .hidden {
     display: none;
+}
+.start-btn {
+    pointer-events: auto;
+}
+
+#menu {
+    pointer-events: none;
+}
+
+#menu * {
+    pointer-events: auto;
 }
