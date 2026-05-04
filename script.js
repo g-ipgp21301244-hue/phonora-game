@@ -1,3 +1,4 @@
+alert("JS LOADED");
 // ================= GAME STATE =================
 let lives = 6;
 let score = 0;
@@ -163,7 +164,6 @@ if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
 
 // ================= NAVIGATION =================
 function goToRoles() {
-    console.log("BUTTON CLICKED"); // 👈 ADD THIS
     document.getElementById("menu").classList.add("hidden");
     document.getElementById("roles").classList.remove("hidden");
 }
@@ -484,10 +484,6 @@ function gameOver() {
         <button onclick="goToMenu()">Back to Menu</button>
     `;
 }
-window.goToRoles = function () {
-    document.getElementById("menu").classList.add("hidden");
-    document.getElementById("roles").classList.remove("hidden");
-};
 document.addEventListener("DOMContentLoaded", function () {
     const startBtn = document.querySelector(".start-btn");
 
