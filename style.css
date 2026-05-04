@@ -437,11 +437,13 @@ body {
 /* ================= CHARACTER (DECORATION ONLY) ================= */
 #menu .menu-character {
     position: absolute;
-    bottom: 35%; /* sits nicely above ground */
-    width: 40px;
+    bottom: 42%;   /* 🔥 moved UP (was 35%) */
     left: 50%;
     transform: translateX(-50%);
-    z-index: 1;
+    
+    font-size: 35px;
+    z-index: 6;   /* above background, below button */
+    pointer-events: none;
 }
 
 /* ================= CLOUDS ================= */
@@ -457,29 +459,26 @@ body {
 
 /* START BUTTON */
 .start-btn {
-    z-index: 10;
     position: absolute;
-    bottom: 32%;   /* 🔥 was too low before */
+    bottom: 28%;
     left: 50%;
     transform: translateX(-50%);
     
+    z-index: 9999; /* 🔥 always top */
+
     padding: 18px 50px;
     font-size: 22px;
-    border: none;
     border-radius: 40px;
 
     background: linear-gradient(180deg, #ff9966, #ff5e62);
     color: white;
-
+    border: none;
     cursor: pointer;
 
     box-shadow: 
         0 6px 0 #c94b4b,
         0 10px 20px rgba(0,0,0,0.25);
-
-    transition: all 0.2s ease;
 }
-
 /* click effect */
 .start-btn:active {
     transform: translate(-50%, 4px);
@@ -493,35 +492,23 @@ body {
 }
 .logo {
     position: absolute;
-    top: 18%;
+    top: 20%;
     left: 50%;
     transform: translateX(-50%);
-    text-align: center;
-    font-weight: 900;
+    
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    font-size: 50px;
+    font-weight: bold;
+    color: white;
+
+    text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+
+    z-index: 5;
+    pointer-events: none;
 }
-
-/* TOP TEXT */
-.logo-top {
-    display: block;
-    font-size: 70px;
-    color: #ffffff;
-
-    text-shadow:
-        0 5px 0 #2c3e50,
-        0 10px 20px rgba(0,0,0,0.3);
-}
-
-/* BOTTOM TEXT (COLOR POP) */
-.logo-bottom {
-    display: block;
-    font-size: 80px;
-    color: #ff4d6d;
-
-    text-shadow:
-        0 5px 0 #c9184a,
-        0 10px 20px rgba(0,0,0,0.3);
-}
-
 /* FLOAT ANIMATION */
 .logo {
     animation: floatLogo 3s ease-in-out infinite;
