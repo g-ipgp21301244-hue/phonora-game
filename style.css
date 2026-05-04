@@ -531,6 +531,9 @@ body {
     0%,100% { transform: translate(-50%, 0); }
     50% { transform: translate(-50%, -12px); }
 }
+.logo {
+    pointer-events: none;
+}
 .menu-sky::after {
     content: "";
     position: absolute;
