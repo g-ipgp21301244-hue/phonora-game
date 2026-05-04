@@ -207,28 +207,37 @@ function startGame(level) {
 }
 function moveToObstacle() {
     const char = document.getElementById("character");
+    const monster = document.getElementById("obstacle");
 
-char.classList.remove("walk");
-void char.offsetWidth;
-char.classList.add("walk");
-    document.getElementById("character").style.left = "10%";
-const monster = document.getElementById("obstacle");
-monster.classList.add("monster-idle");
+    char.classList.remove("walk");
+    void char.offsetWidth;
+    char.classList.add("walk");
+
+    char.style.left = "10%";
+
+    monster.classList.add("monster-idle");
+
     setTimeout(() => {
         showPrompt();
-    }, 500);
+
+        // 🔥 AUTO START SPEECH (IMPORTANT FIX)
+        setTimeout(() => {
+            startListening();
+        }, 500);
+
+    }, 800);
 }
 // ================= PROMPT =================
 function showPrompt() {
     const box = document.getElementById("promptBox");
 
-    let quests = scripts[selectedRole][currentLevel];
+    let quests = scripts[selectedRole]?.[currentLevel];
 
-   if (!quests || !quests[currentIndex]) {
-    console.error("No script found", selectedRole, currentLevel, currentIndex);
-    showEndScreen();
-    return;
-}
+    if (!quests || !quests[currentIndex]) {
+        console.warn("No script found → ending game safely");
+        showEndScreen();
+        return;
+    }
 
     currentScript = quests[currentIndex].join(" ");
 
@@ -238,7 +247,7 @@ function showPrompt() {
     box.classList.remove("hidden");
 
     box.classList.remove("show");
-    void box.offsetWidth; 
+    void box.offsetWidth;
     box.classList.add("show");
 }
 // ================= SPEECH CONTROL =================
@@ -355,7 +364,7 @@ setTimeout(() => {
 let monster = document.getElementById("obstacle");
 monster.classList.remove("attack");
 void monster.offsetWidth;
-monster.classList.add("attack"); // keep this (matches CSS)
+monster.classList.add("monster-attack"); // keep this (matches CSS)
 
 speakWrongWords(wrongWords);
 
