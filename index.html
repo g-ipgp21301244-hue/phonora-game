@@ -15,34 +15,43 @@
 <!-- ROLES -->
 <div id="roles" class="hidden">
     <h2>Select Role</h2>
-    <button onclick="selectRole('pilot')">Pilot</button>
-    <button onclick="selectRole('service')">Service</button>
+    <button onclick="selectRole('pilot')">✈️ Pilot</button>
+    <button onclick="selectRole('service')">☎️ Service</button>
+    <button onclick="selectRole('anchor')">📰 Anchor</button>
+    <button onclick="selectRole('host')">🎤 Host</button>
+    <button onclick="selectRole('minister')">🏛️ Minister</button>
 </div>
 
 <!-- LEVEL -->
 <div id="levels" class="hidden">
     <h2>Select Level</h2>
     <button onclick="startGame('easy')">Easy</button>
+    <button onclick="startGame('medium')">Medium</button>
+    <button onclick="startGame('hard')">Hard</button>
 </div>
 
 <!-- GAME -->
 <div id="game" class="hidden">
 
-    <div id="hearts"></div>
-    <div id="score"></div>
-
-    <div id="character">🧍</div>
-    <div id="obstacle">👾</div>
-
-    <div id="promptBox">
-        <div id="script"></div>
-        <div id="feedback"></div>
-        <button onclick="startListening()">🎤 Speak</button>
+    <div class="top-bar">
+        <div id="hearts"></div>
+        <div id="score"></div>
     </div>
 
+    <div class="game-world">
+        <div id="character">🧍</div>
+        <div id="obstacle">👾</div>
+
+        <div id="promptBox">
+            <div id="script"></div>
+            <div id="feedback"></div>
+
+            <!-- IMPORTANT: USER CLICK -->
+            <button onclick="startListening()">🎤 Speak</button>
+        </div>
+    </div>
 </div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
